@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "peerlab-ai"
+version = "0.1.0"
+description = "A reproducible DeepSeek × Kimi peer-review experiment, with objective checks and blind human review."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = []
+
+[project.scripts]
+peerlab = "peerlab.__main__:main"
+
+[tool.setuptools.package-data]
+peerlab = ["data/*.json", "templates/*.html"]
+
+[tool.setuptools.packages.find]
+include = ["peerlab*"]
