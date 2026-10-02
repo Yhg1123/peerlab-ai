@@ -1,0 +1,13 @@
+{
+  "run_id": "78aefa6b6e614449bb10038bae23959f",
+  "execution_commit": "b84790356a4e8af6915da208030e6f1d0bccbfd2",
+  "preregistered_plan_commit": "b84790356a4e8af6915da208030e6f1d0bccbfd2",
+  "analysis_commit": "b354f0dc813177eea8af1da111ffbd859c77ceea",
+  "dataset_sha256": "5e8206fe4cf3edb50437b15ede8d3980205a6355cc59f51cbc270e49c752b568",
+  "run_json_sha256": "c08bdfb6aacaa9ef8330ee20b22c8f5c34bde621d0f9446aef9549084aec647c",
+  "plan_path": "docs/studies/review-study-v1-plan.json",
+  "command": "python -m peerlab run --dataset peerlab/data/review-study.json --limit 12 --protocol independent --seed 20261002 --max-calls 168 --max-tokens 700 --timeout 90 --output runs/review-study-v1",
+  "started_at": "2026-10-02T08:51:06.351586+00:00",
+  "finished_at": "2026-10-02T08:59:30.187815+00:00",
+  "deviations": "No retries or replacements. Five request failures and their skipped dependent stages are retained."
+}

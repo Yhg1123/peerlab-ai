@@ -22,6 +22,13 @@ v0.2新增可选第四组 **先解后审 / peer_independent**：审稿者额外�
 
 ## 先看真实成果
 
+**v0.2 后续实验已发布：** [12题数值审稿研究](docs/studies/review-study-v1-findings.md)。先解后审对普通互审，在各9个有效配对中，DeepSeek净多对2题，Kimi一题改善、一题退步。150次请求尝试中145次返回，5次网络失败，全部保留。详见[原始记录与离线报告](examples/review-study-v1/README.md)；这是一轮有缺失的小样本探索，不能推断普遍有效。
+
+```bash
+# 无需密钥，下载后立即复核最新成果
+python -m peerlab analyze examples/review-study-v1/run.json --output runs/recheck
+```
+
 仓库附带一次 3 题真实 API 试运行，见 [`examples/pilot/summary.md`](examples/pilot/summary.md)。下载仓库后双击 [`examples/pilot/report.html`](examples/pilot/report.html) 即可查看交互图表、逐题结果和匿名人工评审，不需要 API key 或联网。
 
 本轮 DeepSeek 三条件均为2/3，Kimi均为3/3，没有观察到互审改善。一个值得研究的案例是：Kimi独立算对了概率题，却在审稿时认可DeepSeek的错误数值。见[首轮观察](docs/pilot-findings.md)。这是探索性试验，不是模型排行榜。

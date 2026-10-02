@@ -1,0 +1,603 @@
+{
+  "schema_version": 1,
+  "run_id": "78aefa6b6e614449bb10038bae23959f",
+  "dataset_sha256": "5e8206fe4cf3edb50437b15ede8d3980205a6355cc59f51cbc270e49c752b568",
+  "audit": {
+    "cases": 12,
+    "oracle_verified": 12,
+    "manual_reference": 0,
+    "call_records": 168,
+    "grades_recomputed": 83,
+    "dataset_hash_verified": true,
+    "ledger_verified": true,
+    "note": "Internal consistency, not a cryptographic proof that API outputs are authentic."
+  },
+  "summary": {
+    "deepseek": {
+      "baseline": {
+        "correct": 0,
+        "total": 12,
+        "completed": 12,
+        "accuracy": 0.0,
+        "coverage": 1.0,
+        "paired": 12,
+        "improved": 0,
+        "regressed": 0
+      },
+      "self": {
+        "correct": 3,
+        "total": 12,
+        "completed": 11,
+        "accuracy": 0.2727272727272727,
+        "coverage": 0.9166666666666666,
+        "paired": 11,
+        "improved": 3,
+        "regressed": 0
+      },
+      "peer": {
+        "correct": 5,
+        "total": 12,
+        "completed": 11,
+        "accuracy": 0.45454545454545453,
+        "coverage": 0.9166666666666666,
+        "paired": 11,
+        "improved": 5,
+        "regressed": 0
+      },
+      "peer_independent": {
+        "correct": 7,
+        "total": 12,
+        "completed": 10,
+        "accuracy": 0.7,
+        "coverage": 0.8333333333333334,
+        "paired": 10,
+        "improved": 7,
+        "regressed": 0
+      }
+    },
+    "kimi": {
+      "baseline": {
+        "correct": 0,
+        "total": 12,
+        "completed": 10,
+        "accuracy": 0.0,
+        "coverage": 0.8333333333333334,
+        "paired": 10,
+        "improved": 0,
+        "regressed": 0
+      },
+      "self": {
+        "correct": 5,
+        "total": 12,
+        "completed": 10,
+        "accuracy": 0.5,
+        "coverage": 0.8333333333333334,
+        "paired": 10,
+        "improved": 5,
+        "regressed": 0
+      },
+      "peer": {
+        "correct": 5,
+        "total": 12,
+        "completed": 9,
+        "accuracy": 0.5555555555555556,
+        "coverage": 0.75,
+        "paired": 9,
+        "improved": 5,
+        "regressed": 0
+      },
+      "peer_independent": {
+        "correct": 6,
+        "total": 12,
+        "completed": 10,
+        "accuracy": 0.6,
+        "coverage": 0.8333333333333334,
+        "paired": 10,
+        "improved": 6,
+        "regressed": 0
+      }
+    }
+  },
+  "comparison": {
+    "left": "peer",
+    "right": "peer_independent"
+  },
+  "overall": [
+    {
+      "provider": "deepseek",
+      "left": "peer",
+      "right": "peer_independent",
+      "category": null,
+      "expected_pairs": 12,
+      "paired": 9,
+      "both_correct": 4,
+      "only_left_correct": 0,
+      "only_right_correct": 2,
+      "both_wrong": 3,
+      "missing_pair": 3,
+      "left_accuracy": 0.4444444444444444,
+      "right_accuracy": 0.6666666666666666,
+      "delta_right_minus_left": 0.2222222222222222,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-001",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-005",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-005",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-006",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "provider": "kimi",
+      "left": "peer",
+      "right": "peer_independent",
+      "category": null,
+      "expected_pairs": 12,
+      "paired": 9,
+      "both_correct": 4,
+      "only_left_correct": 1,
+      "only_right_correct": 1,
+      "both_wrong": 3,
+      "missing_pair": 3,
+      "left_accuracy": 0.5555555555555556,
+      "right_accuracy": 0.5555555555555556,
+      "delta_right_minus_left": 0.0,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-001",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-005",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-006",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    }
+  ],
+  "by_category": [
+    {
+      "provider": "deepseek",
+      "left": "peer",
+      "right": "peer_independent",
+      "category": "机器学习",
+      "expected_pairs": 6,
+      "paired": 5,
+      "both_correct": 4,
+      "only_left_correct": 0,
+      "only_right_correct": 1,
+      "both_wrong": 0,
+      "missing_pair": 1,
+      "left_accuracy": 0.8,
+      "right_accuracy": 1.0,
+      "delta_right_minus_left": 0.2,
+      "pairs": [
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-005",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-006",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "provider": "deepseek",
+      "left": "peer",
+      "right": "peer_independent",
+      "category": "概率推理",
+      "expected_pairs": 6,
+      "paired": 4,
+      "both_correct": 0,
+      "only_left_correct": 0,
+      "only_right_correct": 1,
+      "both_wrong": 3,
+      "missing_pair": 2,
+      "left_accuracy": 0.0,
+      "right_accuracy": 0.25,
+      "delta_right_minus_left": 0.25,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-001",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-005",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "provider": "kimi",
+      "left": "peer",
+      "right": "peer_independent",
+      "category": "机器学习",
+      "expected_pairs": 6,
+      "paired": 5,
+      "both_correct": 4,
+      "only_left_correct": 1,
+      "only_right_correct": 0,
+      "both_wrong": 0,
+      "missing_pair": 1,
+      "left_accuracy": 1.0,
+      "right_accuracy": 0.8,
+      "delta_right_minus_left": -0.2,
+      "pairs": [
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-macro_f1-006",
+          "repeat": 1,
+          "category": "机器学习",
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "provider": "kimi",
+      "left": "peer",
+      "right": "peer_independent",
+      "category": "概率推理",
+      "expected_pairs": 6,
+      "paired": 4,
+      "both_correct": 0,
+      "only_left_correct": 0,
+      "only_right_correct": 1,
+      "both_wrong": 3,
+      "missing_pair": 2,
+      "left_accuracy": 0.0,
+      "right_accuracy": 0.25,
+      "delta_right_minus_left": 0.25,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-001",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-005",
+          "repeat": 1,
+          "category": "概率推理",
+          "left_passed": false,
+          "right_passed": false
+        }
+      ]
+    }
+  ],
+  "total_usage": {
+    "returned_calls": 145,
+    "attempted_calls": 150,
+    "prompt_tokens": 58760,
+    "missing_prompt_tokens_calls": 0,
+    "completion_tokens": 21898,
+    "missing_completion_tokens_calls": 0,
+    "total_tokens": 80658,
+    "missing_total_tokens_calls": 0,
+    "latency_ms_sum": 397985,
+    "missing_latency_calls": 0
+  },
+  "condition_costs": [
+    {
+      "provider": "deepseek",
+      "arm": "baseline",
+      "completed_answers": 12,
+      "returned_calls": 12,
+      "attempted_calls": 12,
+      "prompt_tokens": 1354,
+      "missing_prompt_tokens_calls": 0,
+      "completion_tokens": 1518,
+      "missing_completion_tokens_calls": 0,
+      "total_tokens": 2872,
+      "missing_total_tokens_calls": 0,
+      "latency_ms_sum": 14518,
+      "missing_latency_calls": 0
+    },
+    {
+      "provider": "deepseek",
+      "arm": "self",
+      "completed_answers": 11,
+      "returned_calls": 33,
+      "attempted_calls": 33,
+      "prompt_tokens": 8295,
+      "missing_prompt_tokens_calls": 0,
+      "completion_tokens": 3481,
+      "missing_completion_tokens_calls": 0,
+      "total_tokens": 11776,
+      "missing_total_tokens_calls": 0,
+      "latency_ms_sum": 38090,
+      "missing_latency_calls": 0
+    },
+    {
+      "provider": "deepseek",
+      "arm": "peer",
+      "completed_answers": 11,
+      "returned_calls": 33,
+      "attempted_calls": 33,
+      "prompt_tokens": 8744,
+      "missing_prompt_tokens_calls": 0,
+      "completion_tokens": 3859,
+      "missing_completion_tokens_calls": 0,
+      "total_tokens": 12603,
+      "missing_total_tokens_calls": 0,
+      "latency_ms_sum": 58976,
+      "missing_latency_calls": 0
+    },
+    {
+      "provider": "deepseek",
+      "arm": "peer_independent",
+      "completed_answers": 10,
+      "returned_calls": 40,
+      "attempted_calls": 40,
+      "prompt_tokens": 13921,
+      "missing_prompt_tokens_calls": 0,
+      "completion_tokens": 7912,
+      "missing_completion_tokens_calls": 0,
+      "total_tokens": 21833,
+      "missing_total_tokens_calls": 0,
+      "latency_ms_sum": 138074,
+      "missing_latency_calls": 0
+    },
+    {
+      "provider": "kimi",
+      "arm": "baseline",
+      "completed_answers": 10,
+      "returned_calls": 10,
+      "attempted_calls": 10,
+      "prompt_tokens": 1182,
+      "missing_prompt_tokens_calls": 0,
+      "completion_tokens": 2697,
+      "missing_completion_tokens_calls": 0,
+      "total_tokens": 3879,
+      "missing_total_tokens_calls": 0,
+      "latency_ms_sum": 56310,
+      "missing_latency_calls": 0
+    },
+    {
+      "provider": "kimi",
+      "arm": "self",
+      "completed_answers": 10,
+      "returned_calls": 30,
+      "attempted_calls": 30,
+      "prompt_tokens": 11198,
+      "missing_prompt_tokens_calls": 0,
+      "completion_tokens": 6478,
+      "missing_completion_tokens_calls": 0,
+      "total_tokens": 17676,
+      "missing_total_tokens_calls": 0,
+      "latency_ms_sum": 140624,
+      "missing_latency_calls": 0
+    },
+    {
+      "provider": "kimi",
+      "arm": "peer",
+      "completed_answers": 9,
+      "returned_calls": 27,
+      "attempted_calls": 27,
+      "prompt_tokens": 9396,
+      "missing_prompt_tokens_calls": 0,
+      "completion_tokens": 4807,
+      "missing_completion_tokens_calls": 0,
+      "total_tokens": 14203,
+      "missing_total_tokens_calls": 0,
+      "latency_ms_sum": 94632,
+      "missing_latency_calls": 0
+    },
+    {
+      "provider": "kimi",
+      "arm": "peer_independent",
+      "completed_answers": 10,
+      "returned_calls": 40,
+      "attempted_calls": 40,
+      "prompt_tokens": 13547,
+      "missing_prompt_tokens_calls": 0,
+      "completion_tokens": 6883,
+      "missing_completion_tokens_calls": 0,
+      "total_tokens": 20430,
+      "missing_total_tokens_calls": 0,
+      "latency_ms_sum": 124377,
+      "missing_latency_calls": 0
+    }
+  ]
+}

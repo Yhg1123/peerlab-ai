@@ -17,4 +17,5 @@ jobs:
       - run: python -m peerlab verify-dataset peerlab/data/review-study.json
       - run: python -m peerlab run --protocol independent --limit 3 --max-calls 42 --dry-run
       - run: python -m peerlab analyze examples/pilot/run.json --left baseline --right peer --output runs/ci-analysis
+      - run: python -m peerlab analyze examples/review-study-v1/run.json --output runs/ci-study-analysis
       - run: python scripts/package_release.py
