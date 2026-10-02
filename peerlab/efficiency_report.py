@@ -97,9 +97,10 @@ def export_efficiency(run, output):
     for c in run["cases"]:
         records = [r for r in run["records"] if r["case_id"] == c["id"]]
         body = f'<p>{escape(c["prompt"])}</p><p>参考答案：{escape(json.dumps(c["expected"], ensure_ascii=False))}</p>'
+        body += '<p>参考推导：' + escape(c['rationale']) + '</p>'
         for r in records:
             body += f'<h3>#{r["id"]} · {escape(r["provider"])} · {escape(r["arm"])} · r{r["repeat"]}</h3>'
-            body += '<p>' + escape(json.dumps({"status": r["status"], "grade": r.get("grade"), "usage": r.get("usage")}, ensure_ascii=False)) + '</p>'
+            body += '<p>' + escape(json.dumps({"status": r["status"], "finish_reason": r.get("finish_reason"), "latency_ms": r.get("latency_ms"), "grade": r.get("grade"), "usage": r.get("usage")}, ensure_ascii=False)) + '</p>'
             body += '<pre>' + escape(r.get("content", r.get("error", "Pending"))) + '</pre>'
         details.append(f'<details><summary>{escape(c["id"])} · {escape(c["title"])}</summary>{body}</details>')
     styles = 'body{margin:0;background:#f4f3ec;color:#142b36;font:16px/1.65 system-ui,sans-serif}main{max-width:1220px;margin:auto;padding:48px 24px}h1{font-size:clamp(32px,5vw,64px);line-height:1.1}h2{margin-top:42px}small{color:#506971}.tag{color:#006b56;font-weight:700;letter-spacing:.12em}.scroll{overflow:auto;background:white;border:1px solid #d7dfda;border-radius:12px}table{border-collapse:collapse;width:100%;white-space:nowrap}th,td{text-align:left;padding:12px 15px;border-bottom:1px solid #e2e7e2}th{background:#e0ebe5}details{margin:12px 0;padding:16px;background:white;border:1px solid #d7dfda;border-radius:10px}summary{cursor:pointer;font-weight:650}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f7f5;padding:16px;border-radius:8px}p{overflow-wrap:anywhere}.note{max-width:960px;color:#506971}a{color:#006b56}'

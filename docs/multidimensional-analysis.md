@@ -41,3 +41,16 @@ python -m peerlab analyze-efficiency examples/token-efficiency-v2/run.json --out
 ```
 
 该命令不读取密钥、不调用API；先检查协议、题集哈希、提示词、调度和分数，再生成所有文件。原始JSON的字节哈希在provenance中，CI测试会检查它。文件内部一致性不是供应商签名认证。
+
+## 可选科研图
+
+项目核心仍是零运行时依赖。若需要重画可导出的PNG/SVG，单独建立绘图虚拟环境安装matplotlib，再运行：
+
+```bash
+python -m venv .venv
+# 激活该虚拟环境后
+python -m pip install matplotlib
+python scripts/plot_efficiency.py examples/token-efficiency-v2/run.json --output runs/figures-v2
+```
+
+两张图分别展示质量/配对token区间、题型正确率矩阵。图中文字用英文以避免中文字体缺失；中文解读在研究报告中。绘图脚本先离线核验原始记录再计算，图中分母直接标出，不用不同返回数的条件总量计算节省。

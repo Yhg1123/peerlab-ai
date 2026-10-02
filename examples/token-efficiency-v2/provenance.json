@@ -1,0 +1,26 @@
+{
+  "preregistered_commit": "5d6316ebff880403095dd2fe56e9a83a0b374717",
+  "execution_commit": "5d6316ebff880403095dd2fe56e9a83a0b374717",
+  "execution_source_sha256": {
+    "peerlab/efficiency.py": "d2ae0d15206e3a0aaf67565ba5578e5cfffa7902451b65e37493c65615b46fa8",
+    "peerlab/client.py": "57072a6d221c41c9a4dc69e2f0f0c9e07967f826249c8a978438af3fd4675657",
+    "peerlab/grading.py": "70fa995147f8577c8cc58ee1bb65c0ed2ec05f20609334918a6c294fd7712f1e",
+    "peerlab/dimensions.py": "1a570aa6f2bd727f4d643c5d8b8d5934e7980ddee7655686767e1a0c03a14e66",
+    "peerlab/__main__.py": "7c63b70dabf6a9c5e9007afa90ecd068797c9734b3974feb7d5e38dcfc1860e6"
+  },
+  "run_id": "cb271745c85346c3b4db8fae38ce1422",
+  "run_json_sha256": "6ef9a57957b9ec293d9584db7e79857a4eca3b6aa0e43f622515ca91e506e14c",
+  "recorded_run_status": "complete",
+  "analysis_protocol_commit": "5d6316ebff880403095dd2fe56e9a83a0b374717",
+  "figure_environment": {
+    "python": "3.13",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.3"
+  },
+  "notes": [
+    "All 288 planned requests returned; no network errors, retries or replacement calls.",
+    "run.json copied byte-for-byte; API keys, response headers and reasoning traces are not saved.",
+    "Execution version label was 0.3.0; release is 0.4.0. Use the execution commit for exact runner code.",
+    "Figure annotations and example discussion were prepared after results; statistical definitions were preregistered."
+  ]
+}
