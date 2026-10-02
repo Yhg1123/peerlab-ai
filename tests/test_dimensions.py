@@ -89,3 +89,18 @@ class DimensionsTests(unittest.TestCase):
         group = next(g for g in data["conditions"] if g["scope"] == "all")
         self.assertEqual(group["latency"]["median_ms"], 12)
         self.assertIn("三条件复测", (self.path/"report.html").read_text(encoding="utf-8"))
+        self.assertIn("按题型查看", (self.path/"report.html").read_text(encoding="utf-8"))
+        self.assertIn("精度敏感性", (self.path/"report.html").read_text(encoding="utf-8"))
+
+    def test_unknown_usage_suppresses_interval_and_latency_has_own_coverage(self):
+        run = self.execute()
+        row = next(r for r in run["records"] if r["provider"] == "deepseek" and r["arm"] == "compact_answer")
+        row["usage"] = {}
+        row.pop("latency_ms")
+        data = diagnostics(run)
+        pair = next(p for p in data["comparisons"] if p["provider"] == "deepseek" and p["scope"] == "all" and p["comparison"] == "combined")
+        self.assertIsNone(pair["cluster_bootstrap"]["total_token_saving_95pct"])
+        self.assertEqual(pair["tokens"]["total_tokens"]["missing_pairs"], 1)
+        group = next(g for g in data["conditions"] if g["provider"] == "deepseek" and g["scope"] == "all" and g["arm"] == "compact_answer")
+        self.assertEqual(group["latency"]["known_calls"], 3)
+        self.assertEqual(group["latency"]["missing_calls"], 1)

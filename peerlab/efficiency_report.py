@@ -18,9 +18,10 @@ def export_efficiency(run, output):
     dest = Path(output)
     dest.mkdir(parents=True, exist_ok=True)
     atomic_json(dest / "analysis.json", result)
+    dimensions = None
     if run["kind"] == EXTENDED:
         from .dimensions import export_dimensions
-        export_dimensions(run, dest)
+        dimensions = export_dimensions(run, dest)
     headings = ["模型", "条件", "正确/返回/计划", "已知输入 token", "已知输出 token", "已知总 token", "JSON失败", "未完整输出", "请求失败"]
     rows = [[c["provider"], c["arm"], f"{c['correct']}/{c['returned']}/{c['planned']}",
              *(c["usage"][k]["known_sum"] for k in ("prompt_tokens", "completion_tokens", "total_tokens")),
@@ -33,7 +34,7 @@ def export_efficiency(run, output):
     caveat = ("每个比较只使用同模型、同题、同重复中两边都返回的配对。用量缺失时仅在两边用量均已知的子集计算节省，"
               "详见 analysis.json；未知不按零计。总 token = 输入 + 输出，缓存明细保存在原始 usage 中。"
               "这些是返回用量，不是账单；失败请求可能已计费。短提示词改变了措辞，不保证语义完全等价。"
-              "单次采样、小题集，结果不能推断统计显著、不劣性或普遍有效。")
+              "有限采样、小题集，结果不能推断统计显著、不劣性或普遍有效。")
 
     def markdown_table(headers, data):
         def safe(x):
@@ -63,12 +64,41 @@ def export_efficiency(run, output):
         return '<div class="scroll"><table><thead><tr>' + ''.join(f'<th>{escape(str(x))}</th>' for x in headers) + \
                '</tr></thead><tbody>' + ''.join('<tr>' + ''.join(f'<td>{escape(str(x))}</td>' for x in row) + '</tr>' for row in data) + '</tbody></table></div>'
 
+    extra = ''
+    if dimensions:
+        labels = {"verbose_explain": "常规解释", "compact_answer": "仅答案", "compact_evidence": "先依据后答案"}
+        def label(arm):
+            return labels.get(arm, arm)
+        def ms(value):
+            return '—' if value is None else f'{value:,.0f}'
+        def interval(values):
+            return '—' if values is None else ' ～ '.join(percent(v) for v in values)
+        extra += '<h2>输出契约与耗时</h2><p class="note">合法JSON只保证可解析；契约合格还要求字段、类型以及依据的长度与顺序符合约定，仍不代表答案正确。延迟只统计返回请求，不包含失败超时，也不等于纯模型速度。</p>'
+        extra += table(['模型', '回答方式', 'JSON合法/返回', '契约合格/返回', '契约合格且正确/计划', '中位延迟ms', 'P90延迟ms'],
+                       [[g['provider'], label(g['arm']), f"{g['valid_json']}/{g['returned']}", f"{g['contract_ok']}/{g['returned']}", f"{g['contract_and_correct']}/{g['planned']}", ms(g['latency']['median_ms']), ms(g['latency']['p90_ms'])] for g in dimensions['conditions'] if g['scope']=='all'])
+        extra += '<h2>按题型查看</h2><p class="note">每个类别样本很少；分层有助于定位问题，不适合据此排名。生成/人工参考分组和类别分组重叠，不能相加。</p>'
+        for scope in dict.fromkeys(g['scope'] for g in dimensions['conditions'] if g['scope']!='all'):
+            caption = scope.replace('category:', '题型：').replace('reference:generated', '程序参考题').replace('reference:manual', '人工参考题')
+            extra += '<details><summary>' + escape(caption) + '</summary>'
+            extra += table(['模型', '回答方式', '正确/返回/计划', 'JSON合法', '契约合格且正确', '已知总token'],
+                           [[g['provider'], label(g['arm']), f"{g['correct']}/{g['returned']}/{g['planned']}", g['valid_json'], g['contract_and_correct'], g['usage']['total_tokens']['known_sum']] for g in dimensions['conditions'] if g['scope']==scope])
+            extra += '</details>'
+        extra += '<h2>重复采样的稳定性</h2><p class="note">分母为所有重复都返回的题目；“答案相同”只统计所有重复都可解析的题目。始终错误也可以很稳定。</p>'
+        extra += table(['模型','回答方式','重复次数','完整任务','始终正确','对错变化','均可解析任务','答案完全相同'],
+                       [[s['provider'],label(s['arm']),s['repeats'],s['all_repeats_returned_tasks'],s['all_repeats_correct_tasks'],s['mixed_correctness_tasks'],s['all_repeats_parseable_tasks'],s['identical_typed_answers_tasks']] for s in dimensions['stability']])
+        extra += '<h2>精度敏感性</h2><p class="note">仅作诊断，不修改正式分数。计数分母是返回的数值题；格式错误和截断不会因为放宽误差而过关。</p>'
+        extra += table(['模型','回答方式','数值题返回','有限数值答案','误差≤1e-6','≤1e-4','≤1e-2'],
+                       [[s['provider'],label(s['arm']),s['numeric_returned'],s['finite_numeric_answers'],*s['absolute_error_thresholds'].values()] for s in dimensions['numeric_sensitivity']])
+        extra += '<h2>配对变化与不确定性</h2><p class="note">按题聚类重采样2000次，保留同题所有有效重复，显示百分位95%描述区间。题目人为选取，区间不代表总体；也不做不劣性或多重检验结论。先依据后答案改变了多项要求，不能单独归因于顺序。</p>'
+        extra += table(['模型','左 → 右','有效配对','正确率差','95%描述区间','总token节省','95%描述区间'],
+                       [[p['provider'],label(p['left'])+' → '+label(p['right']),p['paired'],percent(p['accuracy_delta']),interval(p['cluster_bootstrap']['accuracy_delta_95pct']),percent(p['tokens']['total_tokens']['saved_fraction']),interval(p['cluster_bootstrap']['total_token_saving_95pct'])] for p in dimensions['comparisons'] if p['scope']=='all'])
+
     details = []
     for c in run["cases"]:
         records = [r for r in run["records"] if r["case_id"] == c["id"]]
         body = f'<p>{escape(c["prompt"])}</p><p>参考答案：{escape(json.dumps(c["expected"], ensure_ascii=False))}</p>'
         for r in records:
-            body += f'<h3>{escape(r["provider"])} · {escape(r["arm"])} · r{r["repeat"]}</h3>'
+            body += f'<h3>#{r["id"]} · {escape(r["provider"])} · {escape(r["arm"])} · r{r["repeat"]}</h3>'
             body += '<p>' + escape(json.dumps({"status": r["status"], "grade": r.get("grade"), "usage": r.get("usage")}, ensure_ascii=False)) + '</p>'
             body += '<pre>' + escape(r.get("content", r.get("error", "Pending"))) + '</pre>'
         details.append(f'<details><summary>{escape(c["id"])} · {escape(c["title"])}</summary>{body}</details>')
@@ -77,7 +107,7 @@ def export_efficiency(run, output):
     design = "三条件复测：常规解释 · 仅答案 · 先依据后答案" if run["kind"] == EXTENDED else "2 × 2 对照：提示词长度 × 是否输出解释"
     html += f'<div class="tag">PEERLAB / TOKEN EFFICIENCY</div><h1>少用 token，<br>答案还可靠吗？</h1><p>{design}</p><small>Run {escape(run["id"])} · {escape(run["status"])} · {run["calls_attempted"]} 次请求尝试</small>'
     html += '<h2>质量与用量</h2>' + table(headings, rows) + '<h2>同题配对比较</h2>' + table(paired_headings, paired_rows)
-    html += '<p class="note">' + escape(caveat) + '</p><h2>逐题原始输出</h2>' + ''.join(details)
+    html += '<p class="note">' + escape(caveat) + '</p>' + extra + '<h2>逐题原始输出</h2>' + ''.join(details)
     html += '<h2>冻结的系统提示词</h2><pre>' + escape(json.dumps(run["config"]["system_prompts"], ensure_ascii=False, indent=2)) + '</pre></main></html>'
     (dest / "report.html").write_text(html, encoding="utf-8")
     return result
