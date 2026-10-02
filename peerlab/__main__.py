@@ -9,6 +9,8 @@ from .experiment import PROTOCOLS, dataset_hash, load_cases, planned_calls, run_
 from .report import export_report
 from .datasets import audit_cases, generate_cases, write_dataset
 from .analysis import export_analysis
+from .efficiency import make_plan, run_efficiency
+from .efficiency_report import export_efficiency
 
 
 def positive(value):
@@ -49,6 +51,19 @@ def main(argv=None):
     analysis.add_argument("--left", default="peer")
     analysis.add_argument("--right", default="peer_independent")
     analysis.add_argument("--output", type=Path)
+    efficiency = sub.add_parser("efficiency", help="Run a bounded 2x2 token/quality experiment")
+    efficiency.add_argument("--dataset", type=Path)
+    efficiency.add_argument("--limit", type=positive, default=3)
+    efficiency.add_argument("--repeats", type=positive, default=1)
+    efficiency.add_argument("--seed", type=int, default=42)
+    efficiency.add_argument("--max-calls", type=positive, default=24)
+    efficiency.add_argument("--max-tokens", type=positive, default=700)
+    efficiency.add_argument("--timeout", type=positive, default=90)
+    efficiency.add_argument("--output", type=Path)
+    efficiency.add_argument("--dry-run", action="store_true")
+    efficiency_analysis = sub.add_parser("analyze-efficiency", help="Audit and render token experiment evidence offline")
+    efficiency_analysis.add_argument("run_json", type=Path)
+    efficiency_analysis.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
     try:
         if args.command == "generate":
@@ -80,6 +95,29 @@ def main(argv=None):
             result = export_analysis(data,dest,args.left,args.right)
             print(json.dumps(result["audit"],ensure_ascii=False))
             print(f"Analysis: {(dest/'analysis.md').resolve()}")
+        elif args.command == "analyze-efficiency":
+            data = json.loads(args.run_json.read_text(encoding="utf-8"))
+            dest = args.output or args.run_json.parent
+            result = export_efficiency(data, dest)
+            print(json.dumps(result["audit"], ensure_ascii=False))
+            print(f"Report: {(dest/'report.html').resolve()}")
+        elif args.command == "efficiency":
+            cases = load_cases(args.dataset)[:args.limit]
+            plan = make_plan(cases, args.repeats, args.seed, args.max_tokens, args.timeout)
+            if plan["planned_calls"] > args.max_calls:
+                raise ValueError(f"Planned {plan['planned_calls']} calls exceeds --max-calls={args.max_calls}. No requests sent.")
+            if args.dry_run:
+                print(json.dumps(plan, ensure_ascii=False, indent=2))
+                return 0
+            providers = clients(args.max_tokens, args.timeout)
+            for c in providers:
+                if c.model not in c.models():
+                    raise ValueError(f"{c.name}: configured model unavailable; no chat calls sent.")
+            dest = args.output or Path("runs") / ("efficiency-" + datetime.now().strftime("%Y%m%d-%H%M%S-%f"))
+            data = run_efficiency(providers, cases, dest, repeats=args.repeats, seed=args.seed, max_calls=args.max_calls)
+            export_efficiency(data, dest)
+            print(f"Status: {data['status']}\nReport: {(dest/'report.html').resolve()}")
+            return 0 if data["status"] == "complete" else 2
         elif args.command == "report":
             data = json.loads(args.run_json.read_text(encoding="utf-8"))
             dest = args.output or args.run_json.parent

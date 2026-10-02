@@ -1,0 +1,40 @@
+{
+  "protocol": "token-efficiency-v1",
+  "arms": [
+    "verbose_explain",
+    "verbose_answer",
+    "compact_explain",
+    "compact_answer"
+  ],
+  "system_prompts": {
+    "verbose_explain": "你是严谨的研究助理。请认真阅读并解答用户提供的任务，遵循题目给出的条件和答案类型要求。不要自报模型或厂商。不要使用工具，也不要执行代码。只输出 JSON 对象，含 answer 与简短 explanation。",
+    "verbose_answer": "你是严谨的研究助理。请认真阅读并解答用户提供的任务，遵循题目给出的条件和答案类型要求。不要自报模型或厂商。不要使用工具，也不要执行代码。只输出 JSON 对象，仅含 answer，不要解释。",
+    "compact_explain": "解题；按题目类型作答。不自报身份，不用工具或执行代码。只输出 JSON 对象，含 answer 与简短 explanation。",
+    "compact_answer": "解题；按题目类型作答。不自报身份，不用工具或执行代码。只输出 JSON 对象，仅含 answer，不要解释。"
+  },
+  "cases": [
+    "generated-bayes-001",
+    "generated-bayes-002",
+    "generated-bayes-003",
+    "generated-bayes-004",
+    "generated-macro_f1-001",
+    "generated-macro_f1-002",
+    "generated-macro_f1-003",
+    "generated-macro_f1-004",
+    "python-aliasing",
+    "critical-path",
+    "balanced-json",
+    "retrieval-abstain"
+  ],
+  "dataset_sha256": "f40012d13557b948102015383d899de3640fe4df2f1cfaf8bc7a40809a1aff4e",
+  "repeats": 1,
+  "seed": 2026100203,
+  "planned_calls": 96,
+  "temperature": 0.6,
+  "thinking": "disabled",
+  "retries": 0,
+  "max_output_tokens_per_call": 700,
+  "timeout_seconds": 90,
+  "output_token_ceiling": 67200,
+  "note": "Input tokens and provider billing are not capped. Seed controls ordering, not model sampling."
+}
