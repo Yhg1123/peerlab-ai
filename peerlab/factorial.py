@@ -104,5 +104,5 @@ def export_factorial(run, output):
         for key, value in p["estimate"].items():
             text += f"- {key}: {value}; 95%描述区间 {p['percentile_95pct'][key]}\n"
         text += "\n"
-    (Path(output)/"factorial.md").write_text(text, encoding="utf-8")
+    (Path(output)/"factorial.md").write_text(text.rstrip() + "\n", encoding="utf-8")
     return data

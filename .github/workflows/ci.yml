@@ -25,4 +25,5 @@ jobs:
       - run: python -m peerlab efficiency --protocol token-efficiency-v2 --dataset peerlab/data/token-efficiency-v2.json --limit 24 --repeats 2 --seed 2026100301 --max-calls 288 --dry-run
       - run: python -m peerlab analyze-efficiency examples/token-efficiency-v2/run.json --output runs/ci-token-v2-analysis
       - run: python -m peerlab efficiency --protocol token-efficiency-v3 --dataset peerlab/data/token-efficiency-v3.json --limit 16 --repeats 2 --seed 2026100302 --max-calls 256 --dry-run
+      - run: python -m peerlab analyze-efficiency examples/token-efficiency-v3/run.json --output runs/ci-token-v3-analysis
       - run: python scripts/package_release.py

@@ -8,6 +8,13 @@ Python 3.10+ · 运行时零第三方依赖 · MIT · 中文题库 · 离线交�
 
 ## 这个项目研究什么
 
+v0.5新增 **字段顺序 × 依据限长的2×2实验**：16道已知难题、每题两次、两模型四条件，256次请求尝试（255次返回、1次网络失败）。固定其他要求，分别测量“先答案/先依据”和“是否限制80字符”，增加共同契约与本条件契约的区分、因素交互分析。见[阅读指南](docs/factorial-analysis.md)和[执行前方案](docs/studies/token-efficiency-v3.md)。
+
+```bash
+# 离线预览，默认3题、一次采样，共24次请求
+python -m peerlab efficiency --protocol token-efficiency-v3 --dry-run
+```
+
 v0.4新增 **多题型、重复采样、先依据后答案** 的后续研究：24题、每题两次、两模型三条件，共288次请求。报告按题型、输出格式、正确率、稳定性、数值误差、token和延迟分析，附按题聚类的描述区间与PNG/SVG图。见[指标解读](docs/multidimensional-analysis.md)和[执行前方案](docs/studies/token-efficiency-v2.md)。
 
 ```bash
@@ -41,6 +48,12 @@ python -m peerlab analyze-efficiency runs/token-pilot/run.json --output runs/tok
 v0.2新增可选第四组 **先解后审 / peer_independent**：审稿者额外看到自己在候选答案出现前的独立解答，再审查对方。`--protocol independent` 每题合计14次调用；默认classic保持原来的三组与预算。见[协议说明](docs/independent-review.md)和[执行前实验方案](docs/studies/review-study-v1.md)。
 
 ## 先看真实成果
+
+**v0.5 顺序与限长实验已发布：** [256次请求的详细解读](docs/studies/token-efficiency-v3-findings.md)。不限长时，先答案→先依据：DeepSeek正确数2/32→22/32、总token增加4.1%；Kimi7/32→7/32、token减少21.4%，但有5次改善与5次退步。附[数据、缺失记录与离线报告](examples/token-efficiency-v3/README.md)、因素交互图及[观点文章](docs/opinions/order-length-and-usable-output.md)。这是已知难题上的小样本探索，不是通用提示词结论。
+
+```bash
+python -m peerlab analyze-efficiency examples/token-efficiency-v3/run.json --output runs/v3-recheck
+```
 
 **v0.4 多维度复测已发布：** [24题、288次请求的详细解读](docs/studies/token-efficiency-v2-findings.md)，全部请求返回。先依据后答案相对仅答案，DeepSeek正确数17/48→40/48，Kimi17/48→22/48；但许多依据超过80字，符合全部输出契约且正确仅27/48和10/48。附[9类题型、重复稳定性、精度和耗时分析](examples/token-efficiency-v2/README.md)、PNG/SVG图及[观点文章](docs/opinions/measure-usable-answers.md)。该新条件同时改了多项要求，不能单独归因于顺序。
 

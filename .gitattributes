@@ -7,3 +7,4 @@
 examples/review-study-v1/run.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 examples/token-efficiency-v1/run.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 examples/token-efficiency-v2/run.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+examples/token-efficiency-v3/run.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

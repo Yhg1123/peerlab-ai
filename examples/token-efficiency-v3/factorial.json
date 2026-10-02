@@ -1,0 +1,200 @@
+{
+  "run_id": "ae7a0ade07df4f86ac0bbb4397b85d84",
+  "conditions": [
+    {
+      "provider": "deepseek",
+      "arm": "answer_first_bounded",
+      "returned": 32,
+      "exact_fields": 32,
+      "nonblank_evidence": 32,
+      "requested_order": 32,
+      "within_80": 27,
+      "common_contract": 32,
+      "arm_contract": 27,
+      "common_contract_and_correct": 3,
+      "arm_contract_and_correct": 3,
+      "evidence_length_known": 32,
+      "median_evidence_characters": 63.0,
+      "p90_evidence_characters": 84.9
+    },
+    {
+      "provider": "deepseek",
+      "arm": "evidence_first_bounded",
+      "returned": 32,
+      "exact_fields": 32,
+      "nonblank_evidence": 32,
+      "requested_order": 32,
+      "within_80": 25,
+      "common_contract": 32,
+      "arm_contract": 25,
+      "common_contract_and_correct": 10,
+      "arm_contract_and_correct": 7,
+      "evidence_length_known": 32,
+      "median_evidence_characters": 65.0,
+      "p90_evidence_characters": 88.7
+    },
+    {
+      "provider": "deepseek",
+      "arm": "answer_first_unbounded",
+      "returned": 32,
+      "exact_fields": 32,
+      "nonblank_evidence": 32,
+      "requested_order": 32,
+      "within_80": 5,
+      "common_contract": 32,
+      "arm_contract": 32,
+      "common_contract_and_correct": 2,
+      "arm_contract_and_correct": 2,
+      "evidence_length_known": 32,
+      "median_evidence_characters": 107.5,
+      "p90_evidence_characters": 306.10000000000014
+    },
+    {
+      "provider": "deepseek",
+      "arm": "evidence_first_unbounded",
+      "returned": 32,
+      "exact_fields": 32,
+      "nonblank_evidence": 32,
+      "requested_order": 32,
+      "within_80": 2,
+      "common_contract": 32,
+      "arm_contract": 32,
+      "common_contract_and_correct": 22,
+      "arm_contract_and_correct": 22,
+      "evidence_length_known": 32,
+      "median_evidence_characters": 170.0,
+      "p90_evidence_characters": 292.40000000000003
+    },
+    {
+      "provider": "kimi",
+      "arm": "answer_first_bounded",
+      "returned": 31,
+      "exact_fields": 31,
+      "nonblank_evidence": 31,
+      "requested_order": 31,
+      "within_80": 17,
+      "common_contract": 31,
+      "arm_contract": 17,
+      "common_contract_and_correct": 6,
+      "arm_contract_and_correct": 6,
+      "evidence_length_known": 31,
+      "median_evidence_characters": 65,
+      "p90_evidence_characters": 161.0
+    },
+    {
+      "provider": "kimi",
+      "arm": "evidence_first_bounded",
+      "returned": 32,
+      "exact_fields": 32,
+      "nonblank_evidence": 32,
+      "requested_order": 32,
+      "within_80": 12,
+      "common_contract": 32,
+      "arm_contract": 12,
+      "common_contract_and_correct": 7,
+      "arm_contract_and_correct": 2,
+      "evidence_length_known": 32,
+      "median_evidence_characters": 92.0,
+      "p90_evidence_characters": 146.9
+    },
+    {
+      "provider": "kimi",
+      "arm": "answer_first_unbounded",
+      "returned": 32,
+      "exact_fields": 24,
+      "nonblank_evidence": 24,
+      "requested_order": 24,
+      "within_80": 0,
+      "common_contract": 24,
+      "arm_contract": 24,
+      "common_contract_and_correct": 7,
+      "arm_contract_and_correct": 7,
+      "evidence_length_known": 24,
+      "median_evidence_characters": 276.5,
+      "p90_evidence_characters": 842.1999999999999
+    },
+    {
+      "provider": "kimi",
+      "arm": "evidence_first_unbounded",
+      "returned": 32,
+      "exact_fields": 31,
+      "nonblank_evidence": 31,
+      "requested_order": 31,
+      "within_80": 0,
+      "common_contract": 31,
+      "arm_contract": 31,
+      "common_contract_and_correct": 7,
+      "arm_contract_and_correct": 7,
+      "evidence_length_known": 31,
+      "median_evidence_characters": 222,
+      "p90_evidence_characters": 639.0
+    }
+  ],
+  "interactions": [
+    {
+      "provider": "deepseek",
+      "complete_blocks": 32,
+      "missing_blocks": 0,
+      "task_clusters": 16,
+      "samples": 2000,
+      "seed": 2026100301,
+      "definition": "(evidence-first minus answer-first) unbounded minus bounded",
+      "estimate": {
+        "accuracy": 0.40625,
+        "common_contract_and_correct": 0.40625,
+        "total_tokens_per_block": 14.28125
+      },
+      "percentile_95pct": {
+        "accuracy": [
+          0.15625,
+          0.65625
+        ],
+        "common_contract_and_correct": [
+          0.15625,
+          0.65625
+        ],
+        "total_tokens_per_block": [
+          -6.446093749999999,
+          31.377343749999987
+        ]
+      },
+      "token_usage_complete": true
+    },
+    {
+      "provider": "kimi",
+      "complete_blocks": 31,
+      "missing_blocks": 1,
+      "task_clusters": 16,
+      "samples": 2000,
+      "seed": 2026100301,
+      "definition": "(evidence-first minus answer-first) unbounded minus bounded",
+      "estimate": {
+        "accuracy": 0,
+        "common_contract_and_correct": 0,
+        "total_tokens_per_block": -108.12903225806451
+      },
+      "percentile_95pct": {
+        "accuracy": [
+          -0.12903225806451613,
+          0.12903225806451613
+        ],
+        "common_contract_and_correct": [
+          -0.12903225806451613,
+          0.12903225806451613
+        ],
+        "total_tokens_per_block": [
+          -171.8718497983871,
+          -43.84162176724139
+        ]
+      },
+      "token_usage_complete": true
+    }
+  ],
+  "notes": [
+    "Common contract: exact fields, nonblank string evidence, requested order; no length limit for any arm.",
+    "Arm contract additionally enforces 80 Unicode code points only for bounded arms; answer types are assessed by the unchanged grader.",
+    "within_80 is measured identically in all arms, not a requirement for unbounded arms.",
+    "Interaction uses complete four-arm task/repeat blocks; unknown usage suppresses its token estimate and interval.",
+    "Selected known tasks; repeated parameter variants are not independent task families. Bootstrap is descriptive, not a population claim."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "preregistered_commit": "35687e6b83e1107b131de3d4f00c716174623f5c",
+  "execution_commit": "35687e6b83e1107b131de3d4f00c716174623f5c",
+  "execution_source_sha256": {
+    "peerlab/efficiency.py": "821bfff3671b5c46a8c8083d1696f6f834961b400123376a8d21d01c72fa44fa",
+    "peerlab/client.py": "57072a6d221c41c9a4dc69e2f0f0c9e07967f826249c8a978438af3fd4675657",
+    "peerlab/grading.py": "70fa995147f8577c8cc58ee1bb65c0ed2ec05f20609334918a6c294fd7712f1e",
+    "peerlab/dimensions.py": "05fb824528eabed2f860ec579c422a60095e52d9713ab574ef634b397c47c194",
+    "peerlab/factorial.py": "5fbcd8ad1943efa65a02fbca4dcd1b7b84cd7002e2e32030b46974b922e87574",
+    "peerlab/__main__.py": "602faf5b3f1a95d65e74e5793458baec639de631c30a44178a9229519f38af66"
+  },
+  "run_id": "ae7a0ade07df4f86ac0bbb4397b85d84",
+  "run_json_sha256": "9b86b5f9b7094e0406b22803580b99e803345cb632bc55a1e280b252546aded1",
+  "recorded_run_status": "partial",
+  "analysis_protocol_commit": "35687e6b83e1107b131de3d4f00c716174623f5c",
+  "figure_environment": {
+    "python": "3.13",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.3"
+  },
+  "notes": [
+    "256 planned requests attempted; 255 returned and one Kimi network failure. No retries or replacements.",
+    "run.json copied byte-for-byte; no keys, headers or reasoning traces saved.",
+    "Execution version 0.4.0; release version 0.5.0. Use execution commit for exact runner.",
+    "Known difficult task subset chosen using v2 observations; not a held-out generalization study.",
+    "Figures and case discussion prepared after results; metric definitions and protocol preregistered."
+  ]
+}

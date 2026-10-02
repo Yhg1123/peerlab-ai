@@ -4,6 +4,7 @@ import csv
 from html import escape
 import json
 from pathlib import Path
+import re
 
 from .efficiency import EXTENDED, FACTORIAL, analyze
 from .experiment import atomic_json
@@ -26,7 +27,7 @@ def export_efficiency(run, output):
     rows = [[c["provider"], c["arm"], f"{c['correct']}/{c['returned']}/{c['planned']}",
              *(c["usage"][k]["known_sum"] for k in ("prompt_tokens", "completion_tokens", "total_tokens")),
              c["invalid_json"], c["incomplete"], c["errors"]] for c in result["conditions"]]
-    paired_headings = ["模型", "左 → 右", "配对/缺失", "正确题数", "总token节省", "改善/退步", "缺用量配对"]
+    paired_headings = ["模型", "左 → 右", "配对/缺失", "正确次数", "总token节省", "改善/退步", "缺用量配对"]
     paired_rows = [[p["provider"], p["left"] + " → " + p["right"], f"{p['paired']}/{p['missing_pairs']}",
                     f"{p['left_correct']} → {p['right_correct']}", percent(p["tokens"]["total_tokens"]["saved_fraction"]),
                     f"{p['only_right_correct']}/{p['only_left_correct']}", p["tokens"]["total_tokens"]["missing_pairs"]]
@@ -68,14 +69,21 @@ def export_efficiency(run, output):
     if run["kind"] == FACTORIAL:
         from .factorial import export_factorial
         factorial = export_factorial(run, dest)
+        def decimal(value):
+            return '—' if value is None else f'{value:.1f}'
+        def effect_value(key, value):
+            return decimal(value if key == 'total_tokens_per_block' or value is None else value * 100)
+        effect_labels = {'accuracy':'正确率差（百分点）', 'common_contract_and_correct':'共同契约且正确之差（百分点）', 'total_tokens_per_block':'总token差（每区组）'}
         extra += '<h2>顺序 × 限长：共同口径</h2><p class="note">共同契约对四组都检查字段、非空依据和要求的顺序，不检查长度。本条件契约仅对限长组额外要求≤80字符；不能把去掉限制带来的合格率上升直接当作能力改善。答案类型由原判分器检查。</p>'
         extra += table(['模型','条件','返回','共同契约且正确','本条件契约且正确','≤80字符','依据长度中位数/P90'],
-                       [[g['provider'],g['arm'],g['returned'],g['common_contract_and_correct'],g['arm_contract_and_correct'],g['within_80'],f"{g['median_evidence_characters']} / {g['p90_evidence_characters']}"] for g in factorial['conditions']])
+                       [[g['provider'],g['arm'],g['returned'],g['common_contract_and_correct'],g['arm_contract_and_correct'],g['within_80'],f"{decimal(g['median_evidence_characters'])} / {decimal(g['p90_evidence_characters'])}"] for g in factorial['conditions']])
         extra += '<h2>因素交互项</h2><p class="note">(不限长时先依据−先答案) − (限长时先依据−先答案)，仅用四组均返回的区组。正确率为比例差，token为每区组的差中之差。正负方向不等于优劣，按题聚类区间只描述这个选题集合。</p>'
         extra += table(['模型','完整/缺失区组','指标','交互估计','95%描述区间'],
-                       [[p['provider'],f"{p['complete_blocks']}/{p['missing_blocks']}",k,v,p['percentile_95pct'][k]] for p in factorial['interactions'] for k,v in p['estimate'].items()])
+                       [[p['provider'],f"{p['complete_blocks']}/{p['missing_blocks']}",effect_labels[k],effect_value(k,v),'—' if p['percentile_95pct'][k] is None else ' ～ '.join(effect_value(k,x) for x in p['percentile_95pct'][k])] for p in factorial['interactions'] for k,v in p['estimate'].items()])
     if dimensions:
-        labels = {"verbose_explain": "常规解释", "compact_answer": "仅答案", "compact_evidence": "先依据后答案"}
+        labels = {"verbose_explain": "常规解释", "compact_answer": "仅答案", "compact_evidence": "先依据后答案",
+                  "answer_first_bounded": "先答案·限80字符", "evidence_first_bounded": "先依据·限80字符",
+                  "answer_first_unbounded": "先答案·不限字符", "evidence_first_unbounded": "先依据·不限字符"}
         def label(arm):
             return labels.get(arm, arm)
         def ms(value):
@@ -118,9 +126,13 @@ def export_efficiency(run, output):
     if run["kind"] == FACTORIAL:
         design = "2 × 2 对照：答案/依据顺序 × 依据是否限80字符"
         extra = extra.replace("先依据后答案改变了多项要求，不能单独归因于顺序。", "本轮在相同长度要求内比较请求的字段顺序；不能由输出顺序推断模型内部推理机制。")
-    html += f'<div class="tag">PEERLAB / TOKEN EFFICIENCY</div><h1>少用 token，<br>答案还可靠吗？</h1><p>{design}</p><small>Run {escape(run["id"])} · {escape(run["status"])} · {run["calls_attempted"]} 次请求尝试</small>'
+    title = "答案放前，<br>还是依据放前？" if run["kind"] == FACTORIAL else "少用 token，<br>答案还可靠吗？"
+    html += f'<div class="tag">PEERLAB / TOKEN EFFICIENCY</div><h1>{title}</h1><p>{design}</p><small>Run {escape(run["id"])} · {escape(run["status"])} · {run["calls_attempted"]} 次请求尝试</small>'
     html += '<h2>质量与用量</h2>' + table(headings, rows) + '<h2>同题配对比较</h2>' + table(paired_headings, paired_rows)
     html += '<p class="note">' + escape(caveat) + '</p>' + extra + '<h2>逐题原始输出</h2>' + ''.join(details)
     html += '<h2>冻结的系统提示词</h2><pre>' + escape(json.dumps(run["config"]["system_prompts"], ensure_ascii=False, indent=2)) + '</pre></main></html>'
+    # Preserve provider whitespace in rendered <pre> text without introducing
+    # trailing whitespace into generated HTML source tracked by Git.
+    html = re.sub(r"[ \t]+(?=\r?$)", lambda m: ''.join('&#32;' if c == ' ' else '&#9;' for c in m[0]), html, flags=re.MULTILINE)
     (dest / "report.html").write_text(html, encoding="utf-8")
     return result
