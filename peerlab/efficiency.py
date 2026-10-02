@@ -38,6 +38,20 @@ EXTENDED_COMPARISONS = (
     ("evidence_vs_answer", "compact_answer", "compact_evidence"),
     ("evidence_vs_baseline", "verbose_explain", "compact_evidence"),
 )
+FACTORIAL = "token-efficiency-v3"
+FACTORIAL_ARMS = ("answer_first_bounded", "evidence_first_bounded",
+                  "answer_first_unbounded", "evidence_first_unbounded")
+FACTORIAL_COMPARISONS = (
+    ("order_bounded", FACTORIAL_ARMS[0], FACTORIAL_ARMS[1]),
+    ("order_unbounded", FACTORIAL_ARMS[2], FACTORIAL_ARMS[3]),
+    ("remove_cap_answer_first", FACTORIAL_ARMS[0], FACTORIAL_ARMS[2]),
+    ("remove_cap_evidence_first", FACTORIAL_ARMS[1], FACTORIAL_ARMS[3]),
+)
+
+
+def comparisons_for(protocol):
+    return {PROTOCOL: COMPARISONS, EXTENDED: EXTENDED_COMPARISONS,
+            FACTORIAL: FACTORIAL_COMPARISONS}[protocol]
 
 
 def arms_for(protocol):
@@ -45,10 +59,19 @@ def arms_for(protocol):
         return ARMS
     if protocol == EXTENDED:
         return EXTENDED_ARMS
+    if protocol == FACTORIAL:
+        return FACTORIAL_ARMS
     raise ValueError("Unknown efficiency protocol.")
 
 
 def messages_for(case, arm):
+    if arm in FACTORIAL_ARMS:
+        order = "answer、evidence" if arm.startswith("answer_first") else "evidence、answer"
+        cap = "evidence长度不超过80个Unicode字符（包含标点和空格）。" if arm.endswith("_bounded") else ""
+        suffix = (f"只输出一个JSON对象，仅含answer和evidence两个字段，字段顺序为{order}。"
+                  "evidence是非空字符串，给出简短计算依据或核验结果。" + cap + "answer必须与evidence一致。")
+        return [{"role": "system", "content": PREFIXES["compact"] + suffix},
+                {"role": "user", "content": case["prompt"]}]
     prefix, output = arm.split("_")
     suffix = EVIDENCE_OUTPUT if output == "evidence" else OUTPUTS[output]
     return [{"role": "system", "content": PREFIXES[prefix] + suffix},
@@ -140,7 +163,7 @@ def run_efficiency(clients, cases, output, *, repeats=1, seed=42, max_calls=24, 
 
 
 def validate(run):
-    if run.get("kind") not in (PROTOCOL, EXTENDED) or run.get("schema_version") != 1:
+    if run.get("kind") not in (PROTOCOL, EXTENDED, FACTORIAL) or run.get("schema_version") != 1:
         raise ValueError("Unsupported efficiency evidence schema.")
     cfg, cases = run["config"], run["cases"]
     plan = make_plan(cases, cfg["repeats"], cfg["seed"], cfg["max_output_tokens_per_call"], cfg["timeout_seconds"], run["kind"])
@@ -245,7 +268,7 @@ def analyze(run):
                            "invalid_json": sum(r["grade"]["reason"] == "invalid_json_answer" for r in good),
                            "incomplete": sum(r["finish_reason"] != "stop" for r in good),
                            "errors": sum(r["status"] == "error" for r in rows), "usage": usage(rows)})
-        for label, left, right in (EXTENDED_COMPARISONS if run["kind"] == EXTENDED else COMPARISONS):
+        for label, left, right in comparisons_for(run["kind"]):
             comparisons.append({"comparison": label, **paired(run, name, left, right)})
     return {"audit": audit, "run_id": run["id"], "status": run["status"],
             "attempted": run["calls_attempted"], "usage": usage(run["records"]),

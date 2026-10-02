@@ -1,0 +1,44 @@
+{
+  "protocol": "token-efficiency-v3",
+  "arms": [
+    "answer_first_bounded",
+    "evidence_first_bounded",
+    "answer_first_unbounded",
+    "evidence_first_unbounded"
+  ],
+  "system_prompts": {
+    "answer_first_bounded": "解题；按题目类型作答。不自报身份，不用工具或执行代码。只输出一个JSON对象，仅含answer和evidence两个字段，字段顺序为answer、evidence。evidence是非空字符串，给出简短计算依据或核验结果。evidence长度不超过80个Unicode字符（包含标点和空格）。answer必须与evidence一致。",
+    "evidence_first_bounded": "解题；按题目类型作答。不自报身份，不用工具或执行代码。只输出一个JSON对象，仅含answer和evidence两个字段，字段顺序为evidence、answer。evidence是非空字符串，给出简短计算依据或核验结果。evidence长度不超过80个Unicode字符（包含标点和空格）。answer必须与evidence一致。",
+    "answer_first_unbounded": "解题；按题目类型作答。不自报身份，不用工具或执行代码。只输出一个JSON对象，仅含answer和evidence两个字段，字段顺序为answer、evidence。evidence是非空字符串，给出简短计算依据或核验结果。answer必须与evidence一致。",
+    "evidence_first_unbounded": "解题；按题目类型作答。不自报身份，不用工具或执行代码。只输出一个JSON对象，仅含answer和evidence两个字段，字段顺序为evidence、answer。evidence是非空字符串，给出简短计算依据或核验结果。answer必须与evidence一致。"
+  },
+  "cases": [
+    "v2-generated-bayes-001",
+    "v2-generated-bayes-002",
+    "v2-generated-bayes-003",
+    "v2-generated-bayes-004",
+    "v2-generated-bayes-005",
+    "v2-generated-bayes-006",
+    "v2-generated-macro_f1-001",
+    "v2-generated-macro_f1-002",
+    "v2-generated-macro_f1-003",
+    "v2-generated-macro_f1-004",
+    "v2-generated-macro_f1-005",
+    "v2-generated-macro_f1-006",
+    "python-aliasing",
+    "critical-path",
+    "balanced-json",
+    "expected-draws"
+  ],
+  "dataset_sha256": "fe5ea5d14d11f1d51528fe4c8b5e27b42c436e65a36dea200dc151e118db47e6",
+  "repeats": 2,
+  "seed": 2026100302,
+  "planned_calls": 256,
+  "temperature": 0.6,
+  "thinking": "disabled",
+  "retries": 0,
+  "max_output_tokens_per_call": 700,
+  "timeout_seconds": 90,
+  "output_token_ceiling": 179200,
+  "note": "Input tokens and provider billing are not capped. Seed controls ordering, not model sampling."
+}

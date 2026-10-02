@@ -9,7 +9,7 @@ import random
 import re
 import statistics
 
-from .efficiency import EXTENDED, EXTENDED_COMPARISONS, arms_for, paired, usage, validate
+from .efficiency import EXTENDED, FACTORIAL, FACTORIAL_ARMS, comparisons_for, arms_for, paired, usage, validate
 from .experiment import atomic_json
 from .grading import parse_answer
 
@@ -37,6 +37,9 @@ def parsed_object(row):
 
 
 def contract(row):
+    if row["arm"] in FACTORIAL_ARMS:
+        from .factorial import contract_components
+        return contract_components(row)["arm_contract"]
     obj = parsed_object(row)
     if obj is None:
         return False
@@ -80,8 +83,8 @@ def cluster_interval(run, provider, left, right, samples=2000, seed=2026100301):
 
 def diagnostics(run):
     audit = validate(run)
-    if run["kind"] != EXTENDED:
-        raise ValueError("Dimensions are defined for token-efficiency-v2 only.")
+    if run["kind"] not in (EXTENDED, FACTORIAL):
+        raise ValueError("Dimensions require token-efficiency-v2 or v3.")
     tasks = {c["id"]: c for c in run["cases"]}
     names = [p["name"] for p in run["providers"]]
     repeats = run["config"]["repeats"]
@@ -135,7 +138,7 @@ def diagnostics(run):
                                 "finite_numeric_answers": len(errors), "median_absolute_error": statistics.median(errors) if errors else None,
                                 "absolute_error_thresholds": {str(t): sum(e <= t for e in errors) for t in (1e-6, 1e-4, 1e-2)},
                                 "note": "Sensitivity only; original per-task grading is unchanged. Invalid/truncated outputs never pass."})
-        for label, left, right in EXTENDED_COMPARISONS:
+        for label, left, right in comparisons_for(run["kind"]):
             for scope, ids in scopes.items():
                 subset = {**run, "cases": [tasks[i] for i in ids]}
                 entry = {"comparison": label, "scope": scope, **paired(subset, name, left, right)}

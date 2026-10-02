@@ -5,7 +5,7 @@ from html import escape
 import json
 from pathlib import Path
 
-from .efficiency import EXTENDED, analyze
+from .efficiency import EXTENDED, FACTORIAL, analyze
 from .experiment import atomic_json
 
 
@@ -19,7 +19,7 @@ def export_efficiency(run, output):
     dest.mkdir(parents=True, exist_ok=True)
     atomic_json(dest / "analysis.json", result)
     dimensions = None
-    if run["kind"] == EXTENDED:
+    if run["kind"] in (EXTENDED, FACTORIAL):
         from .dimensions import export_dimensions
         dimensions = export_dimensions(run, dest)
     headings = ["模型", "条件", "正确/返回/计划", "已知输入 token", "已知输出 token", "已知总 token", "JSON失败", "未完整输出", "请求失败"]
@@ -65,6 +65,15 @@ def export_efficiency(run, output):
                '</tr></thead><tbody>' + ''.join('<tr>' + ''.join(f'<td>{escape(str(x))}</td>' for x in row) + '</tr>' for row in data) + '</tbody></table></div>'
 
     extra = ''
+    if run["kind"] == FACTORIAL:
+        from .factorial import export_factorial
+        factorial = export_factorial(run, dest)
+        extra += '<h2>顺序 × 限长：共同口径</h2><p class="note">共同契约对四组都检查字段、非空依据和要求的顺序，不检查长度。本条件契约仅对限长组额外要求≤80字符；不能把去掉限制带来的合格率上升直接当作能力改善。答案类型由原判分器检查。</p>'
+        extra += table(['模型','条件','返回','共同契约且正确','本条件契约且正确','≤80字符','依据长度中位数/P90'],
+                       [[g['provider'],g['arm'],g['returned'],g['common_contract_and_correct'],g['arm_contract_and_correct'],g['within_80'],f"{g['median_evidence_characters']} / {g['p90_evidence_characters']}"] for g in factorial['conditions']])
+        extra += '<h2>因素交互项</h2><p class="note">(不限长时先依据−先答案) − (限长时先依据−先答案)，仅用四组均返回的区组。正确率为比例差，token为每区组的差中之差。正负方向不等于优劣，按题聚类区间只描述这个选题集合。</p>'
+        extra += table(['模型','完整/缺失区组','指标','交互估计','95%描述区间'],
+                       [[p['provider'],f"{p['complete_blocks']}/{p['missing_blocks']}",k,v,p['percentile_95pct'][k]] for p in factorial['interactions'] for k,v in p['estimate'].items()])
     if dimensions:
         labels = {"verbose_explain": "常规解释", "compact_answer": "仅答案", "compact_evidence": "先依据后答案"}
         def label(arm):
@@ -106,6 +115,9 @@ def export_efficiency(run, output):
     styles = 'body{margin:0;background:#f4f3ec;color:#142b36;font:16px/1.65 system-ui,sans-serif}main{max-width:1220px;margin:auto;padding:48px 24px}h1{font-size:clamp(32px,5vw,64px);line-height:1.1}h2{margin-top:42px}small{color:#506971}.tag{color:#006b56;font-weight:700;letter-spacing:.12em}.scroll{overflow:auto;background:white;border:1px solid #d7dfda;border-radius:12px}table{border-collapse:collapse;width:100%;white-space:nowrap}th,td{text-align:left;padding:12px 15px;border-bottom:1px solid #e2e7e2}th{background:#e0ebe5}details{margin:12px 0;padding:16px;background:white;border:1px solid #d7dfda;border-radius:10px}summary{cursor:pointer;font-weight:650}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f7f5;padding:16px;border-radius:8px}p{overflow-wrap:anywhere}.note{max-width:960px;color:#506971}a{color:#006b56}'
     html = '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PeerLab · Token 效率实验</title><style>' + styles + '</style><main>'
     design = "三条件复测：常规解释 · 仅答案 · 先依据后答案" if run["kind"] == EXTENDED else "2 × 2 对照：提示词长度 × 是否输出解释"
+    if run["kind"] == FACTORIAL:
+        design = "2 × 2 对照：答案/依据顺序 × 依据是否限80字符"
+        extra = extra.replace("先依据后答案改变了多项要求，不能单独归因于顺序。", "本轮在相同长度要求内比较请求的字段顺序；不能由输出顺序推断模型内部推理机制。")
     html += f'<div class="tag">PEERLAB / TOKEN EFFICIENCY</div><h1>少用 token，<br>答案还可靠吗？</h1><p>{design}</p><small>Run {escape(run["id"])} · {escape(run["status"])} · {run["calls_attempted"]} 次请求尝试</small>'
     html += '<h2>质量与用量</h2>' + table(headings, rows) + '<h2>同题配对比较</h2>' + table(paired_headings, paired_rows)
     html += '<p class="note">' + escape(caveat) + '</p>' + extra + '<h2>逐题原始输出</h2>' + ''.join(details)
