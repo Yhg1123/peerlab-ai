@@ -7,6 +7,7 @@ import sys
 from .client import APIError, clients
 from .experiment import load_cases, run_experiment
 from .report import export_report
+from .datasets import audit_cases, generate_cases, write_dataset
 
 
 def positive(value):
@@ -21,6 +22,13 @@ def main(argv=None):
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("doctor", help="Check keys and list models (no chat calls)")
     sub.add_parser("cases", help="Show bundled tasks")
+    generate = sub.add_parser("generate", help="Generate exact-arithmetic tasks without API calls")
+    generate.add_argument("--family", choices=("bayes", "macro_f1"), default="bayes")
+    generate.add_argument("--count", type=positive, default=6)
+    generate.add_argument("--seed", type=int, default=42)
+    generate.add_argument("--output", type=Path, required=True)
+    verify = sub.add_parser("verify-dataset", help="Audit dataset schema and generated reference answers offline")
+    verify.add_argument("dataset", type=Path)
     run = sub.add_parser("run", help="Run a paid, bounded experiment")
     run.add_argument("--dataset", type=Path)
     run.add_argument("--limit", type=positive, default=3)
@@ -35,7 +43,14 @@ def main(argv=None):
     report.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
     try:
-        if args.command == "cases":
+        if args.command == "generate":
+            data = generate_cases(args.family, args.count, args.seed)
+            write_dataset(args.output, data)
+            print(json.dumps(audit_cases(data), ensure_ascii=False))
+            print(f"Dataset: {args.output.resolve()}")
+        elif args.command == "verify-dataset":
+            print(json.dumps(audit_cases(load_cases(args.dataset)), ensure_ascii=False))
+        elif args.command == "cases":
             for case in load_cases():
                 print(f"{case['id']:24} {case['category']} · {case['title']}")
         elif args.command == "doctor":

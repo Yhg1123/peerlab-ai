@@ -10,6 +10,7 @@ import uuid
 from . import __version__
 from .client import APIError
 from .grading import grade
+from .datasets import audit_cases
 
 ARMS = ("baseline", "self", "peer")
 SYSTEM = "你是严谨的研究助理。解答用户任务；不要自报模型或厂商。只输出 JSON 对象，含 answer 与简短 explanation。answer 的类型按题目要求。不要使用工具，不要执行代码。"
@@ -37,6 +38,7 @@ def load_cases(path=None):
             tolerance = case.get("tolerance", 1e-6)
             if type(tolerance) not in (int, float) or not math.isfinite(tolerance) or tolerance < 0:
                 raise ValueError("Tolerance must be finite and nonnegative.")
+    audit_cases(cases)
     return cases
 
 

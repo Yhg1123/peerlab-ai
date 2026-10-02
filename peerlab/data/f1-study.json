@@ -1,0 +1,140 @@
+[
+  {
+    "id": "generated-macro_f1-001",
+    "category": "机器学习",
+    "title": "宏平均变体 001",
+    "prompt": "二分类混淆矩阵：真实正预测正8、真实正预测负7、真实负预测正18、真实负预测负113。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.6453211544067632,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 6641/10291 ≈ 0.645321154407。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 8,
+        "fn": 7,
+        "fp": 18,
+        "tn": 113
+      },
+      "exact_fraction": [
+        6641,
+        10291
+      ]
+    }
+  },
+  {
+    "id": "generated-macro_f1-002",
+    "category": "机器学习",
+    "title": "宏平均变体 002",
+    "prompt": "二分类混淆矩阵：真实正预测正8、真实正预测负7、真实负预测正5、真实负预测负37。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.7159468438538206,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 431/602 ≈ 0.715946843854。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 8,
+        "fn": 7,
+        "fp": 5,
+        "tn": 37
+      },
+      "exact_fraction": [
+        431,
+        602
+      ]
+    }
+  },
+  {
+    "id": "generated-macro_f1-003",
+    "category": "机器学习",
+    "title": "宏平均变体 003",
+    "prompt": "二分类混淆矩阵：真实正预测正29、真实正预测负7、真实负预测正18、真实负预测负72。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.7754330933200256,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 10877/14027 ≈ 0.775433093320。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 29,
+        "fn": 7,
+        "fp": 18,
+        "tn": 72
+      },
+      "exact_fraction": [
+        10877,
+        14027
+      ]
+    }
+  },
+  {
+    "id": "generated-macro_f1-004",
+    "category": "机器学习",
+    "title": "宏平均变体 004",
+    "prompt": "二分类混淆矩阵：真实正预测正29、真实正预测负11、真实负预测正18、真实负预测负72。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.7495183044315993,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 389/519 ≈ 0.749518304432。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 29,
+        "fn": 11,
+        "fp": 18,
+        "tn": 72
+      },
+      "exact_fraction": [
+        389,
+        519
+      ]
+    }
+  },
+  {
+    "id": "generated-macro_f1-005",
+    "category": "机器学习",
+    "title": "宏平均变体 005",
+    "prompt": "二分类混淆矩阵：真实正预测正29、真实正预测负7、真实负预测正5、真实负预测负37。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.8445182724252491,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 1271/1505 ≈ 0.844518272425。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 29,
+        "fn": 7,
+        "fp": 5,
+        "tn": 37
+      },
+      "exact_fraction": [
+        1271,
+        1505
+      ]
+    }
+  },
+  {
+    "id": "generated-macro_f1-006",
+    "category": "机器学习",
+    "title": "宏平均变体 006",
+    "prompt": "二分类混淆矩阵：真实正预测正3、真实正预测负11、真实负预测正18、真实负预测负113。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.5288515406162465,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 944/1785 ≈ 0.528851540616。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 3,
+        "fn": 11,
+        "fp": 18,
+        "tn": 113
+      },
+      "exact_fraction": [
+        944,
+        1785
+      ]
+    }
+  }
+]

@@ -100,6 +100,8 @@ python -m unittest discover -s tests -v
 
 ## 题库与判分
 
+新增可复算的数值题库生成器：`python -m peerlab generate --family bayes --count 6 --seed 42 --output runs/bayes.json`。支持 Bayes 与 macro-F1，标准答案使用精确分数计算；`python -m peerlab verify-dataset runs/bayes.json` 可离线校验。详见[生成题库说明](docs/generated-datasets.md)。
+
 12 道自建题涵盖概率推理、代码理解、结构化输出、指令遵循、约束规划、机器学习指标与证据不足时的拒答。**程序不执行模型生成代码**。
 
 模型返回 `{"answer": ..., "explanation": "..."}`。仅最终 `answer` 接受自动评分：数值使用绝对容差，数组和对象严格比较结构、类型与内容；允许完整 JSON 代码块，不从散文中搜索答案。非法 JSON、重复键、截断均记未通过。网络错误与缺失单独计覆盖率，不混成错误答案。
