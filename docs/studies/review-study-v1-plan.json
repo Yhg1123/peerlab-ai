@@ -1,0 +1,30 @@
+{
+  "protocol": "independent",
+  "arms": [
+    "baseline",
+    "self",
+    "peer",
+    "peer_independent"
+  ],
+  "cases": [
+    "generated-bayes-001",
+    "generated-bayes-002",
+    "generated-bayes-003",
+    "generated-bayes-004",
+    "generated-bayes-005",
+    "generated-bayes-006",
+    "generated-macro_f1-001",
+    "generated-macro_f1-002",
+    "generated-macro_f1-003",
+    "generated-macro_f1-004",
+    "generated-macro_f1-005",
+    "generated-macro_f1-006"
+  ],
+  "dataset_sha256": "5e8206fe4cf3edb50437b15ede8d3980205a6355cc59f51cbc270e49c752b568",
+  "repeats": 1,
+  "seed": 20261002,
+  "planned_calls": 168,
+  "max_output_tokens_per_call": 700,
+  "output_token_ceiling": 117600,
+  "note": "Input tokens and provider billing are not capped by this plan."
+}

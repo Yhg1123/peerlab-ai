@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 
 from .client import APIError, clients
-from .experiment import load_cases, run_experiment
+from .experiment import PROTOCOLS, dataset_hash, load_cases, planned_calls, run_experiment
 from .report import export_report
 from .datasets import audit_cases, generate_cases, write_dataset
 
@@ -18,7 +18,7 @@ def positive(value):
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="PeerLab — DeepSeek × Kimi 三组对照实验")
+    parser = argparse.ArgumentParser(description="PeerLab — DeepSeek × Kimi 可复现对照实验")
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("doctor", help="Check keys and list models (no chat calls)")
     sub.add_parser("cases", help="Show bundled tasks")
@@ -38,6 +38,8 @@ def main(argv=None):
     run.add_argument("--max-tokens", type=positive, default=700)
     run.add_argument("--timeout", type=positive, default=90)
     run.add_argument("--output", type=Path)
+    run.add_argument("--protocol", choices=PROTOCOLS, default="classic")
+    run.add_argument("--dry-run", action="store_true", help="Print an offline plan; no keys or network")
     report = sub.add_parser("report", help="Regenerate HTML / CSV / Markdown without API calls")
     report.add_argument("run_json", type=Path)
     report.add_argument("--output", type=Path)
@@ -73,16 +75,26 @@ def main(argv=None):
             print(f"Report: {(dest / 'report.html').resolve()}")
         else:
             cases = load_cases(args.dataset)[:args.limit]
-            planned = len(cases) * args.repeats * 10
+            planned = planned_calls(len(cases), args.repeats, args.protocol)
             if planned > args.max_calls:
                 raise ValueError(f"Planned {planned} calls exceeds --max-calls={args.max_calls}. No API requests sent.")
+            if args.dry_run:
+                print(json.dumps({"protocol":args.protocol, "arms":PROTOCOLS[args.protocol],
+                                  "cases":[c["id"] for c in cases], "dataset_sha256":dataset_hash(cases),
+                                  "repeats":args.repeats, "seed":args.seed, "planned_calls":planned,
+                                  "max_output_tokens_per_call":args.max_tokens,
+                                  "output_token_ceiling":planned*args.max_tokens,
+                                  "note":"Input tokens and provider billing are not capped by this plan."},
+                                 ensure_ascii=False, indent=2))
+                return 0
             providers = clients(args.max_tokens, args.timeout)
             for c in providers:
                 if c.model not in c.models():
                     raise ValueError(f"{c.name}: configured model {c.model} unavailable; run doctor. No chat calls sent.")
             dest = args.output or Path("runs") / datetime.now().strftime("%Y%m%d-%H%M%S-%f")
             print(f"Plan: {planned} calls; max {args.max_tokens} output tokens/call; no automatic retries.")
-            data = run_experiment(providers, cases, dest, repeats=args.repeats, seed=args.seed, max_calls=args.max_calls)
+            data = run_experiment(providers, cases, dest, repeats=args.repeats, seed=args.seed,
+                                  max_calls=args.max_calls, protocol=args.protocol)
             export_report(data, dest)
             print(f"Status: {data['status']}\nReport: {(dest / 'report.html').resolve()}")
             return 0 if data["status"] == "complete" else 2

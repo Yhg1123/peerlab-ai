@@ -18,6 +18,8 @@ Python 3.10+ · 运行时零第三方依赖 · MIT · 中文题库 · 离线交�
 
 两模型每题合计 **10 次调用**。Self 与 Peer 共用原始 baseline，并使用相同的审稿、修订提示模板。模型不会看到标准答案或判分结果。完整提示词、返回模型名、输出、耗时、token、截断和错误状态都留在本地。
 
+v0.2新增可选第四组 **先解后审 / peer_independent**：审稿者额外看到自己在候选答案出现前的独立解答，再审查对方。`--protocol independent` 每题合计14次调用；默认classic保持原来的三组与预算。见[协议说明](docs/independent-review.md)和[执行前实验方案](docs/studies/review-study-v1.md)。
+
 ## 先看真实成果
 
 仓库附带一次 3 题真实 API 试运行，见 [`examples/pilot/summary.md`](examples/pilot/summary.md)。下载仓库后双击 [`examples/pilot/report.html`](examples/pilot/report.html) 即可查看交互图表、逐题结果和匿名人工评审，不需要 API key 或联网。
@@ -86,6 +88,9 @@ python -m peerlab run --limit 12 --repeats 3 --max-calls 360 --seed 42
 # 限制输出、超时，指定新的结果目录
 python -m peerlab run --max-tokens 700 --timeout 90 --output runs/my-study
 
+# 完全离线预览第四组方案，不读取API客户端、不消耗余额
+python -m peerlab run --protocol independent --limit 3 --max-calls 42 --dry-run
+
 # 离线重新生成报告，不会请求 API
 python -m peerlab report examples/pilot/run.json --output runs/rebuilt
 
@@ -123,7 +128,8 @@ python -m unittest discover -s tests -v
 ```text
 peerlab/
   client.py             官方 API 适配、超时与安全错误信息
-  experiment.py         三组协议、预算、持久化与配对统计
+  experiment.py         三/四组协议、预算、依赖追踪与配对统计
+  datasets.py           精确算术题库生成与参考答案校验
   grading.py            不执行代码的严格判分
   report.py             HTML / Markdown / CSV 导出
   data/cases.json       12 题与独立参考答案
