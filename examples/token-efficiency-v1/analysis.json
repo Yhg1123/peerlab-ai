@@ -1,0 +1,1607 @@
+{
+  "audit": {
+    "cases": 12,
+    "oracle_verified": 8,
+    "manual_reference": 4,
+    "call_records": 96,
+    "grades_recomputed": 95,
+    "plan_and_prompts_verified": true,
+    "note": "Internal consistency audit, not cryptographic proof of provider authenticity."
+  },
+  "run_id": "33399d5f51554e6d8cdb3286ecda39a0",
+  "status": "partial",
+  "attempted": 96,
+  "usage": {
+    "prompt_tokens": {
+      "known_sum": 10731,
+      "known_calls": 95,
+      "missing_calls": 0
+    },
+    "completion_tokens": {
+      "known_sum": 10720,
+      "known_calls": 95,
+      "missing_calls": 0
+    },
+    "total_tokens": {
+      "known_sum": 21451,
+      "known_calls": 95,
+      "missing_calls": 0
+    }
+  },
+  "conditions": [
+    {
+      "provider": "deepseek",
+      "arm": "verbose_explain",
+      "planned": 12,
+      "returned": 12,
+      "correct": 3,
+      "invalid_json": 0,
+      "incomplete": 0,
+      "errors": 0,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1445,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 1392,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 2837,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "verbose_answer",
+      "planned": 12,
+      "returned": 12,
+      "correct": 3,
+      "invalid_json": 1,
+      "incomplete": 0,
+      "errors": 0,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1445,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 116,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 1561,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "compact_explain",
+      "planned": 12,
+      "returned": 12,
+      "correct": 3,
+      "invalid_json": 0,
+      "incomplete": 1,
+      "errors": 0,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1205,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 1790,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 2995,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "compact_answer",
+      "planned": 12,
+      "returned": 11,
+      "correct": 3,
+      "invalid_json": 0,
+      "incomplete": 0,
+      "errors": 1,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1108,
+          "known_calls": 11,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 105,
+          "known_calls": 11,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 1213,
+          "known_calls": 11,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "verbose_explain",
+      "planned": 12,
+      "returned": 12,
+      "correct": 3,
+      "invalid_json": 3,
+      "incomplete": 1,
+      "errors": 0,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1490,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 3875,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 5365,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "verbose_answer",
+      "planned": 12,
+      "returned": 12,
+      "correct": 3,
+      "invalid_json": 0,
+      "incomplete": 0,
+      "errors": 0,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1490,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 217,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 1707,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "compact_explain",
+      "planned": 12,
+      "returned": 12,
+      "correct": 3,
+      "invalid_json": 1,
+      "incomplete": 0,
+      "errors": 0,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1274,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 3014,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 4288,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "compact_answer",
+      "planned": 12,
+      "returned": 12,
+      "correct": 3,
+      "invalid_json": 0,
+      "incomplete": 0,
+      "errors": 0,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1274,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 211,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 1485,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "comparison": "combined",
+      "provider": "deepseek",
+      "left": "verbose_explain",
+      "right": "compact_answer",
+      "paired": 11,
+      "missing_pairs": 1,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 8,
+      "left_correct": 3,
+      "right_correct": 3,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 11,
+          "missing_pairs": 0,
+          "left_sum": 1328,
+          "right_sum": 1108,
+          "saved_fraction": 0.1656626506024096
+        },
+        "completion_tokens": {
+          "paired": 11,
+          "missing_pairs": 0,
+          "left_sum": 1303,
+          "right_sum": 105,
+          "saved_fraction": 0.9194167306216423
+        },
+        "total_tokens": {
+          "paired": 11,
+          "missing_pairs": 0,
+          "left_sum": 2631,
+          "right_sum": 1213,
+          "saved_fraction": 0.5389585708855948
+        }
+      },
+      "left_tokens_per_correct": 877.0,
+      "right_tokens_per_correct": 404.3333333333333,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "left_id": 96,
+          "right_id": 90,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-003",
+          "repeat": 1,
+          "left_id": 86,
+          "right_id": 81,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "left_id": 36,
+          "right_id": 38,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 44,
+          "right_id": 41,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 14,
+          "right_id": 16,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 73,
+          "right_id": 75,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 1,
+          "right_id": 8,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "python-aliasing",
+          "repeat": 1,
+          "left_id": 64,
+          "right_id": 58,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "critical-path",
+          "repeat": 1,
+          "left_id": 54,
+          "right_id": 53,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "balanced-json",
+          "repeat": 1,
+          "left_id": 19,
+          "right_id": 23,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "retrieval-abstain",
+          "repeat": 1,
+          "left_id": 28,
+          "right_id": 25,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "prompt_with_explanation",
+      "provider": "deepseek",
+      "left": "verbose_explain",
+      "right": "compact_explain",
+      "paired": 12,
+      "missing_pairs": 0,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 9,
+      "left_correct": 3,
+      "right_correct": 3,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1445,
+          "right_sum": 1205,
+          "saved_fraction": 0.16608996539792387
+        },
+        "completion_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1392,
+          "right_sum": 1790,
+          "saved_fraction": -0.2859195402298851
+        },
+        "total_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 2837,
+          "right_sum": 2995,
+          "saved_fraction": -0.05569263306309491
+        }
+      },
+      "left_tokens_per_correct": 945.6666666666666,
+      "right_tokens_per_correct": 998.3333333333334,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-001",
+          "repeat": 1,
+          "left_id": 66,
+          "right_id": 70,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "left_id": 96,
+          "right_id": 92,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-003",
+          "repeat": 1,
+          "left_id": 86,
+          "right_id": 85,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "left_id": 36,
+          "right_id": 39,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 44,
+          "right_id": 46,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 14,
+          "right_id": 13,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 73,
+          "right_id": 79,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 1,
+          "right_id": 7,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "python-aliasing",
+          "repeat": 1,
+          "left_id": 64,
+          "right_id": 61,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "critical-path",
+          "repeat": 1,
+          "left_id": 54,
+          "right_id": 52,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "balanced-json",
+          "repeat": 1,
+          "left_id": 19,
+          "right_id": 21,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "retrieval-abstain",
+          "repeat": 1,
+          "left_id": 28,
+          "right_id": 29,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "prompt_without_explanation",
+      "provider": "deepseek",
+      "left": "verbose_answer",
+      "right": "compact_answer",
+      "paired": 11,
+      "missing_pairs": 1,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 8,
+      "left_correct": 3,
+      "right_correct": 3,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 11,
+          "missing_pairs": 0,
+          "left_sum": 1328,
+          "right_sum": 1108,
+          "saved_fraction": 0.1656626506024096
+        },
+        "completion_tokens": {
+          "paired": 11,
+          "missing_pairs": 0,
+          "left_sum": 107,
+          "right_sum": 105,
+          "saved_fraction": 0.01869158878504673
+        },
+        "total_tokens": {
+          "paired": 11,
+          "missing_pairs": 0,
+          "left_sum": 1435,
+          "right_sum": 1213,
+          "saved_fraction": 0.15470383275261324
+        }
+      },
+      "left_tokens_per_correct": 478.3333333333333,
+      "right_tokens_per_correct": 404.3333333333333,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "left_id": 89,
+          "right_id": 90,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-003",
+          "repeat": 1,
+          "left_id": 83,
+          "right_id": 81,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "left_id": 35,
+          "right_id": 38,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 47,
+          "right_id": 41,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 11,
+          "right_id": 16,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 80,
+          "right_id": 75,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 2,
+          "right_id": 8,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "python-aliasing",
+          "repeat": 1,
+          "left_id": 62,
+          "right_id": 58,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "critical-path",
+          "repeat": 1,
+          "left_id": 55,
+          "right_id": 53,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "balanced-json",
+          "repeat": 1,
+          "left_id": 17,
+          "right_id": 23,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "retrieval-abstain",
+          "repeat": 1,
+          "left_id": 30,
+          "right_id": 25,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "output_with_verbose_prompt",
+      "provider": "deepseek",
+      "left": "verbose_explain",
+      "right": "verbose_answer",
+      "paired": 12,
+      "missing_pairs": 0,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 9,
+      "left_correct": 3,
+      "right_correct": 3,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1445,
+          "right_sum": 1445,
+          "saved_fraction": 0.0
+        },
+        "completion_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1392,
+          "right_sum": 116,
+          "saved_fraction": 0.9166666666666666
+        },
+        "total_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 2837,
+          "right_sum": 1561,
+          "saved_fraction": 0.4497708847373987
+        }
+      },
+      "left_tokens_per_correct": 945.6666666666666,
+      "right_tokens_per_correct": 520.3333333333334,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-001",
+          "repeat": 1,
+          "left_id": 66,
+          "right_id": 72,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "left_id": 96,
+          "right_id": 89,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-003",
+          "repeat": 1,
+          "left_id": 86,
+          "right_id": 83,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "left_id": 36,
+          "right_id": 35,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 44,
+          "right_id": 47,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 14,
+          "right_id": 11,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 73,
+          "right_id": 80,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 1,
+          "right_id": 2,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "python-aliasing",
+          "repeat": 1,
+          "left_id": 64,
+          "right_id": 62,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "critical-path",
+          "repeat": 1,
+          "left_id": 54,
+          "right_id": 55,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "balanced-json",
+          "repeat": 1,
+          "left_id": 19,
+          "right_id": 17,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "retrieval-abstain",
+          "repeat": 1,
+          "left_id": 28,
+          "right_id": 30,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "output_with_compact_prompt",
+      "provider": "deepseek",
+      "left": "compact_explain",
+      "right": "compact_answer",
+      "paired": 11,
+      "missing_pairs": 1,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 8,
+      "left_correct": 3,
+      "right_correct": 3,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 11,
+          "missing_pairs": 0,
+          "left_sum": 1108,
+          "right_sum": 1108,
+          "saved_fraction": 0.0
+        },
+        "completion_tokens": {
+          "paired": 11,
+          "missing_pairs": 0,
+          "left_sum": 1730,
+          "right_sum": 105,
+          "saved_fraction": 0.9393063583815029
+        },
+        "total_tokens": {
+          "paired": 11,
+          "missing_pairs": 0,
+          "left_sum": 2838,
+          "right_sum": 1213,
+          "saved_fraction": 0.5725863284002819
+        }
+      },
+      "left_tokens_per_correct": 946.0,
+      "right_tokens_per_correct": 404.3333333333333,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "left_id": 92,
+          "right_id": 90,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-003",
+          "repeat": 1,
+          "left_id": 85,
+          "right_id": 81,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "left_id": 39,
+          "right_id": 38,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 46,
+          "right_id": 41,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 13,
+          "right_id": 16,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 79,
+          "right_id": 75,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 7,
+          "right_id": 8,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "python-aliasing",
+          "repeat": 1,
+          "left_id": 61,
+          "right_id": 58,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "critical-path",
+          "repeat": 1,
+          "left_id": 52,
+          "right_id": 53,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "balanced-json",
+          "repeat": 1,
+          "left_id": 21,
+          "right_id": 23,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "retrieval-abstain",
+          "repeat": 1,
+          "left_id": 29,
+          "right_id": 25,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "combined",
+      "provider": "kimi",
+      "left": "verbose_explain",
+      "right": "compact_answer",
+      "paired": 12,
+      "missing_pairs": 0,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 9,
+      "left_correct": 3,
+      "right_correct": 3,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1490,
+          "right_sum": 1274,
+          "saved_fraction": 0.14496644295302008
+        },
+        "completion_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 3875,
+          "right_sum": 211,
+          "saved_fraction": 0.9455483870967742
+        },
+        "total_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 5365,
+          "right_sum": 1485,
+          "saved_fraction": 0.7232059645852749
+        }
+      },
+      "left_tokens_per_correct": 1788.3333333333333,
+      "right_tokens_per_correct": 495.0,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-001",
+          "repeat": 1,
+          "left_id": 65,
+          "right_id": 71,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "left_id": 91,
+          "right_id": 95,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-003",
+          "repeat": 1,
+          "left_id": 84,
+          "right_id": 88,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "left_id": 40,
+          "right_id": 33,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 48,
+          "right_id": 42,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 15,
+          "right_id": 10,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 77,
+          "right_id": 76,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 6,
+          "right_id": 3,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "python-aliasing",
+          "repeat": 1,
+          "left_id": 63,
+          "right_id": 60,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "critical-path",
+          "repeat": 1,
+          "left_id": 51,
+          "right_id": 56,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "balanced-json",
+          "repeat": 1,
+          "left_id": 22,
+          "right_id": 20,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "retrieval-abstain",
+          "repeat": 1,
+          "left_id": 26,
+          "right_id": 32,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "prompt_with_explanation",
+      "provider": "kimi",
+      "left": "verbose_explain",
+      "right": "compact_explain",
+      "paired": 12,
+      "missing_pairs": 0,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 9,
+      "left_correct": 3,
+      "right_correct": 3,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1490,
+          "right_sum": 1274,
+          "saved_fraction": 0.14496644295302008
+        },
+        "completion_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 3875,
+          "right_sum": 3014,
+          "saved_fraction": 0.22219354838709682
+        },
+        "total_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 5365,
+          "right_sum": 4288,
+          "saved_fraction": 0.20074557315936625
+        }
+      },
+      "left_tokens_per_correct": 1788.3333333333333,
+      "right_tokens_per_correct": 1429.3333333333333,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-001",
+          "repeat": 1,
+          "left_id": 65,
+          "right_id": 68,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "left_id": 91,
+          "right_id": 94,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-003",
+          "repeat": 1,
+          "left_id": 84,
+          "right_id": 87,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "left_id": 40,
+          "right_id": 37,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 48,
+          "right_id": 43,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 15,
+          "right_id": 12,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 77,
+          "right_id": 74,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 6,
+          "right_id": 5,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "python-aliasing",
+          "repeat": 1,
+          "left_id": 63,
+          "right_id": 57,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "critical-path",
+          "repeat": 1,
+          "left_id": 51,
+          "right_id": 49,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "balanced-json",
+          "repeat": 1,
+          "left_id": 22,
+          "right_id": 24,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "retrieval-abstain",
+          "repeat": 1,
+          "left_id": 26,
+          "right_id": 27,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "prompt_without_explanation",
+      "provider": "kimi",
+      "left": "verbose_answer",
+      "right": "compact_answer",
+      "paired": 12,
+      "missing_pairs": 0,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 9,
+      "left_correct": 3,
+      "right_correct": 3,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1490,
+          "right_sum": 1274,
+          "saved_fraction": 0.14496644295302008
+        },
+        "completion_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 217,
+          "right_sum": 211,
+          "saved_fraction": 0.027649769585253448
+        },
+        "total_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1707,
+          "right_sum": 1485,
+          "saved_fraction": 0.1300527240773286
+        }
+      },
+      "left_tokens_per_correct": 569.0,
+      "right_tokens_per_correct": 495.0,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-001",
+          "repeat": 1,
+          "left_id": 67,
+          "right_id": 71,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "left_id": 93,
+          "right_id": 95,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-003",
+          "repeat": 1,
+          "left_id": 82,
+          "right_id": 88,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "left_id": 34,
+          "right_id": 33,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 45,
+          "right_id": 42,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 9,
+          "right_id": 10,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 78,
+          "right_id": 76,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 4,
+          "right_id": 3,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "python-aliasing",
+          "repeat": 1,
+          "left_id": 59,
+          "right_id": 60,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "critical-path",
+          "repeat": 1,
+          "left_id": 50,
+          "right_id": 56,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "balanced-json",
+          "repeat": 1,
+          "left_id": 18,
+          "right_id": 20,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "retrieval-abstain",
+          "repeat": 1,
+          "left_id": 31,
+          "right_id": 32,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "output_with_verbose_prompt",
+      "provider": "kimi",
+      "left": "verbose_explain",
+      "right": "verbose_answer",
+      "paired": 12,
+      "missing_pairs": 0,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 9,
+      "left_correct": 3,
+      "right_correct": 3,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1490,
+          "right_sum": 1490,
+          "saved_fraction": 0.0
+        },
+        "completion_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 3875,
+          "right_sum": 217,
+          "saved_fraction": 0.944
+        },
+        "total_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 5365,
+          "right_sum": 1707,
+          "saved_fraction": 0.6818266542404474
+        }
+      },
+      "left_tokens_per_correct": 1788.3333333333333,
+      "right_tokens_per_correct": 569.0,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-001",
+          "repeat": 1,
+          "left_id": 65,
+          "right_id": 67,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "left_id": 91,
+          "right_id": 93,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-003",
+          "repeat": 1,
+          "left_id": 84,
+          "right_id": 82,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "left_id": 40,
+          "right_id": 34,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 48,
+          "right_id": 45,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 15,
+          "right_id": 9,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 77,
+          "right_id": 78,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 6,
+          "right_id": 4,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "python-aliasing",
+          "repeat": 1,
+          "left_id": 63,
+          "right_id": 59,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "critical-path",
+          "repeat": 1,
+          "left_id": 51,
+          "right_id": 50,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "balanced-json",
+          "repeat": 1,
+          "left_id": 22,
+          "right_id": 18,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "retrieval-abstain",
+          "repeat": 1,
+          "left_id": 26,
+          "right_id": 31,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "output_with_compact_prompt",
+      "provider": "kimi",
+      "left": "compact_explain",
+      "right": "compact_answer",
+      "paired": 12,
+      "missing_pairs": 0,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 9,
+      "left_correct": 3,
+      "right_correct": 3,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1274,
+          "right_sum": 1274,
+          "saved_fraction": 0.0
+        },
+        "completion_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 3014,
+          "right_sum": 211,
+          "saved_fraction": 0.9299933642999336
+        },
+        "total_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 4288,
+          "right_sum": 1485,
+          "saved_fraction": 0.6536847014925373
+        }
+      },
+      "left_tokens_per_correct": 1429.3333333333333,
+      "right_tokens_per_correct": 495.0,
+      "pairs": [
+        {
+          "case_id": "generated-bayes-001",
+          "repeat": 1,
+          "left_id": 68,
+          "right_id": 71,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-002",
+          "repeat": 1,
+          "left_id": 94,
+          "right_id": 95,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-003",
+          "repeat": 1,
+          "left_id": 87,
+          "right_id": 88,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-bayes-004",
+          "repeat": 1,
+          "left_id": 37,
+          "right_id": 33,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 43,
+          "right_id": 42,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 12,
+          "right_id": 10,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 74,
+          "right_id": 76,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 5,
+          "right_id": 3,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "python-aliasing",
+          "repeat": 1,
+          "left_id": 57,
+          "right_id": 60,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "critical-path",
+          "repeat": 1,
+          "left_id": 49,
+          "right_id": 56,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "balanced-json",
+          "repeat": 1,
+          "left_id": 24,
+          "right_id": 20,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "retrieval-abstain",
+          "repeat": 1,
+          "left_id": 27,
+          "right_id": 32,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    }
+  ]
+}

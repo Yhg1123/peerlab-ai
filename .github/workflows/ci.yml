@@ -21,4 +21,5 @@ jobs:
       - run: python -m peerlab analyze examples/pilot/run.json --left baseline --right peer --output runs/ci-analysis
       - run: python -m peerlab analyze examples/review-study-v1/run.json --output runs/ci-study-analysis
       - run: python -m peerlab efficiency --dataset peerlab/data/token-efficiency-v1.json --limit 12 --max-calls 96 --seed 2026100203 --dry-run
+      - run: python -m peerlab analyze-efficiency examples/token-efficiency-v1/run.json --output runs/ci-token-analysis
       - run: python scripts/package_release.py

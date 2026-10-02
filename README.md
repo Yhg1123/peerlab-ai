@@ -1,12 +1,25 @@
 # PeerLab ↗
 
-**两个 AI，能否一起答得更好？**
+**两个 AI，能否答得更好，也用得更省？**
 
-一个可以在本地复现的 **DeepSeek × Kimi 交叉审稿实验**。让两个模型独立作答，再分别接受自己的审稿和另一个模型的审稿，用客观规则比较答案是否改对、是否被带偏。
+一个可以在本地复现的 **DeepSeek × Kimi 实验项目**。研究交叉审稿能否改善答案，以及压缩提示词、减少解释能否在节省 token 的同时保住质量。公开执行前方案、完整输出和可离线重算的结果。
 
 Python 3.10+ · 运行时零第三方依赖 · MIT · 中文题库 · 离线交互报告
 
 ## 这个项目研究什么
+
+v0.3新增 **Token 效率 2×2 实验**：常规/压缩系统提示词 × 带解释/仅答案，固定题目和生成参数，按模型做同题质量与用量配对比较。每题两模型共8次请求。见[方法、指标和CLI](docs/token-efficiency.md)及[执行前方案](docs/studies/token-efficiency-v1.md)。
+
+```bash
+# 离线预览，不需要密钥
+python -m peerlab efficiency --dry-run
+
+# 真实运行，默认3题、24次请求
+python -m peerlab efficiency --output runs/token-pilot
+
+# 离线重算报告
+python -m peerlab analyze-efficiency runs/token-pilot/run.json --output runs/token-recheck
+```
 
 “多叫一个模型”可能改善答案，也可能只是增加费用，或者把原本正确的答案改错。PeerLab 保留三组对照：
 
@@ -21,6 +34,12 @@ Python 3.10+ · 运行时零第三方依赖 · MIT · 中文题库 · 离线交�
 v0.2新增可选第四组 **先解后审 / peer_independent**：审稿者额外看到自己在候选答案出现前的独立解答，再审查对方。`--protocol independent` 每题合计14次调用；默认classic保持原来的三组与预算。见[协议说明](docs/independent-review.md)和[执行前实验方案](docs/studies/review-study-v1.md)。
 
 ## 先看真实成果
+
+**v0.3 Token 效率实验已发布：** [96次请求的结果](docs/studies/token-efficiency-v1-findings.md)。短提示词＋仅答案在有效配对中减少约53.9%（DeepSeek）/72.3%（Kimi）的总token，但正确数仅3/11和3/12，未证明业务可用或质量等价。95次返回、1次网络失败，原样保留。附[观点：先给质量设一道门槛](docs/opinions/token-savings-quality-floor.md)和[数据/离线报告](examples/token-efficiency-v1/README.md)。
+
+```bash
+python -m peerlab analyze-efficiency examples/token-efficiency-v1/run.json --output runs/token-recheck
+```
 
 **v0.2 后续实验已发布：** [12题数值审稿研究](docs/studies/review-study-v1-findings.md)。先解后审对普通互审，在各9个有效配对中，DeepSeek净多对2题，Kimi一题改善、一题退步。150次请求尝试中145次返回，5次网络失败，全部保留。详见[原始记录与离线报告](examples/review-study-v1/README.md)；这是一轮有缺失的小样本探索，不能推断普遍有效。
 

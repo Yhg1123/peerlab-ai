@@ -5,3 +5,4 @@
 *.json text eol=lf
 *.yml text eol=lf
 examples/review-study-v1/run.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+examples/token-efficiency-v1/run.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
