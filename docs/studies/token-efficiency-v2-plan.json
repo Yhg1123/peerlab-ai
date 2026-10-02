@@ -1,0 +1,50 @@
+{
+  "protocol": "token-efficiency-v2",
+  "arms": [
+    "verbose_explain",
+    "compact_answer",
+    "compact_evidence"
+  ],
+  "system_prompts": {
+    "verbose_explain": "你是严谨的研究助理。请认真阅读并解答用户提供的任务，遵循题目给出的条件和答案类型要求。不要自报模型或厂商。不要使用工具，也不要执行代码。只输出 JSON 对象，含 answer 与简短 explanation。",
+    "compact_answer": "解题；按题目类型作答。不自报身份，不用工具或执行代码。只输出 JSON 对象，仅含 answer，不要解释。",
+    "compact_evidence": "解题；按题目类型作答。不自报身份，不用工具或执行代码。只输出一个 JSON 对象，先写 evidence（不超过80字的简短计算依据或核验结果），再写 answer。answer必须与evidence一致。"
+  },
+  "cases": [
+    "v2-generated-bayes-001",
+    "v2-generated-bayes-002",
+    "v2-generated-bayes-003",
+    "v2-generated-bayes-004",
+    "v2-generated-bayes-005",
+    "v2-generated-bayes-006",
+    "v2-generated-macro_f1-001",
+    "v2-generated-macro_f1-002",
+    "v2-generated-macro_f1-003",
+    "v2-generated-macro_f1-004",
+    "v2-generated-macro_f1-005",
+    "v2-generated-macro_f1-006",
+    "bayes-base-rate",
+    "python-aliasing",
+    "context-injection",
+    "critical-path",
+    "simpson-paradox",
+    "conditional-children",
+    "sql-null",
+    "balanced-json",
+    "logic-entailment",
+    "metric-f1",
+    "retrieval-abstain",
+    "expected-draws"
+  ],
+  "dataset_sha256": "9e593fede70a75900ceecc1a790dd2740f093532f13ecf6f66d9fa4a9ef92cf2",
+  "repeats": 2,
+  "seed": 2026100301,
+  "planned_calls": 288,
+  "temperature": 0.6,
+  "thinking": "disabled",
+  "retries": 0,
+  "max_output_tokens_per_call": 700,
+  "timeout_seconds": 90,
+  "output_token_ceiling": 201600,
+  "note": "Input tokens and provider billing are not capped. Seed controls ordering, not model sampling."
+}

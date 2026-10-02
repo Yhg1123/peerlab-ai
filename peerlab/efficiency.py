@@ -30,15 +30,33 @@ COMPARISONS = (
     ("output_with_compact_prompt", "compact_explain", "compact_answer"),
 )
 METRICS = ("prompt_tokens", "completion_tokens", "total_tokens")
+EXTENDED = "token-efficiency-v2"
+EXTENDED_ARMS = ("verbose_explain", "compact_answer", "compact_evidence")
+EVIDENCE_OUTPUT = "只输出一个 JSON 对象，先写 evidence（不超过80字的简短计算依据或核验结果），再写 answer。answer必须与evidence一致。"
+EXTENDED_COMPARISONS = (
+    ("combined", "verbose_explain", "compact_answer"),
+    ("evidence_vs_answer", "compact_answer", "compact_evidence"),
+    ("evidence_vs_baseline", "verbose_explain", "compact_evidence"),
+)
+
+
+def arms_for(protocol):
+    if protocol == PROTOCOL:
+        return ARMS
+    if protocol == EXTENDED:
+        return EXTENDED_ARMS
+    raise ValueError("Unknown efficiency protocol.")
 
 
 def messages_for(case, arm):
     prefix, output = arm.split("_")
-    return [{"role": "system", "content": PREFIXES[prefix] + OUTPUTS[output]},
+    suffix = EVIDENCE_OUTPUT if output == "evidence" else OUTPUTS[output]
+    return [{"role": "system", "content": PREFIXES[prefix] + suffix},
             {"role": "user", "content": case["prompt"]}]
 
 
-def make_plan(cases, repeats=1, seed=42, max_tokens=700, timeout=90):
+def make_plan(cases, repeats=1, seed=42, max_tokens=700, timeout=90, protocol=PROTOCOL):
+    arms = arms_for(protocol)
     if not cases or type(repeats) is not int or repeats < 1:
         raise ValueError("A nonempty dataset and positive repeats are required.")
     if len({c["id"] for c in cases}) != len(cases):
@@ -46,9 +64,9 @@ def make_plan(cases, repeats=1, seed=42, max_tokens=700, timeout=90):
     audit_cases(cases)
     if max_tokens < 1 or timeout < 1:
         raise ValueError("Output limit and timeout must be positive.")
-    calls = len(cases) * repeats * 2 * len(ARMS)
-    return {"protocol": PROTOCOL, "arms": list(ARMS),
-            "system_prompts": {a: messages_for(cases[0], a)[0]["content"] for a in ARMS},
+    calls = len(cases) * repeats * 2 * len(arms)
+    return {"protocol": protocol, "arms": list(arms),
+            "system_prompts": {a: messages_for(cases[0], a)[0]["content"] for a in arms},
             "cases": [c["id"] for c in cases], "dataset_sha256": dataset_hash(cases),
             "repeats": repeats, "seed": seed, "planned_calls": calls,
             "temperature": 0.6, "thinking": "disabled", "retries": 0,
@@ -57,29 +75,29 @@ def make_plan(cases, repeats=1, seed=42, max_tokens=700, timeout=90):
             "note": "Input tokens and provider billing are not capped. Seed controls ordering, not model sampling."}
 
 
-def schedule(cases, names, repeats, seed):
+def schedule(cases, names, repeats, seed, protocol=PROTOCOL):
     rng = random.Random(seed)
     blocks = [(c["id"], rep) for rep in range(1, repeats + 1) for c in cases]
     rng.shuffle(blocks)
     jobs = []
     for case_id, rep in blocks:
-        treatments = [(name, arm) for name in names for arm in ARMS]
+        treatments = [(name, arm) for name in names for arm in arms_for(protocol)]
         rng.shuffle(treatments)
         jobs.extend((case_id, rep, name, arm) for name, arm in treatments)
     return jobs
 
 
-def run_efficiency(clients, cases, output, *, repeats=1, seed=42, max_calls=24, progress=print):
+def run_efficiency(clients, cases, output, *, repeats=1, seed=42, max_calls=24, progress=print, protocol=PROTOCOL):
     if len(clients) != 2 or len({c.name for c in clients}) != 2:
         raise ValueError("Exactly two distinct providers are required.")
     if len({(c.max_tokens, c.timeout) for c in clients}) != 1:
         raise ValueError("Providers must share output limit and timeout.")
-    plan = make_plan(cases, repeats, seed, clients[0].max_tokens, clients[0].timeout)
+    plan = make_plan(cases, repeats, seed, clients[0].max_tokens, clients[0].timeout, protocol)
     if plan["planned_calls"] > max_calls:
         raise ValueError(f"Planned {plan['planned_calls']} calls exceeds --max-calls={max_calls}.")
     dest = Path(output)
     dest.mkdir(parents=True, exist_ok=False)
-    run = {"schema_version": 1, "kind": PROTOCOL, "peerlab_version": __version__,
+    run = {"schema_version": 1, "kind": protocol, "peerlab_version": __version__,
            "id": uuid.uuid4().hex, "mode": "live", "status": "running",
            "started_at": datetime.now(timezone.utc).isoformat(),
            "config": {**plan, "max_calls": max_calls}, "cases": cases,
@@ -93,7 +111,7 @@ def run_efficiency(clients, cases, output, *, repeats=1, seed=42, max_calls=24, 
 
     save()
     try:
-        for case_id, rep, name, arm in schedule(cases, list(by_client), repeats, seed):
+        for case_id, rep, name, arm in schedule(cases, list(by_client), repeats, seed, protocol):
             client, case = by_client[name], by_case[case_id]
             row = {"id": len(run["records"]) + 1, "case_id": case_id, "repeat": rep,
                    "provider": name, "arm": arm, "requested_model": client.model,
@@ -122,10 +140,10 @@ def run_efficiency(clients, cases, output, *, repeats=1, seed=42, max_calls=24, 
 
 
 def validate(run):
-    if run.get("kind") != PROTOCOL or run.get("schema_version") != 1:
+    if run.get("kind") not in (PROTOCOL, EXTENDED) or run.get("schema_version") != 1:
         raise ValueError("Unsupported efficiency evidence schema.")
     cfg, cases = run["config"], run["cases"]
-    plan = make_plan(cases, cfg["repeats"], cfg["seed"], cfg["max_output_tokens_per_call"], cfg["timeout_seconds"])
+    plan = make_plan(cases, cfg["repeats"], cfg["seed"], cfg["max_output_tokens_per_call"], cfg["timeout_seconds"], run["kind"])
     if any(cfg.get(k) != v for k, v in plan.items()):
         raise ValueError("Saved plan differs from the frozen protocol or dataset.")
     names = [p["name"] for p in run["providers"]]
@@ -136,7 +154,7 @@ def validate(run):
         if p["max_tokens"] != cfg["max_output_tokens_per_call"] or p["timeout"] != cfg["timeout_seconds"]:
             raise ValueError("Provider parameters disagree with plan.")
     tasks = {c["id"]: c for c in cases}
-    jobs = schedule(cases, names, cfg["repeats"], cfg["seed"])
+    jobs = schedule(cases, names, cfg["repeats"], cfg["seed"], run["kind"])
     rows = run["records"]
     if len(rows) != run["calls_attempted"] or not len(rows) <= len(jobs) <= cfg["max_calls"]:
         raise ValueError("Call ledger or budget mismatch.")
@@ -219,7 +237,7 @@ def analyze(run):
     total = len(run["cases"]) * run["config"]["repeats"]
     for provider in run["providers"]:
         name = provider["name"]
-        for arm in ARMS:
+        for arm in arms_for(run["kind"]):
             rows = [r for r in run["records"] if r["provider"] == name and r["arm"] == arm]
             good = [r for r in rows if r["status"] == "ok"]
             groups.append({"provider": name, "arm": arm, "planned": total, "returned": len(good),
@@ -227,7 +245,7 @@ def analyze(run):
                            "invalid_json": sum(r["grade"]["reason"] == "invalid_json_answer" for r in good),
                            "incomplete": sum(r["finish_reason"] != "stop" for r in good),
                            "errors": sum(r["status"] == "error" for r in rows), "usage": usage(rows)})
-        for label, left, right in COMPARISONS:
+        for label, left, right in (EXTENDED_COMPARISONS if run["kind"] == EXTENDED else COMPARISONS):
             comparisons.append({"comparison": label, **paired(run, name, left, right)})
     return {"audit": audit, "run_id": run["id"], "status": run["status"],
             "attempted": run["calls_attempted"], "usage": usage(run["records"]),

@@ -9,7 +9,7 @@ from .experiment import PROTOCOLS, dataset_hash, load_cases, planned_calls, run_
 from .report import export_report
 from .datasets import audit_cases, generate_cases, write_dataset
 from .analysis import export_analysis
-from .efficiency import make_plan, run_efficiency
+from .efficiency import EXTENDED, PROTOCOL as EFFICIENCY_PROTOCOL, make_plan, run_efficiency
 from .efficiency_report import export_efficiency
 
 
@@ -61,6 +61,7 @@ def main(argv=None):
     efficiency.add_argument("--timeout", type=positive, default=90)
     efficiency.add_argument("--output", type=Path)
     efficiency.add_argument("--dry-run", action="store_true")
+    efficiency.add_argument("--protocol", choices=(EFFICIENCY_PROTOCOL, EXTENDED), default=EFFICIENCY_PROTOCOL)
     efficiency_analysis = sub.add_parser("analyze-efficiency", help="Audit and render token experiment evidence offline")
     efficiency_analysis.add_argument("run_json", type=Path)
     efficiency_analysis.add_argument("--output", type=Path)
@@ -103,7 +104,7 @@ def main(argv=None):
             print(f"Report: {(dest/'report.html').resolve()}")
         elif args.command == "efficiency":
             cases = load_cases(args.dataset)[:args.limit]
-            plan = make_plan(cases, args.repeats, args.seed, args.max_tokens, args.timeout)
+            plan = make_plan(cases, args.repeats, args.seed, args.max_tokens, args.timeout, args.protocol)
             if plan["planned_calls"] > args.max_calls:
                 raise ValueError(f"Planned {plan['planned_calls']} calls exceeds --max-calls={args.max_calls}. No requests sent.")
             if args.dry_run:
@@ -114,7 +115,7 @@ def main(argv=None):
                 if c.model not in c.models():
                     raise ValueError(f"{c.name}: configured model unavailable; no chat calls sent.")
             dest = args.output or Path("runs") / ("efficiency-" + datetime.now().strftime("%Y%m%d-%H%M%S-%f"))
-            data = run_efficiency(providers, cases, dest, repeats=args.repeats, seed=args.seed, max_calls=args.max_calls)
+            data = run_efficiency(providers, cases, dest, repeats=args.repeats, seed=args.seed, max_calls=args.max_calls, protocol=args.protocol)
             export_efficiency(data, dest)
             print(f"Status: {data['status']}\nReport: {(dest/'report.html').resolve()}")
             return 0 if data["status"] == "complete" else 2

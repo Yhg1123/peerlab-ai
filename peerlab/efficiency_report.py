@@ -5,7 +5,7 @@ from html import escape
 import json
 from pathlib import Path
 
-from .efficiency import analyze
+from .efficiency import EXTENDED, analyze
 from .experiment import atomic_json
 
 
@@ -18,6 +18,9 @@ def export_efficiency(run, output):
     dest = Path(output)
     dest.mkdir(parents=True, exist_ok=True)
     atomic_json(dest / "analysis.json", result)
+    if run["kind"] == EXTENDED:
+        from .dimensions import export_dimensions
+        export_dimensions(run, dest)
     headings = ["模型", "条件", "正确/返回/计划", "已知输入 token", "已知输出 token", "已知总 token", "JSON失败", "未完整输出", "请求失败"]
     rows = [[c["provider"], c["arm"], f"{c['correct']}/{c['returned']}/{c['planned']}",
              *(c["usage"][k]["known_sum"] for k in ("prompt_tokens", "completion_tokens", "total_tokens")),
@@ -71,7 +74,8 @@ def export_efficiency(run, output):
         details.append(f'<details><summary>{escape(c["id"])} · {escape(c["title"])}</summary>{body}</details>')
     styles = 'body{margin:0;background:#f4f3ec;color:#142b36;font:16px/1.65 system-ui,sans-serif}main{max-width:1220px;margin:auto;padding:48px 24px}h1{font-size:clamp(32px,5vw,64px);line-height:1.1}h2{margin-top:42px}small{color:#506971}.tag{color:#006b56;font-weight:700;letter-spacing:.12em}.scroll{overflow:auto;background:white;border:1px solid #d7dfda;border-radius:12px}table{border-collapse:collapse;width:100%;white-space:nowrap}th,td{text-align:left;padding:12px 15px;border-bottom:1px solid #e2e7e2}th{background:#e0ebe5}details{margin:12px 0;padding:16px;background:white;border:1px solid #d7dfda;border-radius:10px}summary{cursor:pointer;font-weight:650}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f4f7f5;padding:16px;border-radius:8px}p{overflow-wrap:anywhere}.note{max-width:960px;color:#506971}a{color:#006b56}'
     html = '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PeerLab · Token 效率实验</title><style>' + styles + '</style><main>'
-    html += f'<div class="tag">PEERLAB / TOKEN EFFICIENCY</div><h1>少用 token，<br>答案还可靠吗？</h1><p>2 × 2 对照：提示词长度 × 是否输出解释</p><small>Run {escape(run["id"])} · {escape(run["status"])} · {run["calls_attempted"]} 次请求尝试</small>'
+    design = "三条件复测：常规解释 · 仅答案 · 先依据后答案" if run["kind"] == EXTENDED else "2 × 2 对照：提示词长度 × 是否输出解释"
+    html += f'<div class="tag">PEERLAB / TOKEN EFFICIENCY</div><h1>少用 token，<br>答案还可靠吗？</h1><p>{design}</p><small>Run {escape(run["id"])} · {escape(run["status"])} · {run["calls_attempted"]} 次请求尝试</small>'
     html += '<h2>质量与用量</h2>' + table(headings, rows) + '<h2>同题配对比较</h2>' + table(paired_headings, paired_rows)
     html += '<p class="note">' + escape(caveat) + '</p><h2>逐题原始输出</h2>' + ''.join(details)
     html += '<h2>冻结的系统提示词</h2><pre>' + escape(json.dumps(run["config"]["system_prompts"], ensure_ascii=False, indent=2)) + '</pre></main></html>'
