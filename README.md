@@ -94,6 +94,9 @@ python -m peerlab run --protocol independent --limit 3 --max-calls 42 --dry-run
 # 离线重新生成报告，不会请求 API
 python -m peerlab report examples/pilot/run.json --output runs/rebuilt
 
+# 从原始输出重新核对判分，导出配对比较和用量分析
+python -m peerlab analyze examples/pilot/run.json --left baseline --right peer --output runs/pilot-analysis
+
 # 列出题目 / 运行离线测试
 python -m peerlab cases
 python -m unittest discover -s tests -v
@@ -102,6 +105,8 @@ python -m unittest discover -s tests -v
 不自动重试，不覆盖已有运行目录。中断时已保存的 `run.json` 保留，可离线生成报告；当前请求可能已计费。失败的依赖会导致对应修订跳过。计划调用数超过预算时，在任何网络请求之前退出。
 
 可选安装：`python -m pip install -e .`，随后也可以使用 `peerlab run`。
+
+离线分析会验证题库hash、重算判分、拒绝重复记录，并区分配对缺失和答错；新协议默认比较peer与peer_independent。详见[独立复核方法与成本口径](docs/offline-analysis.md)。
 
 ## 题库与判分
 
@@ -130,6 +135,7 @@ peerlab/
   client.py             官方 API 适配、超时与安全错误信息
   experiment.py         三/四组协议、预算、依赖追踪与配对统计
   datasets.py           精确算术题库生成与参考答案校验
+  analysis.py           原始记录核验、同题配对比较与用量分析
   grading.py            不执行代码的严格判分
   report.py             HTML / Markdown / CSV 导出
   data/cases.json       12 题与独立参考答案

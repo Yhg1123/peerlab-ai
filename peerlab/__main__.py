@@ -8,6 +8,7 @@ from .client import APIError, clients
 from .experiment import PROTOCOLS, dataset_hash, load_cases, planned_calls, run_experiment
 from .report import export_report
 from .datasets import audit_cases, generate_cases, write_dataset
+from .analysis import export_analysis
 
 
 def positive(value):
@@ -43,6 +44,11 @@ def main(argv=None):
     report = sub.add_parser("report", help="Regenerate HTML / CSV / Markdown without API calls")
     report.add_argument("run_json", type=Path)
     report.add_argument("--output", type=Path)
+    analysis = sub.add_parser("analyze", help="Audit evidence and compare paired answers offline")
+    analysis.add_argument("run_json", type=Path)
+    analysis.add_argument("--left", default="peer")
+    analysis.add_argument("--right", default="peer_independent")
+    analysis.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
     try:
         if args.command == "generate":
@@ -68,6 +74,12 @@ def main(argv=None):
                     failed = True
                     print(f"{c.name}: {exc}")
             return int(failed)
+        elif args.command == "analyze":
+            data = json.loads(args.run_json.read_text(encoding="utf-8"))
+            dest = args.output or args.run_json.parent
+            result = export_analysis(data,dest,args.left,args.right)
+            print(json.dumps(result["audit"],ensure_ascii=False))
+            print(f"Analysis: {(dest/'analysis.md').resolve()}")
         elif args.command == "report":
             data = json.loads(args.run_json.read_text(encoding="utf-8"))
             dest = args.output or args.run_json.parent
