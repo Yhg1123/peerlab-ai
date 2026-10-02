@@ -85,6 +85,13 @@ def main():
     for suffix in ("png","svg"):
         fig.savefig(args.output/f"category-quality.{suffix}",dpi=180,bbox_inches="tight")
     plt.close(fig)
+    # Matplotlib inserts trailing spaces inside SVG path attributes; normalize
+    # generated text for clean Git diffs without changing figure geometry.
+    for name in ("quality-and-tokens.svg", "category-quality.svg"):
+        path = args.output / name
+        normalized = "\n".join(line.rstrip() for line in path.read_text(encoding="utf-8").splitlines()) + "\n"
+        with path.open("w", encoding="utf-8", newline="\n") as stream:
+            stream.write(normalized)
     print(f"Saved 4 figures to {args.output.resolve()}")
 
 
