@@ -7,9 +7,31 @@ from peerlab.analysis import analyze_run
 from peerlab.efficiency import analyze
 from peerlab.dimensions import diagnostics
 from peerlab.factorial import factorial_diagnostics
+from peerlab.native_types import type_diagnostics
 
 
 class PublishedStudyTests(unittest.TestCase):
+    def test_v4_raw_plan_type_results_and_missing_pairs_reproduce(self):
+        root = Path(__file__).resolve().parents[1]
+        folder = root / "examples/token-efficiency-v4"
+        raw = (folder / "run.json").read_bytes()
+        run = json.loads(raw)
+        provenance = json.loads((folder / "provenance.json").read_text(encoding="utf-8"))
+        plan = json.loads((root / "docs/studies/token-efficiency-v4-plan.json").read_text(encoding="utf-8"))
+        self.assertEqual(hashlib.sha256(raw).hexdigest(), provenance["run_json_sha256"])
+        self.assertEqual({k: run["config"][k] for k in plan}, plan)
+        for name, function in (("analysis", analyze), ("dimensions", diagnostics), ("types", type_diagnostics)):
+            self.assertEqual(function(run), json.loads((folder / f"{name}.json").read_text(encoding="utf-8")))
+        result = analyze(run)
+        self.assertEqual(result["attempted"], 128)
+        self.assertEqual(result["audit"]["grades_recomputed"], 126)
+        self.assertEqual(result["usage"]["total_tokens"]["known_sum"], 38089)
+        self.assertEqual([r["id"] for r in run["records"] if r["status"] == "error"], [66, 88])
+        pairs = {p["provider"]: p for p in result["comparisons"]}
+        self.assertEqual((pairs["deepseek"]["paired"], pairs["kimi"]["paired"]), (32, 30))
+        self.assertEqual(pairs["kimi"]["tokens"]["total_tokens"]["left_sum"], 9820)
+        self.assertEqual(pairs["kimi"]["tokens"]["total_tokens"]["right_sum"], 10796)
+
     def test_v3_raw_plan_missingness_and_factorial_reproduction(self):
         root = Path(__file__).resolve().parents[1]
         folder = root/"examples/token-efficiency-v3"

@@ -8,7 +8,7 @@ Python 3.10+ · 运行时零第三方依赖 · MIT · 中文题库 · 离线交�
 
 ## 实验成果一览
 
-**已公开5轮真实实验：820次API请求尝试，813次返回，7次请求失败，已知返回用量248,720 token。** 另有18个互审依赖步骤因前置失败未发起请求。失败记录均保留，不补成漂亮的完整数据。
+**已公开6轮真实实验：948次API请求尝试，939次返回，9次请求失败，已知返回用量286,809 token。** 另有18个互审依赖步骤因前置失败未发起请求。失败记录均保留，不补成漂亮的完整数据。
 
 |研究|本轮题目数|实验重点|请求尝试 / 返回|已知总token|查看成果|
 |---|---:|---|---:|---:|---|
@@ -16,11 +16,49 @@ Python 3.10+ · 运行时零第三方依赖 · MIT · 中文题库 · 离线交�
 |v0.2 审稿研究|12|普通互审 vs 先独立解答再审稿|150 / 145|80,658|[详细结果](docs/studies/review-study-v1-findings.md)|
 |v0.3 Token效率|12|提示词长短 × 是否解释|96 / 95|21,451|[详细结果](docs/studies/token-efficiency-v1-findings.md)|
 |v0.4 多维度复测|24|每题两次，加入先依据后答案|288 / 288|62,837|[详细结果](docs/studies/token-efficiency-v2-findings.md)|
-|**v0.5 顺序与限长**|**16**|**每题两次，字段顺序 × 80字符限制**|**256 / 255**|**72,608**|[**最新结果与反例**](docs/studies/token-efficiency-v3-findings.md)|
+|v0.5 顺序与限长|16|每题两次，字段顺序 × 80字符限制|256 / 255|72,608|[结果与反例](docs/studies/token-efficiency-v3-findings.md)|
+|**v0.6 JSON类型提醒**|**16个新实例**|**同题配对：格式、类型、正确率与用量**|**128 / 126**|**38,089**|[**最新结果与反例**](docs/studies/token-efficiency-v4-findings.md)|
 
 题目在不同轮次间有复用，不能把题目数相加当成独立样本；重复请求也不是新题。token是供应商报告的用量，不是账单金额，失败请求可能已计费。各轮题集与协议不同，下面的数据用于研究提示策略，不用于跨轮成绩排名。
 
-## 最新实验：先写答案，还是先写依据？
+## 最新实验：多写一句类型要求，值得吗？
+
+**16个新实例 × 2次采样 × 2模型 × 2条件 = 128次请求。** 两组都先依据后答案，实验组只增加一句明确要求number/array原生类型的提示。126次返回、2次Kimi网络失败，未重试。题目本身已有类型要求，测的是强化提醒的效果。
+
+|模型|条件|正确 / 返回|返回正确率|类型合格 / 返回|总token|正确 / 计划|
+|---|---|---:|---:|---:|---:|---:|
+|DeepSeek|控制|26 / 32|81.25%|30 / 32|7,785|26 / 32|
+|DeepSeek|明确类型|28 / 32|87.50%|32 / 32|9,085|28 / 32|
+|Kimi|控制|10 / 32|31.25%|11 / 32|10,423|10 / 32|
+|Kimi|明确类型|25 / 30|83.33%|30 / 30|10,796|25 / 32|
+
+类型合格只说明answer是要求的number或array，**不保证答案正确**。Kimi明确类型组按计划计算的正确交付为25/32（78.13%）；上表83.33%以返回为分母。数值误差门槛仍为1e-6，字符串不自动转型。
+
+### 同题配对：用量增加，换到了什么？
+
+|模型|有效配对|正确次数|改善 / 退步|配对总token变化|每个正确答案token|
+|---|---:|---:|---:|---:|---:|
+|DeepSeek|32|26 → 28|4 / 2|7,785 → 9,085（+16.7%）|299.42 → 324.46（+8.4%）|
+|Kimi|30|9 → 25|16 / 0|9,820 → 10,796（+9.9%）|1,091.11 → 431.84（−60.4%）|
+
+每个正确答案token＝同一批有效配对的总token÷正确次数。**Kimi的−60.4%是这个比值下降，不是每次请求省60.4%，也不是实际账单节省。** 两次失败对应的控制结果在配对分析中一并排除，因此Kimi这里是9/30而非全组10/32。
+
+- **类型错误减少，但计算错误仍在。** 控制组DeepSeek有2条错型、Kimi有20条错型；明确类型组的62条返回均类型合格，仍分别有4条和5条答案错误。
+- **同一句提醒对不同模型收益不同。** DeepSeek数值题正确数仍为20/24；数组题6/8→8/8。Kimi数值题4/24→17/22，数组题6/8→8/8；其数值实验组另有2次失败。
+- **保留退步与不确定性。** DeepSeek配对正确率差+6.25个百分点，按题聚类95%描述区间为[-9.38, +21.88]；Kimi+53.33，区间[+30.00, +73.33]。16个实例仍属已知题型，每题两次，不支持总体能力或普遍收益结论。
+
+![最新研究：类型合格、答案正确和网络失败分别统计](examples/token-efficiency-v4/figures/native-types.png)
+
+图上半部分以全部计划请求为分母，下半部分仅用双方返回的配对，区间按题聚类。更多数据：[输入/输出token、延迟、重复稳定性与反例](docs/studies/token-efficiency-v4-findings.md) · [用量图](examples/token-efficiency-v4/figures/quality-and-tokens.png) · [题型图](examples/token-efficiency-v4/figures/category-quality.png)。
+
+**复核入口：** [原始数据与离线报告](examples/token-efficiency-v4/README.md) · [执行前方案](docs/studies/token-efficiency-v4.md) · [类型指标解释](docs/native-type-analysis.md) · [观点：把token预算花在可用答案上](docs/opinions/types-and-token-budget.md)。
+
+```bash
+# 不需要密钥、不联网：从原始输出重算最新研究
+python -m peerlab analyze-efficiency examples/token-efficiency-v4/run.json --output runs/v4-recheck
+```
+
+## v0.5：先写答案，还是先写依据？
 
 **16题 × 2次采样 × 2模型 × 4条件 = 256次请求。** 四组保留相同题目和其他提示要求，只改变JSON中answer/evidence顺序，以及依据是否限制80 Unicode字符。255次返回、1次Kimi网络失败，无重试。
 
@@ -51,18 +89,18 @@ Python 3.10+ · 运行时零第三方依赖 · MIT · 中文题库 · 离线交�
 - **解释变长不保证答案变好。** 两个模型的先答案组去掉限长后都增加用量，却没有净正确次数收益（按有效配对）。一些依据已算对，answer字段仍是错的。
 - **格式也会影响可用性。** Kimi先依据限长正确7条，符合全部要求且正确只有2条；超长、数字字符串、截断都有单独诊断。
 
-![最新研究：正确率、输出契约与配对token变化](examples/token-efficiency-v3/figures/quality-and-tokens.png)
+![v0.5研究：正确率、输出契约与配对token变化](examples/token-efficiency-v3/figures/quality-and-tokens.png)
 
 图中的点与区间来自同模型、同题、同重复的有效配对；正确率条形按返回数计算。区间是按题聚类的描述，不代表总体能力或等价性证明。更多维度：[5类题型](examples/token-efficiency-v3/figures/category-quality.png) · [因素交互图](examples/token-efficiency-v3/figures/factor-interaction.png) · [稳定性、误差、延迟](examples/token-efficiency-v3/dimensions.md)。
 
 **复核入口：** [完整分析与正反案例](docs/studies/token-efficiency-v3-findings.md) · [原始记录与离线HTML](examples/token-efficiency-v3/README.md) · [执行前方案](docs/studies/token-efficiency-v3.md) · [观点：顺序不是装饰，长度也不是质量](docs/opinions/order-length-and-usable-output.md)。
 
 ```bash
-# 不需要密钥、不联网：从原始输出重算最新研究
+# 不需要密钥、不联网：重算v0.5顺序与限长研究
 python -m peerlab analyze-efficiency examples/token-efficiency-v3/run.json --output runs/v3-recheck
 ```
 
-## 上一轮复测：依据、正确率与输出要求
+## v0.4复测：依据、正确率与输出要求
 
 v0.4使用24题、每题两次、两模型三条件，288次请求全部返回。每组48次响应；这轮题集与提示不同，**不能与v0.5的正确率直接比较高低**。
 
@@ -91,13 +129,16 @@ v0.4使用24题、每题两次、两模型三条件，288次请求全部返回�
 
 |协议|研究问题|方法文档|
 |---|---|---|
+|`token-efficiency-v4`|明确JSON原生类型提醒是否值得额外token|[类型与正确性指南](docs/native-type-analysis.md)|
 |`token-efficiency-v3`|字段顺序与依据限长的独立及组合效果|[因素分析指南](docs/factorial-analysis.md)|
 |`token-efficiency-v2`|题型、重复、格式、精度、延迟如何改变结论|[多维度指标](docs/multidimensional-analysis.md)|
 |`token-efficiency-v1`|提示词压缩与省略解释是否节省token|[2×2效率实验](docs/token-efficiency.md)|
 |`independent` / `classic`|独立、自检、交叉审稿及先解后审|[互审协议](docs/independent-review.md)|
 
 ```bash
-# 离线预览最新四条件协议，默认3题一次，共24次请求
+# 离线预览最新类型协议，默认3题一次，共12次请求
+python -m peerlab efficiency --protocol token-efficiency-v4 --dry-run
+# 查看四条件协议，默认3题一次，共24次请求
 python -m peerlab efficiency --protocol token-efficiency-v3 --dry-run
 # 查看三条件复测计划，默认3题一次，共18次请求
 python -m peerlab efficiency --protocol token-efficiency-v2 --dry-run

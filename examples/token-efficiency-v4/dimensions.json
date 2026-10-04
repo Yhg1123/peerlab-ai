@@ -1,0 +1,3370 @@
+{
+  "audit": {
+    "cases": 16,
+    "oracle_verified": 12,
+    "manual_reference": 4,
+    "call_records": 128,
+    "grades_recomputed": 126,
+    "plan_and_prompts_verified": true,
+    "note": "Internal consistency audit, not cryptographic proof of provider authenticity."
+  },
+  "run_id": "0ca26e97ada042298e501d15ca6bf94a",
+  "conditions": [
+    {
+      "provider": "deepseek",
+      "arm": "native_control",
+      "scope": "all",
+      "unique_tasks": 16,
+      "planned": 32,
+      "returned": 32,
+      "correct": 26,
+      "answer_accuracy_returned": 0.8125,
+      "delivered_correct_fraction": 0.8125,
+      "valid_json": 32,
+      "contract_ok": 32,
+      "contract_and_correct": 26,
+      "failure_reasons": {
+        "wrong_answer": 6
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 32,
+        "missing_calls": 0,
+        "median_ms": 1175.0,
+        "p90_ms": 1446.7
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 3926,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 3859,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 7785,
+          "known_calls": 32,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_control",
+      "scope": "category:代码理解",
+      "unique_tasks": 1,
+      "planned": 2,
+      "returned": 2,
+      "correct": 2,
+      "answer_accuracy_returned": 1.0,
+      "delivered_correct_fraction": 1.0,
+      "valid_json": 2,
+      "contract_ok": 2,
+      "contract_and_correct": 2,
+      "failure_reasons": {},
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 2,
+        "missing_calls": 0,
+        "median_ms": 973.0,
+        "p90_ms": 1006.6
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 212,
+          "known_calls": 2,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 170,
+          "known_calls": 2,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 382,
+          "known_calls": 2,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_control",
+      "scope": "category:机器学习",
+      "unique_tasks": 6,
+      "planned": 12,
+      "returned": 12,
+      "correct": 8,
+      "answer_accuracy_returned": 0.6666666666666666,
+      "delivered_correct_fraction": 0.6666666666666666,
+      "valid_json": 12,
+      "contract_ok": 12,
+      "contract_and_correct": 8,
+      "failure_reasons": {
+        "wrong_answer": 4
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 12,
+        "missing_calls": 0,
+        "median_ms": 1237.0,
+        "p90_ms": 1446.7
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1536,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 1992,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 3528,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_control",
+      "scope": "category:概率推理",
+      "unique_tasks": 6,
+      "planned": 12,
+      "returned": 12,
+      "correct": 12,
+      "answer_accuracy_returned": 1.0,
+      "delivered_correct_fraction": 1.0,
+      "valid_json": 12,
+      "contract_ok": 12,
+      "contract_and_correct": 12,
+      "failure_reasons": {},
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 12,
+        "missing_calls": 0,
+        "median_ms": 1176.0,
+        "p90_ms": 1263.8
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1500,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 1281,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 2781,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_control",
+      "scope": "category:结构化输出",
+      "unique_tasks": 3,
+      "planned": 6,
+      "returned": 6,
+      "correct": 4,
+      "answer_accuracy_returned": 0.6666666666666666,
+      "delivered_correct_fraction": 0.6666666666666666,
+      "valid_json": 6,
+      "contract_ok": 6,
+      "contract_and_correct": 4,
+      "failure_reasons": {
+        "wrong_answer": 2
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 6,
+        "missing_calls": 0,
+        "median_ms": 1105.0,
+        "p90_ms": 1322.5
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 678,
+          "known_calls": 6,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 416,
+          "known_calls": 6,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 1094,
+          "known_calls": 6,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_control",
+      "scope": "reference:generated",
+      "unique_tasks": 12,
+      "planned": 24,
+      "returned": 24,
+      "correct": 20,
+      "answer_accuracy_returned": 0.8333333333333334,
+      "delivered_correct_fraction": 0.8333333333333334,
+      "valid_json": 24,
+      "contract_ok": 24,
+      "contract_and_correct": 20,
+      "failure_reasons": {
+        "wrong_answer": 4
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 24,
+        "missing_calls": 0,
+        "median_ms": 1182.0,
+        "p90_ms": 1440.1
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 3036,
+          "known_calls": 24,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 3273,
+          "known_calls": 24,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 6309,
+          "known_calls": 24,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_control",
+      "scope": "reference:manual",
+      "unique_tasks": 4,
+      "planned": 8,
+      "returned": 8,
+      "correct": 6,
+      "answer_accuracy_returned": 0.75,
+      "delivered_correct_fraction": 0.75,
+      "valid_json": 8,
+      "contract_ok": 8,
+      "contract_and_correct": 6,
+      "failure_reasons": {
+        "wrong_answer": 2
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 8,
+        "missing_calls": 0,
+        "median_ms": 1050.5,
+        "p90_ms": 1263.8999999999999
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 890,
+          "known_calls": 8,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 586,
+          "known_calls": 8,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 1476,
+          "known_calls": 8,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_explicit",
+      "scope": "all",
+      "unique_tasks": 16,
+      "planned": 32,
+      "returned": 32,
+      "correct": 28,
+      "answer_accuracy_returned": 0.875,
+      "delivered_correct_fraction": 0.875,
+      "valid_json": 32,
+      "contract_ok": 32,
+      "contract_and_correct": 28,
+      "failure_reasons": {
+        "wrong_answer": 4
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 32,
+        "missing_calls": 0,
+        "median_ms": 1160.5,
+        "p90_ms": 1611.8000000000002
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 4886,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 4199,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 9085,
+          "known_calls": 32,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_explicit",
+      "scope": "category:代码理解",
+      "unique_tasks": 1,
+      "planned": 2,
+      "returned": 2,
+      "correct": 2,
+      "answer_accuracy_returned": 1.0,
+      "delivered_correct_fraction": 1.0,
+      "valid_json": 2,
+      "contract_ok": 2,
+      "contract_and_correct": 2,
+      "failure_reasons": {},
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 2,
+        "missing_calls": 0,
+        "median_ms": 1172.5,
+        "p90_ms": 1239.3
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 272,
+          "known_calls": 2,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 165,
+          "known_calls": 2,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 437,
+          "known_calls": 2,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_explicit",
+      "scope": "category:机器学习",
+      "unique_tasks": 6,
+      "planned": 12,
+      "returned": 12,
+      "correct": 9,
+      "answer_accuracy_returned": 0.75,
+      "delivered_correct_fraction": 0.75,
+      "valid_json": 12,
+      "contract_ok": 12,
+      "contract_and_correct": 9,
+      "failure_reasons": {
+        "wrong_answer": 3
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 12,
+        "missing_calls": 0,
+        "median_ms": 1392.5,
+        "p90_ms": 1671.2
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1896,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 2220,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 4116,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_explicit",
+      "scope": "category:概率推理",
+      "unique_tasks": 6,
+      "planned": 12,
+      "returned": 12,
+      "correct": 11,
+      "answer_accuracy_returned": 0.9166666666666666,
+      "delivered_correct_fraction": 0.9166666666666666,
+      "valid_json": 12,
+      "contract_ok": 12,
+      "contract_and_correct": 11,
+      "failure_reasons": {
+        "wrong_answer": 1
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 12,
+        "missing_calls": 0,
+        "median_ms": 973.5,
+        "p90_ms": 1234.6000000000001
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1860,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 1345,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 3205,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_explicit",
+      "scope": "category:结构化输出",
+      "unique_tasks": 3,
+      "planned": 6,
+      "returned": 6,
+      "correct": 6,
+      "answer_accuracy_returned": 1.0,
+      "delivered_correct_fraction": 1.0,
+      "valid_json": 6,
+      "contract_ok": 6,
+      "contract_and_correct": 6,
+      "failure_reasons": {},
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 6,
+        "missing_calls": 0,
+        "median_ms": 1030.0,
+        "p90_ms": 1397.0
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 858,
+          "known_calls": 6,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 469,
+          "known_calls": 6,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 1327,
+          "known_calls": 6,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_explicit",
+      "scope": "reference:generated",
+      "unique_tasks": 12,
+      "planned": 24,
+      "returned": 24,
+      "correct": 20,
+      "answer_accuracy_returned": 0.8333333333333334,
+      "delivered_correct_fraction": 0.8333333333333334,
+      "valid_json": 24,
+      "contract_ok": 24,
+      "contract_and_correct": 20,
+      "failure_reasons": {
+        "wrong_answer": 4
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 24,
+        "missing_calls": 0,
+        "median_ms": 1168.0,
+        "p90_ms": 1584.8
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 3756,
+          "known_calls": 24,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 3565,
+          "known_calls": 24,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 7321,
+          "known_calls": 24,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_explicit",
+      "scope": "reference:manual",
+      "unique_tasks": 4,
+      "planned": 8,
+      "returned": 8,
+      "correct": 8,
+      "answer_accuracy_returned": 1.0,
+      "delivered_correct_fraction": 1.0,
+      "valid_json": 8,
+      "contract_ok": 8,
+      "contract_and_correct": 8,
+      "failure_reasons": {},
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 8,
+        "missing_calls": 0,
+        "median_ms": 1123.5,
+        "p90_ms": 1367.0
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1130,
+          "known_calls": 8,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 634,
+          "known_calls": 8,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 1764,
+          "known_calls": 8,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_control",
+      "scope": "all",
+      "unique_tasks": 16,
+      "planned": 32,
+      "returned": 32,
+      "correct": 10,
+      "answer_accuracy_returned": 0.3125,
+      "delivered_correct_fraction": 0.3125,
+      "valid_json": 31,
+      "contract_ok": 31,
+      "contract_and_correct": 10,
+      "failure_reasons": {
+        "invalid_json_answer": 1,
+        "wrong_answer": 21
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 32,
+        "missing_calls": 0,
+        "median_ms": 3966.5,
+        "p90_ms": 5531.500000000001
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 4184,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 6239,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 10423,
+          "known_calls": 32,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_control",
+      "scope": "category:代码理解",
+      "unique_tasks": 1,
+      "planned": 2,
+      "returned": 2,
+      "correct": 2,
+      "answer_accuracy_returned": 1.0,
+      "delivered_correct_fraction": 1.0,
+      "valid_json": 2,
+      "contract_ok": 2,
+      "contract_and_correct": 2,
+      "failure_reasons": {},
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 2,
+        "missing_calls": 0,
+        "median_ms": 2643.5,
+        "p90_ms": 2795.9
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 228,
+          "known_calls": 2,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 220,
+          "known_calls": 2,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 448,
+          "known_calls": 2,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_control",
+      "scope": "category:机器学习",
+      "unique_tasks": 6,
+      "planned": 12,
+      "returned": 12,
+      "correct": 0,
+      "answer_accuracy_returned": 0.0,
+      "delivered_correct_fraction": 0.0,
+      "valid_json": 12,
+      "contract_ok": 12,
+      "contract_and_correct": 0,
+      "failure_reasons": {
+        "wrong_answer": 12
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 12,
+        "missing_calls": 0,
+        "median_ms": 5063.5,
+        "p90_ms": 7635.9000000000015
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1632,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 3211,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 4843,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_control",
+      "scope": "category:概率推理",
+      "unique_tasks": 6,
+      "planned": 12,
+      "returned": 12,
+      "correct": 4,
+      "answer_accuracy_returned": 0.3333333333333333,
+      "delivered_correct_fraction": 0.3333333333333333,
+      "valid_json": 11,
+      "contract_ok": 11,
+      "contract_and_correct": 4,
+      "failure_reasons": {
+        "invalid_json_answer": 1,
+        "wrong_answer": 7
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 12,
+        "missing_calls": 0,
+        "median_ms": 3966.5,
+        "p90_ms": 4151.6
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1596,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 2223,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 3819,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_control",
+      "scope": "category:结构化输出",
+      "unique_tasks": 3,
+      "planned": 6,
+      "returned": 6,
+      "correct": 4,
+      "answer_accuracy_returned": 0.6666666666666666,
+      "delivered_correct_fraction": 0.6666666666666666,
+      "valid_json": 6,
+      "contract_ok": 6,
+      "contract_and_correct": 4,
+      "failure_reasons": {
+        "wrong_answer": 2
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 6,
+        "missing_calls": 0,
+        "median_ms": 2293.5,
+        "p90_ms": 2657.0
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 728,
+          "known_calls": 6,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 585,
+          "known_calls": 6,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 1313,
+          "known_calls": 6,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_control",
+      "scope": "reference:generated",
+      "unique_tasks": 12,
+      "planned": 24,
+      "returned": 24,
+      "correct": 4,
+      "answer_accuracy_returned": 0.16666666666666666,
+      "delivered_correct_fraction": 0.16666666666666666,
+      "valid_json": 23,
+      "contract_ok": 23,
+      "contract_and_correct": 4,
+      "failure_reasons": {
+        "invalid_json_answer": 1,
+        "wrong_answer": 19
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 24,
+        "missing_calls": 0,
+        "median_ms": 4146.0,
+        "p90_ms": 6500.099999999999
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 3228,
+          "known_calls": 24,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 5434,
+          "known_calls": 24,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 8662,
+          "known_calls": 24,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_control",
+      "scope": "reference:manual",
+      "unique_tasks": 4,
+      "planned": 8,
+      "returned": 8,
+      "correct": 6,
+      "answer_accuracy_returned": 0.75,
+      "delivered_correct_fraction": 0.75,
+      "valid_json": 8,
+      "contract_ok": 8,
+      "contract_and_correct": 6,
+      "failure_reasons": {
+        "wrong_answer": 2
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 8,
+        "missing_calls": 0,
+        "median_ms": 2378.0,
+        "p90_ms": 2846.6
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 956,
+          "known_calls": 8,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 805,
+          "known_calls": 8,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 1761,
+          "known_calls": 8,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_explicit",
+      "scope": "all",
+      "unique_tasks": 16,
+      "planned": 32,
+      "returned": 30,
+      "correct": 25,
+      "answer_accuracy_returned": 0.8333333333333334,
+      "delivered_correct_fraction": 0.78125,
+      "valid_json": 30,
+      "contract_ok": 30,
+      "contract_and_correct": 25,
+      "failure_reasons": {
+        "wrong_answer": 5
+      },
+      "request_errors": 2,
+      "latency": {
+        "known_calls": 30,
+        "missing_calls": 0,
+        "median_ms": 3817.0,
+        "p90_ms": 6279.000000000001
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 4788,
+          "known_calls": 30,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 6008,
+          "known_calls": 30,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 10796,
+          "known_calls": 30,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_explicit",
+      "scope": "category:代码理解",
+      "unique_tasks": 1,
+      "planned": 2,
+      "returned": 2,
+      "correct": 2,
+      "answer_accuracy_returned": 1.0,
+      "delivered_correct_fraction": 1.0,
+      "valid_json": 2,
+      "contract_ok": 2,
+      "contract_and_correct": 2,
+      "failure_reasons": {},
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 2,
+        "missing_calls": 0,
+        "median_ms": 2731.5,
+        "p90_ms": 2810.3
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 286,
+          "known_calls": 2,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 232,
+          "known_calls": 2,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 518,
+          "known_calls": 2,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_explicit",
+      "scope": "category:机器学习",
+      "unique_tasks": 6,
+      "planned": 12,
+      "returned": 12,
+      "correct": 7,
+      "answer_accuracy_returned": 0.5833333333333334,
+      "delivered_correct_fraction": 0.5833333333333334,
+      "valid_json": 12,
+      "contract_ok": 12,
+      "contract_and_correct": 7,
+      "failure_reasons": {
+        "wrong_answer": 5
+      },
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 12,
+        "missing_calls": 0,
+        "median_ms": 5206.5,
+        "p90_ms": 7672.200000000001
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1980,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 3558,
+          "known_calls": 12,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 5538,
+          "known_calls": 12,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_explicit",
+      "scope": "category:概率推理",
+      "unique_tasks": 6,
+      "planned": 12,
+      "returned": 10,
+      "correct": 10,
+      "answer_accuracy_returned": 1.0,
+      "delivered_correct_fraction": 0.8333333333333334,
+      "valid_json": 10,
+      "contract_ok": 10,
+      "contract_and_correct": 10,
+      "failure_reasons": {},
+      "request_errors": 2,
+      "latency": {
+        "known_calls": 10,
+        "missing_calls": 0,
+        "median_ms": 3744.5,
+        "p90_ms": 4116.099999999999
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1620,
+          "known_calls": 10,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 1620,
+          "known_calls": 10,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 3240,
+          "known_calls": 10,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_explicit",
+      "scope": "category:结构化输出",
+      "unique_tasks": 3,
+      "planned": 6,
+      "returned": 6,
+      "correct": 6,
+      "answer_accuracy_returned": 1.0,
+      "delivered_correct_fraction": 1.0,
+      "valid_json": 6,
+      "contract_ok": 6,
+      "contract_and_correct": 6,
+      "failure_reasons": {},
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 6,
+        "missing_calls": 0,
+        "median_ms": 2075.5,
+        "p90_ms": 2251.0
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 902,
+          "known_calls": 6,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 598,
+          "known_calls": 6,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 1500,
+          "known_calls": 6,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_explicit",
+      "scope": "reference:generated",
+      "unique_tasks": 12,
+      "planned": 24,
+      "returned": 22,
+      "correct": 17,
+      "answer_accuracy_returned": 0.7727272727272727,
+      "delivered_correct_fraction": 0.7083333333333334,
+      "valid_json": 22,
+      "contract_ok": 22,
+      "contract_and_correct": 17,
+      "failure_reasons": {
+        "wrong_answer": 5
+      },
+      "request_errors": 2,
+      "latency": {
+        "known_calls": 22,
+        "missing_calls": 0,
+        "median_ms": 4680.0,
+        "p90_ms": 6655.000000000001
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 3600,
+          "known_calls": 22,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 5178,
+          "known_calls": 22,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 8778,
+          "known_calls": 22,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_explicit",
+      "scope": "reference:manual",
+      "unique_tasks": 4,
+      "planned": 8,
+      "returned": 8,
+      "correct": 8,
+      "answer_accuracy_returned": 1.0,
+      "delivered_correct_fraction": 1.0,
+      "valid_json": 8,
+      "contract_ok": 8,
+      "contract_and_correct": 8,
+      "failure_reasons": {},
+      "request_errors": 0,
+      "latency": {
+        "known_calls": 8,
+        "missing_calls": 0,
+        "median_ms": 2084.5,
+        "p90_ms": 2692.1
+      },
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 1188,
+          "known_calls": 8,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 830,
+          "known_calls": 8,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 2018,
+          "known_calls": 8,
+          "missing_calls": 0
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "comparison": "explicit_native_type",
+      "scope": "all",
+      "provider": "deepseek",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 32,
+      "missing_pairs": 0,
+      "both_correct": 24,
+      "only_left_correct": 2,
+      "only_right_correct": 4,
+      "both_wrong": 2,
+      "left_correct": 26,
+      "right_correct": 28,
+      "accuracy_delta": 0.0625,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 32,
+          "missing_pairs": 0,
+          "left_sum": 3926,
+          "right_sum": 4886,
+          "saved_fraction": -0.24452368823229742
+        },
+        "completion_tokens": {
+          "paired": 32,
+          "missing_pairs": 0,
+          "left_sum": 3859,
+          "right_sum": 4199,
+          "saved_fraction": -0.08810572687224671
+        },
+        "total_tokens": {
+          "paired": 32,
+          "missing_pairs": 0,
+          "left_sum": 7785,
+          "right_sum": 9085,
+          "saved_fraction": -0.1669877970456004
+        }
+      },
+      "left_tokens_per_correct": 299.4230769230769,
+      "right_tokens_per_correct": 324.4642857142857,
+      "pairs": [
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 1,
+          "left_id": 37,
+          "right_id": 40,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 2,
+          "left_id": 27,
+          "right_id": 28,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 1,
+          "left_id": 65,
+          "right_id": 68,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 2,
+          "left_id": 117,
+          "right_id": 120,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 1,
+          "left_id": 109,
+          "right_id": 111,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 2,
+          "left_id": 87,
+          "right_id": 86,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 1,
+          "left_id": 97,
+          "right_id": 100,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 2,
+          "left_id": 22,
+          "right_id": 21,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 1,
+          "left_id": 48,
+          "right_id": 46,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 2,
+          "left_id": 62,
+          "right_id": 63,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 1,
+          "left_id": 121,
+          "right_id": 123,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 2,
+          "left_id": 41,
+          "right_id": 44,
+          "left_passed": true,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 20,
+          "right_id": 17,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 2,
+          "left_id": 128,
+          "right_id": 127,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 34,
+          "right_id": 36,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 2,
+          "left_id": 15,
+          "right_id": 14,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 90,
+          "right_id": 89,
+          "left_passed": true,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 2,
+          "left_id": 57,
+          "right_id": 60,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 9,
+          "right_id": 12,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 2,
+          "left_id": 2,
+          "right_id": 1,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 1,
+          "left_id": 75,
+          "right_id": 73,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 2,
+          "left_id": 31,
+          "right_id": 32,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 1,
+          "left_id": 55,
+          "right_id": 56,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 2,
+          "left_id": 106,
+          "right_id": 105,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 1,
+          "left_id": 84,
+          "right_id": 81,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 2,
+          "left_id": 79,
+          "right_id": 78,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 1,
+          "left_id": 52,
+          "right_id": 50,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 2,
+          "left_id": 71,
+          "right_id": 70,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 1,
+          "left_id": 113,
+          "right_id": 115,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 2,
+          "left_id": 102,
+          "right_id": 103,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 1,
+          "left_id": 96,
+          "right_id": 95,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 2,
+          "left_id": 7,
+          "right_id": 8,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ],
+      "cluster_bootstrap": {
+        "task_clusters": 16,
+        "samples": 2000,
+        "seed": 2026100301,
+        "accuracy_delta_95pct": [
+          -0.09375,
+          0.21875
+        ],
+        "total_token_saving_95pct": [
+          -0.20435528415980914,
+          -0.1296583841329689
+        ]
+      }
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "category:代码理解",
+      "provider": "deepseek",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 2,
+      "missing_pairs": 0,
+      "both_correct": 2,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 0,
+      "left_correct": 2,
+      "right_correct": 2,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 2,
+          "missing_pairs": 0,
+          "left_sum": 212,
+          "right_sum": 272,
+          "saved_fraction": -0.28301886792452824
+        },
+        "completion_tokens": {
+          "paired": 2,
+          "missing_pairs": 0,
+          "left_sum": 170,
+          "right_sum": 165,
+          "saved_fraction": 0.02941176470588236
+        },
+        "total_tokens": {
+          "paired": 2,
+          "missing_pairs": 0,
+          "left_sum": 382,
+          "right_sum": 437,
+          "saved_fraction": -0.1439790575916231
+        }
+      },
+      "left_tokens_per_correct": 191.0,
+      "right_tokens_per_correct": 218.5,
+      "pairs": [
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 1,
+          "left_id": 96,
+          "right_id": 95,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 2,
+          "left_id": 7,
+          "right_id": 8,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "category:机器学习",
+      "provider": "deepseek",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 12,
+      "missing_pairs": 0,
+      "both_correct": 7,
+      "only_left_correct": 1,
+      "only_right_correct": 2,
+      "both_wrong": 2,
+      "left_correct": 8,
+      "right_correct": 9,
+      "accuracy_delta": 0.08333333333333333,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1536,
+          "right_sum": 1896,
+          "saved_fraction": -0.234375
+        },
+        "completion_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1992,
+          "right_sum": 2220,
+          "saved_fraction": -0.1144578313253013
+        },
+        "total_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 3528,
+          "right_sum": 4116,
+          "saved_fraction": -0.16666666666666674
+        }
+      },
+      "left_tokens_per_correct": 441.0,
+      "right_tokens_per_correct": 457.3333333333333,
+      "pairs": [
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 20,
+          "right_id": 17,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 2,
+          "left_id": 128,
+          "right_id": 127,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 34,
+          "right_id": 36,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 2,
+          "left_id": 15,
+          "right_id": 14,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 90,
+          "right_id": 89,
+          "left_passed": true,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 2,
+          "left_id": 57,
+          "right_id": 60,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 9,
+          "right_id": 12,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 2,
+          "left_id": 2,
+          "right_id": 1,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 1,
+          "left_id": 75,
+          "right_id": 73,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 2,
+          "left_id": 31,
+          "right_id": 32,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 1,
+          "left_id": 55,
+          "right_id": 56,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 2,
+          "left_id": 106,
+          "right_id": 105,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "category:概率推理",
+      "provider": "deepseek",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 12,
+      "missing_pairs": 0,
+      "both_correct": 11,
+      "only_left_correct": 1,
+      "only_right_correct": 0,
+      "both_wrong": 0,
+      "left_correct": 12,
+      "right_correct": 11,
+      "accuracy_delta": -0.08333333333333333,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1500,
+          "right_sum": 1860,
+          "saved_fraction": -0.24
+        },
+        "completion_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1281,
+          "right_sum": 1345,
+          "saved_fraction": -0.049960967993754934
+        },
+        "total_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 2781,
+          "right_sum": 3205,
+          "saved_fraction": -0.15246314275440498
+        }
+      },
+      "left_tokens_per_correct": 231.75,
+      "right_tokens_per_correct": 291.3636363636364,
+      "pairs": [
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 1,
+          "left_id": 37,
+          "right_id": 40,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 2,
+          "left_id": 27,
+          "right_id": 28,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 1,
+          "left_id": 65,
+          "right_id": 68,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 2,
+          "left_id": 117,
+          "right_id": 120,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 1,
+          "left_id": 109,
+          "right_id": 111,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 2,
+          "left_id": 87,
+          "right_id": 86,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 1,
+          "left_id": 97,
+          "right_id": 100,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 2,
+          "left_id": 22,
+          "right_id": 21,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 1,
+          "left_id": 48,
+          "right_id": 46,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 2,
+          "left_id": 62,
+          "right_id": 63,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 1,
+          "left_id": 121,
+          "right_id": 123,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 2,
+          "left_id": 41,
+          "right_id": 44,
+          "left_passed": true,
+          "right_passed": false
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "category:结构化输出",
+      "provider": "deepseek",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 6,
+      "missing_pairs": 0,
+      "both_correct": 4,
+      "only_left_correct": 0,
+      "only_right_correct": 2,
+      "both_wrong": 0,
+      "left_correct": 4,
+      "right_correct": 6,
+      "accuracy_delta": 0.3333333333333333,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 6,
+          "missing_pairs": 0,
+          "left_sum": 678,
+          "right_sum": 858,
+          "saved_fraction": -0.2654867256637168
+        },
+        "completion_tokens": {
+          "paired": 6,
+          "missing_pairs": 0,
+          "left_sum": 416,
+          "right_sum": 469,
+          "saved_fraction": -0.12740384615384626
+        },
+        "total_tokens": {
+          "paired": 6,
+          "missing_pairs": 0,
+          "left_sum": 1094,
+          "right_sum": 1327,
+          "saved_fraction": -0.212979890310786
+        }
+      },
+      "left_tokens_per_correct": 273.5,
+      "right_tokens_per_correct": 221.16666666666666,
+      "pairs": [
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 1,
+          "left_id": 84,
+          "right_id": 81,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 2,
+          "left_id": 79,
+          "right_id": 78,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 1,
+          "left_id": 52,
+          "right_id": 50,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 2,
+          "left_id": 71,
+          "right_id": 70,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 1,
+          "left_id": 113,
+          "right_id": 115,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 2,
+          "left_id": 102,
+          "right_id": 103,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "reference:generated",
+      "provider": "deepseek",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 24,
+      "missing_pairs": 0,
+      "both_correct": 18,
+      "only_left_correct": 2,
+      "only_right_correct": 2,
+      "both_wrong": 2,
+      "left_correct": 20,
+      "right_correct": 20,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 24,
+          "missing_pairs": 0,
+          "left_sum": 3036,
+          "right_sum": 3756,
+          "saved_fraction": -0.23715415019762842
+        },
+        "completion_tokens": {
+          "paired": 24,
+          "missing_pairs": 0,
+          "left_sum": 3273,
+          "right_sum": 3565,
+          "saved_fraction": -0.08921478765658408
+        },
+        "total_tokens": {
+          "paired": 24,
+          "missing_pairs": 0,
+          "left_sum": 6309,
+          "right_sum": 7321,
+          "saved_fraction": -0.16040576953558405
+        }
+      },
+      "left_tokens_per_correct": 315.45,
+      "right_tokens_per_correct": 366.05,
+      "pairs": [
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 1,
+          "left_id": 37,
+          "right_id": 40,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 2,
+          "left_id": 27,
+          "right_id": 28,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 1,
+          "left_id": 65,
+          "right_id": 68,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 2,
+          "left_id": 117,
+          "right_id": 120,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 1,
+          "left_id": 109,
+          "right_id": 111,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 2,
+          "left_id": 87,
+          "right_id": 86,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 1,
+          "left_id": 97,
+          "right_id": 100,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 2,
+          "left_id": 22,
+          "right_id": 21,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 1,
+          "left_id": 48,
+          "right_id": 46,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 2,
+          "left_id": 62,
+          "right_id": 63,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 1,
+          "left_id": 121,
+          "right_id": 123,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 2,
+          "left_id": 41,
+          "right_id": 44,
+          "left_passed": true,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 20,
+          "right_id": 17,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 2,
+          "left_id": 128,
+          "right_id": 127,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 34,
+          "right_id": 36,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 2,
+          "left_id": 15,
+          "right_id": 14,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 90,
+          "right_id": 89,
+          "left_passed": true,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 2,
+          "left_id": 57,
+          "right_id": 60,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 9,
+          "right_id": 12,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 2,
+          "left_id": 2,
+          "right_id": 1,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 1,
+          "left_id": 75,
+          "right_id": 73,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 2,
+          "left_id": 31,
+          "right_id": 32,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 1,
+          "left_id": 55,
+          "right_id": 56,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 2,
+          "left_id": 106,
+          "right_id": 105,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "reference:manual",
+      "provider": "deepseek",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 8,
+      "missing_pairs": 0,
+      "both_correct": 6,
+      "only_left_correct": 0,
+      "only_right_correct": 2,
+      "both_wrong": 0,
+      "left_correct": 6,
+      "right_correct": 8,
+      "accuracy_delta": 0.25,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 8,
+          "missing_pairs": 0,
+          "left_sum": 890,
+          "right_sum": 1130,
+          "saved_fraction": -0.2696629213483146
+        },
+        "completion_tokens": {
+          "paired": 8,
+          "missing_pairs": 0,
+          "left_sum": 586,
+          "right_sum": 634,
+          "saved_fraction": -0.08191126279863492
+        },
+        "total_tokens": {
+          "paired": 8,
+          "missing_pairs": 0,
+          "left_sum": 1476,
+          "right_sum": 1764,
+          "saved_fraction": -0.19512195121951215
+        }
+      },
+      "left_tokens_per_correct": 246.0,
+      "right_tokens_per_correct": 220.5,
+      "pairs": [
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 1,
+          "left_id": 84,
+          "right_id": 81,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 2,
+          "left_id": 79,
+          "right_id": 78,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 1,
+          "left_id": 52,
+          "right_id": 50,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 2,
+          "left_id": 71,
+          "right_id": 70,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 1,
+          "left_id": 113,
+          "right_id": 115,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 2,
+          "left_id": 102,
+          "right_id": 103,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 1,
+          "left_id": 96,
+          "right_id": 95,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 2,
+          "left_id": 7,
+          "right_id": 8,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "all",
+      "provider": "kimi",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 30,
+      "missing_pairs": 2,
+      "both_correct": 9,
+      "only_left_correct": 0,
+      "only_right_correct": 16,
+      "both_wrong": 5,
+      "left_correct": 9,
+      "right_correct": 25,
+      "accuracy_delta": 0.5333333333333333,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 30,
+          "missing_pairs": 0,
+          "left_sum": 3918,
+          "right_sum": 4788,
+          "saved_fraction": -0.2220520673813171
+        },
+        "completion_tokens": {
+          "paired": 30,
+          "missing_pairs": 0,
+          "left_sum": 5902,
+          "right_sum": 6008,
+          "saved_fraction": -0.017960013554727317
+        },
+        "total_tokens": {
+          "paired": 30,
+          "missing_pairs": 0,
+          "left_sum": 9820,
+          "right_sum": 10796,
+          "saved_fraction": -0.0993890020366599
+        }
+      },
+      "left_tokens_per_correct": 1091.111111111111,
+      "right_tokens_per_correct": 431.84,
+      "pairs": [
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 1,
+          "left_id": 39,
+          "right_id": 38,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 2,
+          "left_id": 25,
+          "right_id": 26,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 2,
+          "left_id": 118,
+          "right_id": 119,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 1,
+          "left_id": 112,
+          "right_id": 110,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 1,
+          "left_id": 98,
+          "right_id": 99,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 2,
+          "left_id": 24,
+          "right_id": 23,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 1,
+          "left_id": 45,
+          "right_id": 47,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 2,
+          "left_id": 64,
+          "right_id": 61,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 1,
+          "left_id": 124,
+          "right_id": 122,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 2,
+          "left_id": 42,
+          "right_id": 43,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 18,
+          "right_id": 19,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 2,
+          "left_id": 125,
+          "right_id": 126,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 33,
+          "right_id": 35,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 2,
+          "left_id": 13,
+          "right_id": 16,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 91,
+          "right_id": 92,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 2,
+          "left_id": 58,
+          "right_id": 59,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 10,
+          "right_id": 11,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 2,
+          "left_id": 3,
+          "right_id": 4,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 1,
+          "left_id": 76,
+          "right_id": 74,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 2,
+          "left_id": 29,
+          "right_id": 30,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 1,
+          "left_id": 54,
+          "right_id": 53,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 2,
+          "left_id": 108,
+          "right_id": 107,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 1,
+          "left_id": 83,
+          "right_id": 82,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 2,
+          "left_id": 77,
+          "right_id": 80,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 1,
+          "left_id": 51,
+          "right_id": 49,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 2,
+          "left_id": 72,
+          "right_id": 69,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 1,
+          "left_id": 116,
+          "right_id": 114,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 2,
+          "left_id": 101,
+          "right_id": 104,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 1,
+          "left_id": 93,
+          "right_id": 94,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 2,
+          "left_id": 5,
+          "right_id": 6,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ],
+      "cluster_bootstrap": {
+        "task_clusters": 16,
+        "samples": 2000,
+        "seed": 2026100301,
+        "accuracy_delta_95pct": [
+          0.3,
+          0.7333333333333333
+        ],
+        "total_token_saving_95pct": [
+          -0.20714806709891126,
+          0.01989305479835559
+        ]
+      }
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "category:代码理解",
+      "provider": "kimi",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 2,
+      "missing_pairs": 0,
+      "both_correct": 2,
+      "only_left_correct": 0,
+      "only_right_correct": 0,
+      "both_wrong": 0,
+      "left_correct": 2,
+      "right_correct": 2,
+      "accuracy_delta": 0.0,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 2,
+          "missing_pairs": 0,
+          "left_sum": 228,
+          "right_sum": 286,
+          "saved_fraction": -0.2543859649122806
+        },
+        "completion_tokens": {
+          "paired": 2,
+          "missing_pairs": 0,
+          "left_sum": 220,
+          "right_sum": 232,
+          "saved_fraction": -0.05454545454545445
+        },
+        "total_tokens": {
+          "paired": 2,
+          "missing_pairs": 0,
+          "left_sum": 448,
+          "right_sum": 518,
+          "saved_fraction": -0.15625
+        }
+      },
+      "left_tokens_per_correct": 224.0,
+      "right_tokens_per_correct": 259.0,
+      "pairs": [
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 1,
+          "left_id": 93,
+          "right_id": 94,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 2,
+          "left_id": 5,
+          "right_id": 6,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "category:机器学习",
+      "provider": "kimi",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 12,
+      "missing_pairs": 0,
+      "both_correct": 0,
+      "only_left_correct": 0,
+      "only_right_correct": 7,
+      "both_wrong": 5,
+      "left_correct": 0,
+      "right_correct": 7,
+      "accuracy_delta": 0.5833333333333334,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 1632,
+          "right_sum": 1980,
+          "saved_fraction": -0.21323529411764697
+        },
+        "completion_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 3211,
+          "right_sum": 3558,
+          "saved_fraction": -0.10806602304578017
+        },
+        "total_tokens": {
+          "paired": 12,
+          "missing_pairs": 0,
+          "left_sum": 4843,
+          "right_sum": 5538,
+          "saved_fraction": -0.14350609126574443
+        }
+      },
+      "left_tokens_per_correct": null,
+      "right_tokens_per_correct": 791.1428571428571,
+      "pairs": [
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 18,
+          "right_id": 19,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 2,
+          "left_id": 125,
+          "right_id": 126,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 33,
+          "right_id": 35,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 2,
+          "left_id": 13,
+          "right_id": 16,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 91,
+          "right_id": 92,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 2,
+          "left_id": 58,
+          "right_id": 59,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 10,
+          "right_id": 11,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 2,
+          "left_id": 3,
+          "right_id": 4,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 1,
+          "left_id": 76,
+          "right_id": 74,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 2,
+          "left_id": 29,
+          "right_id": 30,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 1,
+          "left_id": 54,
+          "right_id": 53,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 2,
+          "left_id": 108,
+          "right_id": 107,
+          "left_passed": false,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "category:概率推理",
+      "provider": "kimi",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 10,
+      "missing_pairs": 2,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 7,
+      "both_wrong": 0,
+      "left_correct": 3,
+      "right_correct": 10,
+      "accuracy_delta": 0.7,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 10,
+          "missing_pairs": 0,
+          "left_sum": 1330,
+          "right_sum": 1620,
+          "saved_fraction": -0.21804511278195493
+        },
+        "completion_tokens": {
+          "paired": 10,
+          "missing_pairs": 0,
+          "left_sum": 1886,
+          "right_sum": 1620,
+          "saved_fraction": 0.14103923647932126
+        },
+        "total_tokens": {
+          "paired": 10,
+          "missing_pairs": 0,
+          "left_sum": 3216,
+          "right_sum": 3240,
+          "saved_fraction": -0.00746268656716409
+        }
+      },
+      "left_tokens_per_correct": 1072.0,
+      "right_tokens_per_correct": 324.0,
+      "pairs": [
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 1,
+          "left_id": 39,
+          "right_id": 38,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 2,
+          "left_id": 25,
+          "right_id": 26,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 2,
+          "left_id": 118,
+          "right_id": 119,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 1,
+          "left_id": 112,
+          "right_id": 110,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 1,
+          "left_id": 98,
+          "right_id": 99,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 2,
+          "left_id": 24,
+          "right_id": 23,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 1,
+          "left_id": 45,
+          "right_id": 47,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 2,
+          "left_id": 64,
+          "right_id": 61,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 1,
+          "left_id": 124,
+          "right_id": 122,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 2,
+          "left_id": 42,
+          "right_id": 43,
+          "left_passed": false,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "category:结构化输出",
+      "provider": "kimi",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 6,
+      "missing_pairs": 0,
+      "both_correct": 4,
+      "only_left_correct": 0,
+      "only_right_correct": 2,
+      "both_wrong": 0,
+      "left_correct": 4,
+      "right_correct": 6,
+      "accuracy_delta": 0.3333333333333333,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 6,
+          "missing_pairs": 0,
+          "left_sum": 728,
+          "right_sum": 902,
+          "saved_fraction": -0.23901098901098905
+        },
+        "completion_tokens": {
+          "paired": 6,
+          "missing_pairs": 0,
+          "left_sum": 585,
+          "right_sum": 598,
+          "saved_fraction": -0.022222222222222143
+        },
+        "total_tokens": {
+          "paired": 6,
+          "missing_pairs": 0,
+          "left_sum": 1313,
+          "right_sum": 1500,
+          "saved_fraction": -0.14242193450114238
+        }
+      },
+      "left_tokens_per_correct": 328.25,
+      "right_tokens_per_correct": 250.0,
+      "pairs": [
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 1,
+          "left_id": 83,
+          "right_id": 82,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 2,
+          "left_id": 77,
+          "right_id": 80,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 1,
+          "left_id": 51,
+          "right_id": 49,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 2,
+          "left_id": 72,
+          "right_id": 69,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 1,
+          "left_id": 116,
+          "right_id": 114,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 2,
+          "left_id": 101,
+          "right_id": 104,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "reference:generated",
+      "provider": "kimi",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 22,
+      "missing_pairs": 2,
+      "both_correct": 3,
+      "only_left_correct": 0,
+      "only_right_correct": 14,
+      "both_wrong": 5,
+      "left_correct": 3,
+      "right_correct": 17,
+      "accuracy_delta": 0.6363636363636364,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 22,
+          "missing_pairs": 0,
+          "left_sum": 2962,
+          "right_sum": 3600,
+          "saved_fraction": -0.21539500337609718
+        },
+        "completion_tokens": {
+          "paired": 22,
+          "missing_pairs": 0,
+          "left_sum": 5097,
+          "right_sum": 5178,
+          "saved_fraction": -0.015891701000588565
+        },
+        "total_tokens": {
+          "paired": 22,
+          "missing_pairs": 0,
+          "left_sum": 8059,
+          "right_sum": 8778,
+          "saved_fraction": -0.08921702444472013
+        }
+      },
+      "left_tokens_per_correct": 2686.3333333333335,
+      "right_tokens_per_correct": 516.3529411764706,
+      "pairs": [
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 1,
+          "left_id": 39,
+          "right_id": 38,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 2,
+          "left_id": 25,
+          "right_id": 26,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 2,
+          "left_id": 118,
+          "right_id": 119,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 1,
+          "left_id": 112,
+          "right_id": 110,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 1,
+          "left_id": 98,
+          "right_id": 99,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 2,
+          "left_id": 24,
+          "right_id": 23,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 1,
+          "left_id": 45,
+          "right_id": 47,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 2,
+          "left_id": 64,
+          "right_id": 61,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 1,
+          "left_id": 124,
+          "right_id": 122,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 2,
+          "left_id": 42,
+          "right_id": 43,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 18,
+          "right_id": 19,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 2,
+          "left_id": 125,
+          "right_id": 126,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 33,
+          "right_id": 35,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 2,
+          "left_id": 13,
+          "right_id": 16,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 91,
+          "right_id": 92,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 2,
+          "left_id": 58,
+          "right_id": 59,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 10,
+          "right_id": 11,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 2,
+          "left_id": 3,
+          "right_id": 4,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 1,
+          "left_id": 76,
+          "right_id": 74,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 2,
+          "left_id": 29,
+          "right_id": 30,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 1,
+          "left_id": 54,
+          "right_id": 53,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 2,
+          "left_id": 108,
+          "right_id": 107,
+          "left_passed": false,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "scope": "reference:manual",
+      "provider": "kimi",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 8,
+      "missing_pairs": 0,
+      "both_correct": 6,
+      "only_left_correct": 0,
+      "only_right_correct": 2,
+      "both_wrong": 0,
+      "left_correct": 6,
+      "right_correct": 8,
+      "accuracy_delta": 0.25,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 8,
+          "missing_pairs": 0,
+          "left_sum": 956,
+          "right_sum": 1188,
+          "saved_fraction": -0.2426778242677825
+        },
+        "completion_tokens": {
+          "paired": 8,
+          "missing_pairs": 0,
+          "left_sum": 805,
+          "right_sum": 830,
+          "saved_fraction": -0.03105590062111796
+        },
+        "total_tokens": {
+          "paired": 8,
+          "missing_pairs": 0,
+          "left_sum": 1761,
+          "right_sum": 2018,
+          "saved_fraction": -0.1459398069278819
+        }
+      },
+      "left_tokens_per_correct": 293.5,
+      "right_tokens_per_correct": 252.25,
+      "pairs": [
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 1,
+          "left_id": 83,
+          "right_id": 82,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 2,
+          "left_id": 77,
+          "right_id": 80,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 1,
+          "left_id": 51,
+          "right_id": 49,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 2,
+          "left_id": 72,
+          "right_id": 69,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 1,
+          "left_id": 116,
+          "right_id": 114,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 2,
+          "left_id": 101,
+          "right_id": 104,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 1,
+          "left_id": 93,
+          "right_id": 94,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 2,
+          "left_id": 5,
+          "right_id": 6,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    }
+  ],
+  "stability": [
+    {
+      "provider": "deepseek",
+      "arm": "native_control",
+      "repeats": 2,
+      "all_repeats_returned_tasks": 16,
+      "missing_task_clusters": 0,
+      "all_repeats_correct_tasks": 12,
+      "mixed_correctness_tasks": 2,
+      "all_repeats_parseable_tasks": 16,
+      "identical_typed_answers_tasks": 12
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_explicit",
+      "repeats": 2,
+      "all_repeats_returned_tasks": 16,
+      "missing_task_clusters": 0,
+      "all_repeats_correct_tasks": 13,
+      "mixed_correctness_tasks": 2,
+      "all_repeats_parseable_tasks": 16,
+      "identical_typed_answers_tasks": 9
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_control",
+      "repeats": 2,
+      "all_repeats_returned_tasks": 16,
+      "missing_task_clusters": 0,
+      "all_repeats_correct_tasks": 5,
+      "mixed_correctness_tasks": 0,
+      "all_repeats_parseable_tasks": 15,
+      "identical_typed_answers_tasks": 10
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_explicit",
+      "repeats": 2,
+      "all_repeats_returned_tasks": 14,
+      "missing_task_clusters": 2,
+      "all_repeats_correct_tasks": 10,
+      "mixed_correctness_tasks": 3,
+      "all_repeats_parseable_tasks": 14,
+      "identical_typed_answers_tasks": 9
+    }
+  ],
+  "numeric_sensitivity": [
+    {
+      "provider": "deepseek",
+      "arm": "native_control",
+      "numeric_returned": 24,
+      "finite_numeric_answers": 24,
+      "median_absolute_error": 1.1281070745605692e-07,
+      "absolute_error_thresholds": {
+        "1e-06": 20,
+        "0.0001": 21,
+        "0.01": 24
+      },
+      "note": "Sensitivity only; original per-task grading is unchanged. Invalid/truncated outputs never pass."
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_explicit",
+      "numeric_returned": 24,
+      "finite_numeric_answers": 24,
+      "median_absolute_error": 9.004433730759598e-10,
+      "absolute_error_thresholds": {
+        "1e-06": 20,
+        "0.0001": 23,
+        "0.01": 23
+      },
+      "note": "Sensitivity only; original per-task grading is unchanged. Invalid/truncated outputs never pass."
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_control",
+      "numeric_returned": 24,
+      "finite_numeric_answers": 5,
+      "median_absolute_error": 1.1281070745605692e-07,
+      "absolute_error_thresholds": {
+        "1e-06": 4,
+        "0.0001": 4,
+        "0.01": 4
+      },
+      "note": "Sensitivity only; original per-task grading is unchanged. Invalid/truncated outputs never pass."
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_explicit",
+      "numeric_returned": 22,
+      "finite_numeric_answers": 22,
+      "median_absolute_error": 3.3985367886568696e-07,
+      "absolute_error_thresholds": {
+        "1e-06": 17,
+        "0.0001": 17,
+        "0.01": 21
+      },
+      "note": "Sensitivity only; original per-task grading is unchanged. Invalid/truncated outputs never pass."
+    }
+  ],
+  "notes": [
+    "Percentile bootstrap resamples task clusters, not independent repeats; 2000 draws, fixed seed 2026100301.",
+    "Intervals describe this selected task set, are not adjusted for multiple comparisons and do not establish noninferiority.",
+    "Latency covers returned responses only; timeout durations and server load/cache are uncontrolled.",
+    "Contract checks field structure and evidence length/order, not semantic truth of explanations.",
+    "Scope rows overlap; categories/reference groups cannot be summed together."
+  ]
+}

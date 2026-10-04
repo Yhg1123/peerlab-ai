@@ -10,14 +10,14 @@ from peerlab.dimensions import diagnostics
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Plot audited v2/v3 evidence with matplotlib")
+    parser = argparse.ArgumentParser(description="Plot audited v2/v3/v4 evidence with matplotlib")
     parser.add_argument("run_json", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from matplotlib.ticker import PercentFormatter
+    from matplotlib.ticker import MaxNLocator, PercentFormatter
 
     run = json.loads(args.run_json.read_text(encoding="utf-8"))
     data = diagnostics(run)
@@ -30,6 +30,9 @@ def main():
         labels = ["Answer\nfirst\n80-char cap", "Evidence\nfirst\n80-char cap", "Answer\nfirst\nno char cap", "Evidence\nfirst\nno char cap"]
         colors = ["#45647a", "#14826d", "#bf742c", "#875a95"]
         pair_labels = ["Order: 80-char cap", "Order: no char cap", "Remove cap: answer first", "Remove cap: evidence first"]
+    if run["kind"] == "token-efficiency-v4":
+        labels = ["Control", "Explicit JSON type"]
+        pair_labels = ["Control → explicit type"]
     plt.rcParams.update({"font.family":"DejaVu Sans", "font.size":10, "axes.spines.top":False,
                          "axes.spines.right":False, "svg.fonttype":"none", "figure.facecolor":"#fafaf7"})
     fig, axes = plt.subplots(2, 2, figsize=(12, 9))
@@ -63,6 +66,7 @@ def main():
         ax.axvline(0, color="#8c9595", linewidth=1)
         ax.set(yticks=range(len(pairs)), yticklabels=pair_labels, ylim=(len(pairs)-.5,-.6), xlabel="Paired total-token saving (negative = more tokens)",title=name + " | paired token change")
         ax.xaxis.set_major_formatter(PercentFormatter(1))
+        ax.xaxis.set_major_locator(MaxNLocator(nbins=5))
         ax.grid(axis="x", alpha=.15)
     design = f"PeerLab: {len(run['cases'])} tasks × {run['config']['repeats']} repeats × {len(names)} models × {len(arms)} conditions"
     if run.get("mode") != "live":
@@ -74,6 +78,55 @@ def main():
     for suffix in ("png","svg"):
         fig.savefig(args.output/f"quality-and-tokens.{suffix}",dpi=180,bbox_inches="tight")
     plt.close(fig)
+    if run["kind"] == "token-efficiency-v4":
+        from peerlab.native_types import type_diagnostics
+        types = type_diagnostics(run)
+        fig, axes = plt.subplots(2,2,figsize=(12,8.5))
+        outcomes = [("correct","Correct","#14826d"),
+                    ("native_type_wrong_answer","Type OK, answer wrong","#d6ae65"),
+                    ("wrong_native_type","Wrong native type","#9b628d"),
+                    ("invalid_json","Invalid JSON","#b3534e"),
+                    ("truncated","Truncated","#e18450"),
+                    ("request_error","Request failed","#78878b"),
+                    ("pending","Pending","#acb9bd"),
+                    ("not_attempted","Not attempted","#d2dcdf")]
+        used = {key for key,_,_ in outcomes if any(g['outcomes'][key] for g in types['conditions'] if g['scope']=='all')}
+        for col,name in enumerate(names):
+            ax=axes[0,col]
+            groups=[next(g for g in types['conditions'] if g['provider']==name and g['arm']==arm and g['scope']=='all') for arm in arms]
+            bottom=[0,0]
+            for key,label,color in outcomes:
+                if key not in used:
+                    continue
+                values=[g['outcomes'][key] for g in groups]
+                ax.bar([0,1],values,bottom=bottom,color=color,label=label,width=.55)
+                for i,value in enumerate(values):
+                    if value:
+                        ax.text(i,bottom[i]+value/2,str(value),ha='center',va='center',fontsize=11)
+                bottom=[a+b for a,b in zip(bottom,values)]
+            ax.set(title=name+' | all planned calls',xticks=[0,1],xticklabels=labels,ylim=(0,max(g['planned'] for g in groups)*1.05),ylabel='Number of responses / missing calls')
+            ax=axes[1,col]
+            p=next(p for p in types['comparisons'] if p['provider']==name and p['scope']=='all')
+            q=next(p for p in data['comparisons'] if p['provider']==name and p['scope']=='all')
+            endpoints=[('Native type',p['type_delta'],p['native_type_delta_95pct']),('Answer correct',q['accuracy_delta'],q['cluster_bootstrap']['accuracy_delta_95pct'])]
+            for i,(label,value,ci) in enumerate(endpoints):
+                if value is not None:
+                    if ci is not None:
+                        ax.plot([x*100 for x in ci],[i,i],color=colors[i],linewidth=3)
+                        ax.plot([x*100 for x in ci],[i,i],'|',color=colors[i],markersize=10)
+                    ax.plot(value*100,i,'o',color=colors[i])
+                    ax.annotate(f'{value*100:+.1f} pp',(value*100,i),xytext=(0,12),textcoords='offset points',ha='center')
+            ax.axvline(0,color='#8c9595',linewidth=1)
+            ax.set(title=f"{name} | {p['paired']} matched pairs",yticks=[0,1],yticklabels=['Native type','Answer correct'],ylim=(1.5,-.5),xlabel='Explicit type minus control (percentage points)')
+            ax.grid(axis='x',alpha=.15)
+        handles,legend_labels=axes[0,0].get_legend_handles_labels()
+        fig.legend(handles,legend_labels,loc='upper center',bbox_to_anchor=(.5,.94),ncol=3,frameon=False,fontsize=9)
+        fig.suptitle(('SYNTHETIC TEST FIXTURE | ' if run.get('mode') != 'live' else '') + 'Native JSON types: compliance and correctness are different endpoints',fontsize=15)
+        fig.text(.5,.025,'Top panels: mutually exclusive outcomes; denominators include all planned calls.\nBottom panels: matched returned pairs, 95% descriptive task-cluster intervals. No coercion or grade changes.',ha='center',fontsize=9,color='#52636b')
+        fig.tight_layout(rect=(0,.08,1,.86),h_pad=3,w_pad=2)
+        for suffix in ('png','svg'):
+            fig.savefig(args.output/f'native-types.{suffix}',dpi=180,bbox_inches='tight')
+        plt.close(fig)
 
     categories = sorted({c["category"] for c in run["cases"]})
     translations = {"概率推理":"Probability", "机器学习":"ML metrics", "代码理解":"Code understanding", "约束规划":"Planning", "结构化输出":"Structured output", "事实约束":"Evidence constraints", "逻辑推理":"Logic", "数据分析":"Data analysis", "指令遵循":"Instruction following"}
@@ -130,6 +183,8 @@ def main():
     svg_names = ["quality-and-tokens.svg", "category-quality.svg"]
     if run["kind"] == "token-efficiency-v3":
         svg_names.append("factor-interaction.svg")
+    if run["kind"] == "token-efficiency-v4":
+        svg_names.append("native-types.svg")
     for name in svg_names:
         path = args.output / name
         normalized = "\n".join(line.rstrip() for line in path.read_text(encoding="utf-8").splitlines()) + "\n"

@@ -1,0 +1,723 @@
+{
+  "audit": {
+    "cases": 16,
+    "oracle_verified": 12,
+    "manual_reference": 4,
+    "call_records": 128,
+    "grades_recomputed": 126,
+    "plan_and_prompts_verified": true,
+    "note": "Internal consistency audit, not cryptographic proof of provider authenticity."
+  },
+  "run_id": "0ca26e97ada042298e501d15ca6bf94a",
+  "status": "partial",
+  "attempted": 128,
+  "usage": {
+    "prompt_tokens": {
+      "known_sum": 17784,
+      "known_calls": 126,
+      "missing_calls": 0
+    },
+    "completion_tokens": {
+      "known_sum": 20305,
+      "known_calls": 126,
+      "missing_calls": 0
+    },
+    "total_tokens": {
+      "known_sum": 38089,
+      "known_calls": 126,
+      "missing_calls": 0
+    }
+  },
+  "conditions": [
+    {
+      "provider": "deepseek",
+      "arm": "native_control",
+      "planned": 32,
+      "returned": 32,
+      "correct": 26,
+      "invalid_json": 0,
+      "incomplete": 0,
+      "errors": 0,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 3926,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 3859,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 7785,
+          "known_calls": 32,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "deepseek",
+      "arm": "native_explicit",
+      "planned": 32,
+      "returned": 32,
+      "correct": 28,
+      "invalid_json": 0,
+      "incomplete": 0,
+      "errors": 0,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 4886,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 4199,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 9085,
+          "known_calls": 32,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_control",
+      "planned": 32,
+      "returned": 32,
+      "correct": 10,
+      "invalid_json": 1,
+      "incomplete": 0,
+      "errors": 0,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 4184,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 6239,
+          "known_calls": 32,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 10423,
+          "known_calls": 32,
+          "missing_calls": 0
+        }
+      }
+    },
+    {
+      "provider": "kimi",
+      "arm": "native_explicit",
+      "planned": 32,
+      "returned": 30,
+      "correct": 25,
+      "invalid_json": 0,
+      "incomplete": 0,
+      "errors": 2,
+      "usage": {
+        "prompt_tokens": {
+          "known_sum": 4788,
+          "known_calls": 30,
+          "missing_calls": 0
+        },
+        "completion_tokens": {
+          "known_sum": 6008,
+          "known_calls": 30,
+          "missing_calls": 0
+        },
+        "total_tokens": {
+          "known_sum": 10796,
+          "known_calls": 30,
+          "missing_calls": 0
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "comparison": "explicit_native_type",
+      "provider": "deepseek",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 32,
+      "missing_pairs": 0,
+      "both_correct": 24,
+      "only_left_correct": 2,
+      "only_right_correct": 4,
+      "both_wrong": 2,
+      "left_correct": 26,
+      "right_correct": 28,
+      "accuracy_delta": 0.0625,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 32,
+          "missing_pairs": 0,
+          "left_sum": 3926,
+          "right_sum": 4886,
+          "saved_fraction": -0.24452368823229742
+        },
+        "completion_tokens": {
+          "paired": 32,
+          "missing_pairs": 0,
+          "left_sum": 3859,
+          "right_sum": 4199,
+          "saved_fraction": -0.08810572687224671
+        },
+        "total_tokens": {
+          "paired": 32,
+          "missing_pairs": 0,
+          "left_sum": 7785,
+          "right_sum": 9085,
+          "saved_fraction": -0.1669877970456004
+        }
+      },
+      "left_tokens_per_correct": 299.4230769230769,
+      "right_tokens_per_correct": 324.4642857142857,
+      "pairs": [
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 1,
+          "left_id": 37,
+          "right_id": 40,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 2,
+          "left_id": 27,
+          "right_id": 28,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 1,
+          "left_id": 65,
+          "right_id": 68,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 2,
+          "left_id": 117,
+          "right_id": 120,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 1,
+          "left_id": 109,
+          "right_id": 111,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 2,
+          "left_id": 87,
+          "right_id": 86,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 1,
+          "left_id": 97,
+          "right_id": 100,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 2,
+          "left_id": 22,
+          "right_id": 21,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 1,
+          "left_id": 48,
+          "right_id": 46,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 2,
+          "left_id": 62,
+          "right_id": 63,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 1,
+          "left_id": 121,
+          "right_id": 123,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 2,
+          "left_id": 41,
+          "right_id": 44,
+          "left_passed": true,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 20,
+          "right_id": 17,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 2,
+          "left_id": 128,
+          "right_id": 127,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 34,
+          "right_id": 36,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 2,
+          "left_id": 15,
+          "right_id": 14,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 90,
+          "right_id": 89,
+          "left_passed": true,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 2,
+          "left_id": 57,
+          "right_id": 60,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 9,
+          "right_id": 12,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 2,
+          "left_id": 2,
+          "right_id": 1,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 1,
+          "left_id": 75,
+          "right_id": 73,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 2,
+          "left_id": 31,
+          "right_id": 32,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 1,
+          "left_id": 55,
+          "right_id": 56,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 2,
+          "left_id": 106,
+          "right_id": 105,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 1,
+          "left_id": 84,
+          "right_id": 81,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 2,
+          "left_id": 79,
+          "right_id": 78,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 1,
+          "left_id": 52,
+          "right_id": 50,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 2,
+          "left_id": 71,
+          "right_id": 70,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 1,
+          "left_id": 113,
+          "right_id": 115,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 2,
+          "left_id": 102,
+          "right_id": 103,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 1,
+          "left_id": 96,
+          "right_id": 95,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 2,
+          "left_id": 7,
+          "right_id": 8,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    },
+    {
+      "comparison": "explicit_native_type",
+      "provider": "kimi",
+      "left": "native_control",
+      "right": "native_explicit",
+      "paired": 30,
+      "missing_pairs": 2,
+      "both_correct": 9,
+      "only_left_correct": 0,
+      "only_right_correct": 16,
+      "both_wrong": 5,
+      "left_correct": 9,
+      "right_correct": 25,
+      "accuracy_delta": 0.5333333333333333,
+      "tokens": {
+        "prompt_tokens": {
+          "paired": 30,
+          "missing_pairs": 0,
+          "left_sum": 3918,
+          "right_sum": 4788,
+          "saved_fraction": -0.2220520673813171
+        },
+        "completion_tokens": {
+          "paired": 30,
+          "missing_pairs": 0,
+          "left_sum": 5902,
+          "right_sum": 6008,
+          "saved_fraction": -0.017960013554727317
+        },
+        "total_tokens": {
+          "paired": 30,
+          "missing_pairs": 0,
+          "left_sum": 9820,
+          "right_sum": 10796,
+          "saved_fraction": -0.0993890020366599
+        }
+      },
+      "left_tokens_per_correct": 1091.111111111111,
+      "right_tokens_per_correct": 431.84,
+      "pairs": [
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 1,
+          "left_id": 39,
+          "right_id": 38,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-001",
+          "repeat": 2,
+          "left_id": 25,
+          "right_id": 26,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-002",
+          "repeat": 2,
+          "left_id": 118,
+          "right_id": 119,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-003",
+          "repeat": 1,
+          "left_id": 112,
+          "right_id": 110,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 1,
+          "left_id": 98,
+          "right_id": 99,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-004",
+          "repeat": 2,
+          "left_id": 24,
+          "right_id": 23,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 1,
+          "left_id": 45,
+          "right_id": 47,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-005",
+          "repeat": 2,
+          "left_id": 64,
+          "right_id": 61,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 1,
+          "left_id": 124,
+          "right_id": 122,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-bayes-006",
+          "repeat": 2,
+          "left_id": 42,
+          "right_id": 43,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 1,
+          "left_id": 18,
+          "right_id": 19,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-001",
+          "repeat": 2,
+          "left_id": 125,
+          "right_id": 126,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 1,
+          "left_id": 33,
+          "right_id": 35,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-002",
+          "repeat": 2,
+          "left_id": 13,
+          "right_id": 16,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 1,
+          "left_id": 91,
+          "right_id": 92,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-003",
+          "repeat": 2,
+          "left_id": 58,
+          "right_id": 59,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 1,
+          "left_id": 10,
+          "right_id": 11,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-004",
+          "repeat": 2,
+          "left_id": 3,
+          "right_id": 4,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 1,
+          "left_id": 76,
+          "right_id": 74,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-005",
+          "repeat": 2,
+          "left_id": 29,
+          "right_id": 30,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 1,
+          "left_id": 54,
+          "right_id": 53,
+          "left_passed": false,
+          "right_passed": false
+        },
+        {
+          "case_id": "v4-generated-macro_f1-006",
+          "repeat": 2,
+          "left_id": 108,
+          "right_id": 107,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 1,
+          "left_id": 83,
+          "right_id": 82,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-stable-even",
+          "repeat": 2,
+          "left_id": 77,
+          "right_id": 80,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 1,
+          "left_id": 51,
+          "right_id": 49,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-ranked-ids",
+          "repeat": 2,
+          "left_id": 72,
+          "right_id": 69,
+          "left_passed": false,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 1,
+          "left_id": 116,
+          "right_id": 114,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-transpose",
+          "repeat": 2,
+          "left_id": 101,
+          "right_id": 104,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 1,
+          "left_id": 93,
+          "right_id": 94,
+          "left_passed": true,
+          "right_passed": true
+        },
+        {
+          "case_id": "v4-alias-copy",
+          "repeat": 2,
+          "left_id": 5,
+          "right_id": 6,
+          "left_passed": true,
+          "right_passed": true
+        }
+      ]
+    }
+  ]
+}

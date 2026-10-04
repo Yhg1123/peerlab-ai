@@ -138,6 +138,8 @@ def export_efficiency(run, output):
         extra = extra.replace("先依据后答案改变了多项要求，不能单独归因于顺序。", "本轮在相同长度要求内比较请求的字段顺序；不能由输出顺序推断模型内部推理机制。")
     if run["kind"] == NATIVE:
         design = "新题配对：相同先依据后答案提示 × 是否明确JSON原生类型"
+        caveat = caveat.replace("短提示词改变了措辞，不保证语义完全等价。", "明确类型要求会增加输入token，并可能改变回答内容。")
+        extra = extra.replace("合法JSON只保证可解析；契约合格还要求字段、类型以及依据的长度与顺序符合约定，仍不代表答案正确。", "可解析允许整个JSON外层的一对代码围栏，不提取混合文本中的JSON。此处契约只检查两个字段、非空字符串依据及先依据后答案的顺序；answer类型另行统计，契约合格仍不代表答案正确。")
         extra = extra.replace("先依据后答案改变了多项要求，不能单独归因于顺序。", "两组只相差一句原生类型要求；本轮不改变答案判分，不测试自动格式修复。")
     title = "答案放前，<br>还是依据放前？" if run["kind"] == FACTORIAL else "少用 token，<br>答案还可靠吗？"
     if run["kind"] == NATIVE:
