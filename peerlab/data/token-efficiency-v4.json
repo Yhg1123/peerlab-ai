@@ -1,0 +1,340 @@
+[
+  {
+    "id": "v4-generated-bayes-001",
+    "category": "概率推理",
+    "title": "基准率变体 001",
+    "prompt": "某分类器识别一个占总体 0.5% 的稀有类别，真阳性率为 97%，假阳性率为 0.5%。随机抽一个样本，分类器报阳性，它实际属于该类别的概率是多少？answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.49363867684478374,
+    "tolerance": 1e-06,
+    "rationale": "p×TPR / (p×TPR + (1-p)×FPR) = 194/393 ≈ 0.493638676845。",
+    "oracle": {
+      "kind": "bayes",
+      "parameters": {
+        "prevalence_bp": 50,
+        "sensitivity_bp": 9700,
+        "false_positive_bp": 50
+      },
+      "exact_fraction": [
+        194,
+        393
+      ]
+    }
+  },
+  {
+    "id": "v4-generated-bayes-002",
+    "category": "概率推理",
+    "title": "基准率变体 002",
+    "prompt": "某分类器识别一个占总体 0.05% 的稀有类别，真阳性率为 91%，假阳性率为 11%。随机抽一个样本，分类器报阳性，它实际属于该类别的概率是多少？answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.004121376811594203,
+    "tolerance": 1e-06,
+    "rationale": "p×TPR / (p×TPR + (1-p)×FPR) = 91/22080 ≈ 0.004121376812。",
+    "oracle": {
+      "kind": "bayes",
+      "parameters": {
+        "prevalence_bp": 5,
+        "sensitivity_bp": 9100,
+        "false_positive_bp": 1100
+      },
+      "exact_fraction": [
+        91,
+        22080
+      ]
+    }
+  },
+  {
+    "id": "v4-generated-bayes-003",
+    "category": "概率推理",
+    "title": "基准率变体 003",
+    "prompt": "某分类器识别一个占总体 0.25% 的稀有类别，真阳性率为 97%，假阳性率为 5%。随机抽一个样本，分类器报阳性，它实际属于该类别的概率是多少？answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.046367112810707455,
+    "tolerance": 1e-06,
+    "rationale": "p×TPR / (p×TPR + (1-p)×FPR) = 97/2092 ≈ 0.046367112811。",
+    "oracle": {
+      "kind": "bayes",
+      "parameters": {
+        "prevalence_bp": 25,
+        "sensitivity_bp": 9700,
+        "false_positive_bp": 500
+      },
+      "exact_fraction": [
+        97,
+        2092
+      ]
+    }
+  },
+  {
+    "id": "v4-generated-bayes-004",
+    "category": "概率推理",
+    "title": "基准率变体 004",
+    "prompt": "某分类器识别一个占总体 2% 的稀有类别，真阳性率为 93%，假阳性率为 5%。随机抽一个样本，分类器报阳性，它实际属于该类别的概率是多少？answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.27514792899408286,
+    "tolerance": 1e-06,
+    "rationale": "p×TPR / (p×TPR + (1-p)×FPR) = 93/338 ≈ 0.275147928994。",
+    "oracle": {
+      "kind": "bayes",
+      "parameters": {
+        "prevalence_bp": 200,
+        "sensitivity_bp": 9300,
+        "false_positive_bp": 500
+      },
+      "exact_fraction": [
+        93,
+        338
+      ]
+    }
+  },
+  {
+    "id": "v4-generated-bayes-005",
+    "category": "概率推理",
+    "title": "基准率变体 005",
+    "prompt": "某分类器识别一个占总体 2% 的稀有类别，真阳性率为 99%，假阳性率为 11%。随机抽一个样本，分类器报阳性，它实际属于该类别的概率是多少？answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.15517241379310345,
+    "tolerance": 1e-06,
+    "rationale": "p×TPR / (p×TPR + (1-p)×FPR) = 9/58 ≈ 0.155172413793。",
+    "oracle": {
+      "kind": "bayes",
+      "parameters": {
+        "prevalence_bp": 200,
+        "sensitivity_bp": 9900,
+        "false_positive_bp": 1100
+      },
+      "exact_fraction": [
+        9,
+        58
+      ]
+    }
+  },
+  {
+    "id": "v4-generated-bayes-006",
+    "category": "概率推理",
+    "title": "基准率变体 006",
+    "prompt": "某分类器识别一个占总体 1.2% 的稀有类别，真阳性率为 97%，假阳性率为 1.7%。随机抽一个样本，分类器报阳性，它实际属于该类别的概率是多少？answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.40934027289351527,
+    "tolerance": 1e-06,
+    "rationale": "p×TPR / (p×TPR + (1-p)×FPR) = 2910/7109 ≈ 0.409340272894。",
+    "oracle": {
+      "kind": "bayes",
+      "parameters": {
+        "prevalence_bp": 120,
+        "sensitivity_bp": 9700,
+        "false_positive_bp": 170
+      },
+      "exact_fraction": [
+        2910,
+        7109
+      ]
+    }
+  },
+  {
+    "id": "v4-generated-macro_f1-001",
+    "category": "机器学习",
+    "title": "宏平均变体 001",
+    "prompt": "二分类混淆矩阵：真实正预测正17、真实正预测负7、真实负预测正5、真实负预测负37。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.7997977755308392,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 791/989 ≈ 0.799797775531。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 17,
+        "fn": 7,
+        "fp": 5,
+        "tn": 37
+      },
+      "exact_fraction": [
+        791,
+        989
+      ]
+    }
+  },
+  {
+    "id": "v4-generated-macro_f1-002",
+    "category": "机器学习",
+    "title": "宏平均变体 002",
+    "prompt": "二分类混淆矩阵：真实正预测正3、真实正预测负2、真实负预测正31、真实负预测负37。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.4227174694464414,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 588/1391 ≈ 0.422717469446。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 3,
+        "fn": 2,
+        "fp": 31,
+        "tn": 37
+      },
+      "exact_fraction": [
+        588,
+        1391
+      ]
+    }
+  },
+  {
+    "id": "v4-generated-macro_f1-003",
+    "category": "机器学习",
+    "title": "宏平均变体 003",
+    "prompt": "二分类混淆矩阵：真实正预测正8、真实正预测负11、真实负预测正5、真实负预测负113。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.7169421487603306,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 347/484 ≈ 0.716942148760。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 8,
+        "fn": 11,
+        "fp": 5,
+        "tn": 113
+      },
+      "exact_fraction": [
+        347,
+        484
+      ]
+    }
+  },
+  {
+    "id": "v4-generated-macro_f1-004",
+    "category": "机器学习",
+    "title": "宏平均变体 004",
+    "prompt": "二分类混淆矩阵：真实正预测正53、真实正预测负2、真实负预测正31、真实负预测负37。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.7270893565521415,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 10814/14873 ≈ 0.727089356552。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 53,
+        "fn": 2,
+        "fp": 31,
+        "tn": 37
+      },
+      "exact_fraction": [
+        10814,
+        14873
+      ]
+    }
+  },
+  {
+    "id": "v4-generated-macro_f1-005",
+    "category": "机器学习",
+    "title": "宏平均变体 005",
+    "prompt": "二分类混淆矩阵：真实正预测正53、真实正预测负7、真实负预测正18、真实负预测负113。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.8547793558590068,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 28106/32881 ≈ 0.854779355859。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 53,
+        "fn": 7,
+        "fp": 18,
+        "tn": 113
+      },
+      "exact_fraction": [
+        28106,
+        32881
+      ]
+    }
+  },
+  {
+    "id": "v4-generated-macro_f1-006",
+    "category": "机器学习",
+    "title": "宏平均变体 006",
+    "prompt": "二分类混淆矩阵：真实正预测正29、真实正预测负11、真实负预测正5、真实负预测负37。求两个类别各自F1的算术平均（macro-F1），不是accuracy也不是micro-F1。answer 必须是0到1之间的数值，保留至少6位小数。",
+    "check": "number",
+    "expected": 0.803003003003003,
+    "tolerance": 1e-06,
+    "rationale": "(2TP/(2TP+FN+FP) + 2TN/(2TN+FN+FP)) / 2 = 1337/1665 ≈ 0.803003003003。",
+    "oracle": {
+      "kind": "macro_f1",
+      "parameters": {
+        "tp": 29,
+        "fn": 11,
+        "fp": 5,
+        "tn": 37
+      },
+      "exact_fraction": [
+        1337,
+        1665
+      ]
+    }
+  },
+  {
+    "id": "v4-stable-even",
+    "category": "结构化输出",
+    "title": "筛选偶数并稳定去重",
+    "prompt": "序列[9,4,7,4,2,9,6,2]先保留偶数，再去除重复值，保留每个值首次出现的顺序。answer必须是由整数构成的JSON数组。",
+    "check": "exact",
+    "expected": [
+      4,
+      2,
+      6
+    ],
+    "rationale": "偶数序列为[4,4,2,6,2]，按首次出现去重得[4,2,6]。"
+  },
+  {
+    "id": "v4-ranked-ids",
+    "category": "结构化输出",
+    "title": "按分数与ID排序",
+    "prompt": "记录为[{\"id\":\"m\",\"score\":3},{\"id\":\"q\",\"score\":7},{\"id\":\"a\",\"score\":7},{\"id\":\"z\",\"score\":2}]。保留score至少为3的记录，先按score降序，同分按id字母升序排列。answer必须是排序后的id组成的JSON字符串数组。",
+    "check": "exact",
+    "expected": [
+      "a",
+      "q",
+      "m"
+    ],
+    "rationale": "z被筛掉；7分的a在q之前，然后是3分的m。"
+  },
+  {
+    "id": "v4-transpose",
+    "category": "结构化输出",
+    "title": "二维整数数组转置",
+    "prompt": "矩阵的各行为[[3,8],[5,1],[7,4]]。求其转置矩阵：原矩阵的列变为新矩阵的行。answer必须是二维JSON整数数组。",
+    "check": "exact",
+    "expected": [
+      [
+        3,
+        5,
+        7
+      ],
+      [
+        8,
+        1,
+        4
+      ]
+    ],
+    "rationale": "第一列3,5,7变为第一行；第二列8,1,4变为第二行。"
+  },
+  {
+    "id": "v4-alias-copy",
+    "category": "代码理解",
+    "title": "引用与浅复制后的数组",
+    "prompt": "阅读Python代码，不执行：x=[4]; y=x; z=x[:]; x.append(9); z.append(2)。最终[x,y,z]的值是什么？answer必须是二维JSON整数数组。",
+    "check": "exact",
+    "expected": [
+      [
+        4,
+        9
+      ],
+      [
+        4,
+        9
+      ],
+      [
+        4,
+        2
+      ]
+    ],
+    "rationale": "x与y引用同一列表；z在追加前浅复制了元素，之后独立追加2。"
+  }
+]

@@ -9,7 +9,7 @@ import random
 import re
 import statistics
 
-from .efficiency import EXTENDED, FACTORIAL, FACTORIAL_ARMS, comparisons_for, arms_for, paired, usage, validate
+from .efficiency import EXTENDED, FACTORIAL, FACTORIAL_ARMS, NATIVE, NATIVE_ARMS, comparisons_for, arms_for, paired, usage, validate
 from .experiment import atomic_json
 from .grading import parse_answer
 
@@ -37,6 +37,10 @@ def parsed_object(row):
 
 
 def contract(row):
+    if row["arm"] in NATIVE_ARMS:
+        obj = parsed_object(row)
+        return (obj is not None and list(obj) == ["evidence", "answer"]
+                and isinstance(obj["evidence"], str) and bool(obj["evidence"].strip()))
     if row["arm"] in FACTORIAL_ARMS:
         from .factorial import contract_components
         return contract_components(row)["arm_contract"]
@@ -83,8 +87,8 @@ def cluster_interval(run, provider, left, right, samples=2000, seed=2026100301):
 
 def diagnostics(run):
     audit = validate(run)
-    if run["kind"] not in (EXTENDED, FACTORIAL):
-        raise ValueError("Dimensions require token-efficiency-v2 or v3.")
+    if run["kind"] not in (EXTENDED, FACTORIAL, NATIVE):
+        raise ValueError("Dimensions require token-efficiency-v2, v3 or v4.")
     tasks = {c["id"]: c for c in run["cases"]}
     names = [p["name"] for p in run["providers"]]
     repeats = run["config"]["repeats"]

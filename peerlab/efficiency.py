@@ -47,11 +47,15 @@ FACTORIAL_COMPARISONS = (
     ("remove_cap_answer_first", FACTORIAL_ARMS[0], FACTORIAL_ARMS[2]),
     ("remove_cap_evidence_first", FACTORIAL_ARMS[1], FACTORIAL_ARMS[3]),
 )
+NATIVE = "token-efficiency-v4"
+NATIVE_ARMS = ("native_control", "native_explicit")
+NATIVE_COMPARISONS = (("explicit_native_type", *NATIVE_ARMS),)
+NATIVE_INSTRUCTION = "answer必须使用题目要求的JSON原生类型：数值题使用number，数组题使用array；不得把数字或数组写成带引号的字符串。"
 
 
 def comparisons_for(protocol):
     return {PROTOCOL: COMPARISONS, EXTENDED: EXTENDED_COMPARISONS,
-            FACTORIAL: FACTORIAL_COMPARISONS}[protocol]
+            FACTORIAL: FACTORIAL_COMPARISONS, NATIVE: NATIVE_COMPARISONS}[protocol]
 
 
 def arms_for(protocol):
@@ -61,10 +65,17 @@ def arms_for(protocol):
         return EXTENDED_ARMS
     if protocol == FACTORIAL:
         return FACTORIAL_ARMS
+    if protocol == NATIVE:
+        return NATIVE_ARMS
     raise ValueError("Unknown efficiency protocol.")
 
 
 def messages_for(case, arm):
+    if arm in NATIVE_ARMS:
+        messages = messages_for(case, "evidence_first_unbounded")
+        if arm == "native_explicit":
+            messages[0]["content"] += NATIVE_INSTRUCTION
+        return messages
     if arm in FACTORIAL_ARMS:
         order = "answer、evidence" if arm.startswith("answer_first") else "evidence、answer"
         cap = "evidence长度不超过80个Unicode字符（包含标点和空格）。" if arm.endswith("_bounded") else ""
@@ -163,7 +174,7 @@ def run_efficiency(clients, cases, output, *, repeats=1, seed=42, max_calls=24, 
 
 
 def validate(run):
-    if run.get("kind") not in (PROTOCOL, EXTENDED, FACTORIAL) or run.get("schema_version") != 1:
+    if run.get("kind") not in (PROTOCOL, EXTENDED, FACTORIAL, NATIVE) or run.get("schema_version") != 1:
         raise ValueError("Unsupported efficiency evidence schema.")
     cfg, cases = run["config"], run["cases"]
     plan = make_plan(cases, cfg["repeats"], cfg["seed"], cfg["max_output_tokens_per_call"], cfg["timeout_seconds"], run["kind"])

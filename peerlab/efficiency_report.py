@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import re
 
-from .efficiency import EXTENDED, FACTORIAL, analyze
+from .efficiency import EXTENDED, FACTORIAL, NATIVE, analyze
 from .experiment import atomic_json
 
 
@@ -20,7 +20,7 @@ def export_efficiency(run, output):
     dest.mkdir(parents=True, exist_ok=True)
     atomic_json(dest / "analysis.json", result)
     dimensions = None
-    if run["kind"] in (EXTENDED, FACTORIAL):
+    if run["kind"] in (EXTENDED, FACTORIAL, NATIVE):
         from .dimensions import export_dimensions
         dimensions = export_dimensions(run, dest)
     headings = ["模型", "条件", "正确/返回/计划", "已知输入 token", "已知输出 token", "已知总 token", "JSON失败", "未完整输出", "请求失败"]
@@ -66,6 +66,15 @@ def export_efficiency(run, output):
                '</tr></thead><tbody>' + ''.join('<tr>' + ''.join(f'<td>{escape(str(x))}</td>' for x in row) + '</tr>' for row in data) + '</tbody></table></div>'
 
     extra = ''
+    if run["kind"] == NATIVE:
+        from .native_types import export_types
+        types = export_types(run, dest)
+        extra += '<h2>JSON原生类型：格式对了，答案就对了吗？</h2><p class="note">数值必须是有限JSON number，不能是字符串或布尔值；数组只在此检查外层array。数组元素、结构与内容仍由原判分器严格检查。不会自动转型或修改答案。下面的错误类别互斥，缺失另计。</p>'
+        extra += table(['模型','条件','范围','类型正确/返回/计划','类型错误','类型对但答案错','正确','JSON错误/截断','请求失败/待定/未尝试'],
+                       [[g['provider'],g['arm'],g['scope'],f"{g['native_type_ok']}/{g['returned']}/{g['planned']}",g['outcomes']['wrong_native_type'],g['outcomes']['native_type_wrong_answer'],g['outcomes']['correct'],f"{g['outcomes']['invalid_json']}/{g['outcomes']['truncated']}",f"{g['outcomes']['request_error']}/{g['outcomes']['pending']}/{g['outcomes']['not_attempted']}"] for g in types['conditions']])
+        extra += '<h2>同题类型合格率变化</h2><p class="note">控制组→明确类型组；仅比较双方返回的配对，区间按题聚类2000次。类型正确不等于答案正确。</p>'
+        extra += table(['模型','配对/缺失','类型正确次数','改善/退步','合格率差（百分点）','95%描述区间（百分点）'],
+                       [[p['provider'],f"{p['paired']}/{p['missing_pairs']}",f"{p['left_type_ok']} → {p['right_type_ok']}",f"{p['only_right_type_ok']}/{p['only_left_type_ok']}",'—' if p['type_delta'] is None else f"{p['type_delta']*100:.1f}",'—' if p['native_type_delta_95pct'] is None else ' ～ '.join(f'{v*100:.1f}' for v in p['native_type_delta_95pct'])] for p in types['comparisons'] if p['scope']=='all'])
     if run["kind"] == FACTORIAL:
         from .factorial import export_factorial
         factorial = export_factorial(run, dest)
@@ -83,7 +92,8 @@ def export_efficiency(run, output):
     if dimensions:
         labels = {"verbose_explain": "常规解释", "compact_answer": "仅答案", "compact_evidence": "先依据后答案",
                   "answer_first_bounded": "先答案·限80字符", "evidence_first_bounded": "先依据·限80字符",
-                  "answer_first_unbounded": "先答案·不限字符", "evidence_first_unbounded": "先依据·不限字符"}
+                  "answer_first_unbounded": "先答案·不限字符", "evidence_first_unbounded": "先依据·不限字符",
+                  "native_control": "控制组", "native_explicit": "明确类型组"}
         def label(arm):
             return labels.get(arm, arm)
         def ms(value):
@@ -126,7 +136,12 @@ def export_efficiency(run, output):
     if run["kind"] == FACTORIAL:
         design = "2 × 2 对照：答案/依据顺序 × 依据是否限80字符"
         extra = extra.replace("先依据后答案改变了多项要求，不能单独归因于顺序。", "本轮在相同长度要求内比较请求的字段顺序；不能由输出顺序推断模型内部推理机制。")
+    if run["kind"] == NATIVE:
+        design = "新题配对：相同先依据后答案提示 × 是否明确JSON原生类型"
+        extra = extra.replace("先依据后答案改变了多项要求，不能单独归因于顺序。", "两组只相差一句原生类型要求；本轮不改变答案判分，不测试自动格式修复。")
     title = "答案放前，<br>还是依据放前？" if run["kind"] == FACTORIAL else "少用 token，<br>答案还可靠吗？"
+    if run["kind"] == NATIVE:
+        title = "类型说清楚，<br>答案能更可用吗？"
     html += f'<div class="tag">PEERLAB / TOKEN EFFICIENCY</div><h1>{title}</h1><p>{design}</p><small>Run {escape(run["id"])} · {escape(run["status"])} · {run["calls_attempted"]} 次请求尝试</small>'
     html += '<h2>质量与用量</h2>' + table(headings, rows) + '<h2>同题配对比较</h2>' + table(paired_headings, paired_rows)
     html += '<p class="note">' + escape(caveat) + '</p>' + extra + '<h2>逐题原始输出</h2>' + ''.join(details)

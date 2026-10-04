@@ -9,7 +9,7 @@ from .experiment import PROTOCOLS, dataset_hash, load_cases, planned_calls, run_
 from .report import export_report
 from .datasets import audit_cases, generate_cases, write_dataset
 from .analysis import export_analysis
-from .efficiency import EXTENDED, FACTORIAL, PROTOCOL as EFFICIENCY_PROTOCOL, make_plan, run_efficiency
+from .efficiency import EXTENDED, FACTORIAL, NATIVE, PROTOCOL as EFFICIENCY_PROTOCOL, make_plan, run_efficiency
 from .efficiency_report import export_efficiency
 
 
@@ -61,7 +61,7 @@ def main(argv=None):
     efficiency.add_argument("--timeout", type=positive, default=90)
     efficiency.add_argument("--output", type=Path)
     efficiency.add_argument("--dry-run", action="store_true")
-    efficiency.add_argument("--protocol", choices=(EFFICIENCY_PROTOCOL, EXTENDED, FACTORIAL), default=EFFICIENCY_PROTOCOL)
+    efficiency.add_argument("--protocol", choices=(EFFICIENCY_PROTOCOL, EXTENDED, FACTORIAL, NATIVE), default=EFFICIENCY_PROTOCOL)
     efficiency_analysis = sub.add_parser("analyze-efficiency", help="Audit and render token experiment evidence offline")
     efficiency_analysis.add_argument("run_json", type=Path)
     efficiency_analysis.add_argument("--output", type=Path)
